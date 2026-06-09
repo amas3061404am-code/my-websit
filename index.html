@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="أماني العتيبي — مؤلفة ومستشارة تربوية ونفسية. كتب سر السعادة، سنا، وملحمة أوريان.">
+  <title>أماني العتيبي | سر السعادة</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+<header class="hdr" id="hdr">
+  <a href="#" class="logo">
+    <div class="logo-circle">س</div>
+    <div class="logo-name">
+      سر السعادة
+      <small>أماني العتيبي · مؤلفة ومستشارة</small>
+    </div>
+  </a>
+  <nav>
+    <a href="#books">الكتب</a>
+    <a href="#about">عني</a>
+    <a href="#testi">القراء</a>
+    <a href="#footer" class="nav-cta">تواصلي معي</a>
+  </nav>
+  <button class="menu-btn" id="menuBtn" aria-label="القائمة">☰</button>
+</header>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#books" onclick="closeMobileNav()">الكتب</a>
+  <a href="#about" onclick="closeMobileNav()">عني</a>
+  <a href="#testi" onclick="closeMobileNav()">القراء</a>
+  <a href="#footer" onclick="closeMobileNav()">تواصلي معي</a>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+
+  <!-- القوس الملون -->
+  <div class="arc-wrap" aria-hidden="true">
+    <svg viewBox="0 0 1000 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M80 480 Q500 -120 920 480"  stroke="#A8CEDD" stroke-width="6" fill="none" opacity="0.45"/>
+      <path d="M100 495 Q500 -80 900 495"  stroke="#7BB3C8" stroke-width="5" fill="none" opacity="0.40"/>
+      <path d="M120 508 Q500 -45 880 508"  stroke="#B8A4CC" stroke-width="5" fill="none" opacity="0.38"/>
+      <path d="M140 518 Q500 -15 860 518"  stroke="#D4899A" stroke-width="5" fill="none" opacity="0.42"/>
+      <path d="M162 526 Q500  15 838 526"  stroke="#E8A87C" stroke-width="5" fill="none" opacity="0.38"/>
+      <path d="M184 532 Q500  42 816 532"  stroke="#C8A96E" stroke-width="5" fill="none" opacity="0.38"/>
+      <path d="M206 537 Q500  65 794 537"  stroke="#8A9E7A" stroke-width="5" fill="none" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner rv">
+    <div class="hero-chip">
+      <span class="chip-dot"></span>
+      مؤلفة · مستشارة تربوية ونفسية · صانعة محتوى ملهم
+    </div>
+    <h1 class="hero-h1">
+      حيث تلتقي الكلمات<br>
+      بـ<em>عمق الروح</em>
+    </h1>
+    <p class="hero-p">
+      كتب تُضيء طريقكِ، وقصص تُلامس أعماقكِ،<br>
+      ومحتوى رقمي يُغيّر نظرتكِ للحياة
+    </p>
+    <p class="hero-quote">
+      كل كتاب رحلة، وكل كلمة بذرة نور في قلب قارئها
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollTo('books')">🌸 اكتشفي الكتب</button>
+      <button class="btn-ghost"   onclick="scrollTo('about')">تعرّفي عليّ ✨</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-n">٤+</div><div class="hstat-l">كتب منشورة</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><div class="hstat-n">٩</div><div class="hstat-l">منتجات رقمية</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><div class="hstat-n">آلاف</div><div class="hstat-l">قارئة مستفيدة</div></div>
+      <div class="hstat-div"></div>
+      <div class="hstat"><div class="hstat-n">١٠+</div><div class="hstat-l">سنوات خبرة</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-stripe"></div>
+
+
+<!-- ══════════════════════════════════════
+     BOOKS
+══════════════════════════════════════ -->
+<section class="sec books-sec" id="books">
+  <div class="sec-center rv">
+    <div class="sec-tag">مكتبة أماني</div>
+    <h2 class="sec-h2">إصداراتي <span>وكتبي</span></h2>
+    <p class="sec-p">كل كتاب عالم مستقل يدعوكِ لرحلة تنمو فيها من الداخل</p>
+  </div>
+
+  <div class="books-grid">
+
+    <!-- ── كتاب ١: سر السعادة ── -->
+    <article class="book-card rv d1">
+      <div class="book-cover-area bca-1">
+        <div class="book-cover-deco bd-1"></div>
+        <div class="book-3d">
+          <div class="book-3d-inner">
+            <div class="book-front bf-1">
+              <div class="book-gem">🌸</div>
+              <div class="book-front-title">سر السعادة</div>
+              <div class="book-front-author">أماني العتيبي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-cat">تنمية ذاتية · علم النفس</div>
+        <h3 class="book-title">سر السعادة</h3>
+        <p class="book-desc">
+          هل تساءلتِ يوماً لماذا يشعر بعض الناس بالسعادة رغم الظروف؟
+          هذا الكتاب يكشف لكِ السر الحقيقي للسعادة الداخلية بأسلوب نفسي
+          عميق وأسئلة تأملية تُرشدكِ لاكتشاف نفسكِ من جديد.
+        </p>
+        <div class="book-tags">
+          <span class="book-tag bt-dig">📱 رقمي</span>
+          <span class="book-tag bt-pri">📚 ورقي</span>
+          <span class="book-tag bt-rom">💛 تنمية ذاتية</span>
+        </div>
+        <!-- *** ضعي رابط الشراء هنا *** -->
+        <a href="https://your-store-link.com/sar-alsaada" target="_blank" class="book-buy">
+          🛒 اقتني الكتاب الآن
+        </a>
+      </div>
+    </article>
+
+    <!-- ── كتاب ٢: سنا ── -->
+    <article class="book-card rv d2">
+      <div class="book-cover-area bca-2">
+        <div class="book-cover-deco bd-2"></div>
+        <div class="book-3d">
+          <div class="book-3d-inner">
+            <div class="book-front bf-2">
+              <div class="book-gem">✨</div>
+              <div class="book-front-title">سنا</div>
+              <div class="book-front-author">أماني العتيبي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-cat">رواية · أدب إنساني</div>
+        <h3 class="book-title">سنا</h3>
+        <p class="book-desc">
+          في أعتم اللحظات يُولد الضوء. رواية "سنا" تأخذكِ في رحلة
+          إنسانية مؤثرة عبر أرواح تبحث عن معنى الوجود، بلغة أدبية
+          رفيعة تأسركِ من الصفحة الأولى وتتركك في تأمل عميق.
+        </p>
+        <div class="book-tags">
+          <span class="book-tag bt-dig">📱 رقمي</span>
+          <span class="book-tag bt-pri">📚 ورقي</span>
+          <span class="book-tag bt-rom">💜 رواية</span>
+        </div>
+        <!-- *** ضعي رابط الشراء هنا *** -->
+        <a href="https://your-store-link.com/sana" target="_blank" class="book-buy">
+          🛒 اقتني الكتاب الآن
+        </a>
+      </div>
+    </article>
+
+    <!-- ── كتاب ٣: أوريان ── -->
+    <article class="book-card rv d3">
+      <div class="book-cover-area bca-3">
+        <div class="book-cover-deco bd-3"></div>
+        <div class="book-3d">
+          <div class="book-3d-inner">
+            <div class="book-front bf-3">
+              <div class="book-gem">🌙</div>
+              <div class="book-front-title">أوريان</div>
+              <div class="book-front-author">أماني العتيبي</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="book-body">
+        <div class="book-cat">فانتازيا إسلامية · ملحمة</div>
+        <h3 class="book-title">ملحمة أوريان</h3>
+        <p class="book-desc">
+          في عالم تتشابك فيه الأزمنة وتتقاطع الأرواح مع الجن والجمال
+          الخفي، تنطلق بطلة ملحمة أوريان في رحلة إيمانية ملحمية لا
+          مثيل لها في أدب الخيال الإسلامي العربي.
+        </p>
+        <div class="book-tags">
+          <span class="book-tag bt-dig">📱 رقمي</span>
+          <span class="book-tag bt-pri">📚 ورقي</span>
+          <span class="book-tag bt-rom">🌙 فانتازيا</span>
+        </div>
+        <!-- *** ضعي رابط الشراء هنا *** -->
+        <a href="https://your-store-link.com/oryan" target="_blank" class="book-buy">
+          🛒 اقتني الكتاب الآن
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="gold-stripe"></div>
+
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section class="sec about-sec" id="about">
+  <div class="about-inner">
+
+    <div class="about-visual rv">
+      <div class="author-portrait">
+        <div class="portrait-monogram">أ</div>
+        <div class="portrait-label">
+          <div class="pl-name">أماني العتيبي</div>
+          <div class="pl-sub">مؤلفة · مستشارة تربوية ونفسية</div>
+        </div>
+      </div>
+      <div class="about-chips">
+        <div class="achip">✍️ مؤلفة كتب</div>
+        <div class="achip">🧠 علم النفس</div>
+        <div class="achip">🎓 تربية وإرشاد</div>
+        <div class="achip">🌙 أدب إسلامي</div>
+        <div class="achip">📱 محتوى رقمي</div>
+        <div class="achip">👩‍👧 علاقات أسرية</div>
+      </div>
+    </div>
+
+    <div class="about-text rv d2">
+      <div class="sec-tag">من أنا</div>
+      <h2 class="sec-h2">أماني العتيبي<br><span>بين الحرف والروح</span></h2>
+      <p class="about-bio">
+        مؤلفة سعودية وخبيرة في الإرشاد التربوي والنفسي من الرياض.
+        أحمل في قلبي شغفاً عميقاً بالكلمة التي تُشفي وتُلهم، وبدأت
+        مسيرتي كاتبةً أُحاور الأرواح عبر كتاب
+        <strong>"سر السعادة"</strong> الذي أضاء طريق آلاف القراء.
+      </p>
+      <p class="about-bio">
+        أمزج في كتاباتي بين عمق الدراسة النفسية ودفء القصة الإنسانية،
+        لأُقدّم محتوىً يلامس الوجدان ويُرسّخ قيم الإيمان والنمو. من
+        عالم الخيال الإسلامي في ملحمة "أوريان" إلى دليل الأمومة
+        الواعية، كل إصدار هو رسالة.
+      </p>
+      <div class="about-highlights">
+        <div class="ahl"><div class="ahl-icon">📚</div><div class="ahl-text"><strong>٤+ كتب</strong><small>منشورة ومُعتمدة</small></div></div>
+        <div class="ahl"><div class="ahl-icon">🎓</div><div class="ahl-text"><strong>علم النفس</strong><small>دراسة وتخصص</small></div></div>
+        <div class="ahl"><div class="ahl-icon">💡</div><div class="ahl-text"><strong>٩ منتجات</strong><small>رقمية متاحة</small></div></div>
+        <div class="ahl"><div class="ahl-icon">🌙</div><div class="ahl-text"><strong>أدب ملتزم</strong><small>بقيم الإيمان</small></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-stripe"></div>
+
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════ -->
+<section class="sec testi-sec" id="testi">
+  <div class="sec-center rv">
+    <div class="sec-tag">آراء القراء</div>
+    <h2 class="sec-h2">ماذا قالوا عن <span>كتبي؟</span></h2>
+    <p class="sec-p">كلمات قارئاتي هي أجمل جائزة أحصل عليها</p>
+  </div>
+  <div class="testi-grid">
+
+    <div class="testi-card rv d1">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">كتاب سر السعادة غيّر نظرتي للحياة تماماً. أسلوب الكاتبة يصل للقلب مباشرة وكأنها تتكلم عن تجربتي الشخصية. أنصح كل من تمر بمرحلة صعبة أن تقرأه.</p>
+      <div class="tc-author"><div class="tc-av av1">ن</div><div><div class="tc-name">نورا الشمري</div><div class="tc-loc">الرياض، السعودية</div></div></div>
+    </div>
+
+    <div class="testi-card rv d2">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">رواية سنا من أجمل ما قرأته هذا العام. قصة مؤثرة جداً ولغة جميلة تأسر القلب. قرأتها في يومين ولم أستطع أن أتركها. أنتظر كل إصدار جديد بشوق.</p>
+      <div class="tc-author"><div class="tc-av av2">م</div><div><div class="tc-name">مريم القحطاني</div><div class="tc-loc">جدة، السعودية</div></div></div>
+    </div>
+
+    <div class="testi-card rv d3">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">ملحمة أوريان تجربة استثنائية! عالم خيالي إسلامي رائع لم أقرأ مثله من قبل. الكاتبة مبدعة حقاً في دمج الإيمان مع القصة المشوّقة.</p>
+      <div class="tc-author"><div class="tc-av av3">ه</div><div><div class="tc-name">هيا العنزي</div><div class="tc-loc">الكويت</div></div></div>
+    </div>
+
+    <div class="testi-card rv d1">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">اشتريت الكتاب الرقمي وكان أفضل قرار. المحتوى ثري جداً والأسئلة التأملية ساعدتني كثيراً في فهم نفسي. شكراً يا أماني على هذا العطاء الجميل.</p>
+      <div class="tc-author"><div class="tc-av av4">س</div><div><div class="tc-name">سارة المطيري</div><div class="tc-loc">الدمام، السعودية</div></div></div>
+    </div>
+
+    <div class="testi-card rv d2">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">كمستشارة تربوية أنا متحيزة لكتب أماني! أسلوبها يجمع بين العلم والروحانية بشكل نادر. أوصي به لكل أم وكل من تعمل في مجال التعليم والإرشاد.</p>
+      <div class="tc-author"><div class="tc-av av1">ر</div><div><div class="tc-name">ريم الزهراني</div><div class="tc-loc">مكة المكرمة</div></div></div>
+    </div>
+
+    <div class="testi-card rv d3">
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-q">"</div>
+      <p class="tc-text">أهديت "سنا" لأختي وبكت من شدة التأثر. كتاب يلمس أعمق أوتار الروح. أماني كاتبة من طراز فريد تستحق كل تقدير. نفتخر بكِ في عالمنا العربي.</p>
+      <div class="tc-author"><div class="tc-av av2">ل</div><div><div class="tc-name">لين الأحمدي</div><div class="tc-loc">أبوظبي، الإمارات</div></div></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-stripe"></div>
+
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer class="footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="ft-brand">
+        <div class="logo">
+          <div class="logo-circle">س</div>
+          <div class="logo-name">سر السعادة<small>أماني العتيبي</small></div>
+        </div>
+        <p class="ft-desc">مؤلفة سعودية ومستشارة تربوية ونفسية، أكتب لأُلهم وأُشفي وأُضيء الطريق بكلمات تلامس الأرواح.</p>
+        <div class="social-row">
+          <!-- *** استبدلي الروابط بروابطكِ الحقيقية *** -->
+          <a href="https://instagram.com/your_account" target="_blank" class="soc-btn sb-ig">📸 إنستغرام</a>
+          <a href="https://tiktok.com/@your_account"   target="_blank" class="soc-btn sb-tk">🎵 تيك توك</a>
+          <a href="https://twitter.com/your_account"   target="_blank" class="soc-btn sb-tw">𝕏 تويتر</a>
+          <a href="mailto:amas3061404am@gmail.com"                     class="soc-btn sb-em">✉️ البريد</a>
+        </div>
+      </div>
+
+      <div class="ft-col">
+        <h4>الكتب</h4>
+        <a href="#books">سر السعادة</a>
+        <a href="#books">سنا</a>
+        <a href="#books">ملحمة أوريان</a>
+      </div>
+
+      <div class="ft-col">
+        <h4>المتجر الرقمي</h4>
+        <a href="https://rz.store" target="_blank">منصة رمز</a>
+        <a href="https://gumroad.com" target="_blank">Gumroad</a>
+        <a href="https://samawy.com" target="_blank">سماوي</a>
+      </div>
+
+      <div class="ft-col">
+        <h4>تواصلي معي</h4>
+        <p>📧 amas3061404am@gmail.com</p>
+        <p>📍 الرياض، السعودية</p>
+        <a href="mailto:amas3061404am@gmail.com" class="footer-cta">إرسال رسالة 🌸</a>
+      </div>
+
+    </div>
+    <div class="footer-bot">
+      جميع الحقوق محفوظة © ٢٠٢٤ · أماني العتيبي — سر السعادة
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script src="script.js"></script>
+</body>
+</html>
