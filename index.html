@@ -1254,19 +1254,20 @@ footer{
     </button>
     <div style="text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(244,143,177,0.25);">
       <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:0.5rem;">أو راسليني مباشرة عبر البريد الإلكتروني</p>
-      <a href="mailto:amas3061404am@gmail.com" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:white;padding:9px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.88rem;transition:all 0.3s;">
-        📧 amas3061404am@gmail.com
-      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:0.5rem;">
+        <a href="https://mail.google.com/mail/?view=cm&to=amas3061404am@gmail.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:white;padding:9px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.88rem;transition:all 0.3s;">
+          📧 راسليني عبر Gmail
+        </a>
+        <button onclick="navigator.clipboard.writeText('amas3061404am@gmail.com').then(()=>{this.textContent='✅ تم النسخ!';setTimeout(()=>this.textContent='📋 انسخي الإيميل',2000)})" style="display:inline-flex;align-items:center;gap:6px;background:var(--pink-pale);color:var(--rose);border:1.5px solid var(--pink);padding:9px 20px;border-radius:20px;cursor:pointer;font-weight:700;font-size:0.88rem;font-family:'Tajawal',sans-serif;transition:all 0.3s;">
+          📋 انسخي الإيميل
+        </button>
+      </div>
     </div>
   </div>
 
   <div id="commentsDisplay" class="comments-display"></div>
   <p id="noComments" style="text-align:center;color:var(--text-light);font-size:0.9rem;padding:2rem;">كوني أول من تشارك رأيها! 🌷</p>
 
-  <!-- Disqus -->
-  <div style="max-width:800px;margin:2rem auto 0;">
-    <div id="disqus_thread"></div>
-  </div>
 </section>
 
 <!-- FOOTER -->
@@ -1279,7 +1280,7 @@ footer{
     <a href="https://pin.it/4ztojoMhN" target="_blank" class="footer-soc-btn">📌 Pinterest</a>
     <a href="https://serel.rmz.gg" target="_blank" class="footer-soc-btn">✨ منصة إلهام</a>
   </div>
-  <a href="mailto:amas3061404am@gmail.com" class="footer-email">📧 amas3061404am@gmail.com</a>
+  <a href="https://mail.google.com/mail/?view=cm&to=amas3061404am@gmail.com" class="footer-email">📧 amas3061404am@gmail.com</a>
   <div class="footer-copy">
     <span class="footer-roses">🌹</span>
     جميع الحقوق محفوظة © ٢٠٢٥ أماني العتيبي
@@ -1453,19 +1454,6 @@ async function submitComment(){
   setTimeout(()=>succ.style.display='none',4000);
 }
 renderComments();
-
-// ===== DISQUS =====
-var disqus_config = function(){
-  this.page.url = window.location.href;
-  this.page.identifier = 'amani-alotaibi-main';
-  this.language = 'ar';
-};
-(function(){
-  var d=document,s=d.createElement('script');
-  s.src='https://amani-alotaibi.disqus.com/embed.js';
-  s.setAttribute('data-timestamp',+new Date());
-  (d.head||d.body).appendChild(s);
-})();
 
 // ===== SCROLL FADE =====
 const observer = new IntersectionObserver(entries=>{
@@ -2744,19 +2732,20 @@ footer{
     </button>
     <div style="text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(244,143,177,0.25);">
       <p style="color:var(--text-light);font-size:0.82rem;margin-bottom:0.5rem;">أو راسليني مباشرة عبر البريد الإلكتروني</p>
-      <a href="mailto:amas3061404am@gmail.com" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:white;padding:9px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.88rem;transition:all 0.3s;">
-        📧 amas3061404am@gmail.com
-      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:0.5rem;">
+        <a href="https://mail.google.com/mail/?view=cm&to=amas3061404am@gmail.com" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:white;padding:9px 20px;border-radius:20px;text-decoration:none;font-weight:700;font-size:0.88rem;transition:all 0.3s;">
+          📧 راسليني عبر Gmail
+        </a>
+        <button onclick="navigator.clipboard.writeText('amas3061404am@gmail.com').then(()=>{this.textContent='✅ تم النسخ!';setTimeout(()=>this.textContent='📋 انسخي الإيميل',2000)})" style="display:inline-flex;align-items:center;gap:6px;background:var(--pink-pale);color:var(--rose);border:1.5px solid var(--pink);padding:9px 20px;border-radius:20px;cursor:pointer;font-weight:700;font-size:0.88rem;font-family:'Tajawal',sans-serif;transition:all 0.3s;">
+          📋 انسخي الإيميل
+        </button>
+      </div>
     </div>
   </div>
 
   <div id="commentsDisplay" class="comments-display"></div>
   <p id="noComments" style="text-align:center;color:var(--text-light);font-size:0.9rem;padding:2rem;">كوني أول من تشارك رأيها! 🌷</p>
 
-  <!-- Disqus -->
-  <div style="max-width:800px;margin:2rem auto 0;">
-    <div id="disqus_thread"></div>
-  </div>
 </section>
 
 <!-- FOOTER -->
@@ -2769,7 +2758,7 @@ footer{
     <a href="https://pin.it/4ztojoMhN" target="_blank" class="footer-soc-btn">📌 Pinterest</a>
     <a href="https://serel.rmz.gg" target="_blank" class="footer-soc-btn">✨ منصة إلهام</a>
   </div>
-  <a href="mailto:amas3061404am@gmail.com" class="footer-email">📧 amas3061404am@gmail.com</a>
+  <a href="https://mail.google.com/mail/?view=cm&to=amas3061404am@gmail.com" class="footer-email">📧 amas3061404am@gmail.com</a>
   <div class="footer-copy">
     <span class="footer-roses">🌹</span>
     جميع الحقوق محفوظة © ٢٠٢٥ أماني العتيبي
@@ -2944,18 +2933,6 @@ async function submitComment(){
 }
 renderComments();
 
-// ===== DISQUS =====
-var disqus_config = function(){
-  this.page.url = window.location.href;
-  this.page.identifier = 'amani-alotaibi-main';
-  this.language = 'ar';
-};
-(function(){
-  var d=document,s=d.createElement('script');
-  s.src='https://amani-alotaibi.disqus.com/embed.js';
-  s.setAttribute('data-timestamp',+new Date());
-  (d.head||d.body).appendChild(s);
-})();
 
 // ===== SCROLL FADE =====
 const observer = new IntersectionObserver(entries=>{
