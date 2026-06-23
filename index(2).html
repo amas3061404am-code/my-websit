@@ -717,6 +717,68 @@
     font-size:1.3rem;
     color:var(--ink-soft);
   }
+
+  /* ===== Car Race Game ===== */
+  .race-shell{
+    background:linear-gradient(180deg, #cdd6e0 0%, #e9edf3 100%);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .race-canvas-wrap{
+    position:relative;
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
+    touch-action:none;
+  }
+  #raceCanvas{
+    display:block;
+    width:100%;
+    height:480px;
+  }
+  .race-controls-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+  }
+  @media (max-width:600px){
+    #raceCanvas{height:400px;}
+  }
+
+  /* ===== Hill Climb Game ===== */
+  .hill-shell{
+    background:linear-gradient(180deg, #BFE9FB 0%, #FFF1D6 100%);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow-card);
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .hill-canvas-wrap{
+    position:relative;
+    border-radius:var(--radius-md);
+    overflow:hidden;
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
+    touch-action:none;
+  }
+  #hillCanvas{
+    display:block;
+    width:100%;
+    height:440px;
+  }
+  .hill-controls-row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+  }
+  @media (max-width:600px){
+    #hillCanvas{height:380px;}
+  }
 </style>
 </head>
 <body>
@@ -866,15 +928,36 @@
   <div class="zone-head">
     <span class="zone-badge">🚗 بوابة السيارات</span>
     <h2>سباق مليان سرعة</h2>
-    <p>قُد سيارتك وتفادى العوائق في طريق طويل ومليان مفاجآت — قريبًا في سحابة اللعب.</p>
+    <p>قُدي سيارتك يمين ويسار، تفادي العوائق، واجمعي النجوم!</p>
   </div>
-  <div class="soon-grid">
-    <div class="soon-card">
-      <div class="ic" style="background:#EFE3FF;">🏎️</div>
-      <h3>طريق السرعة</h3>
-      <p>تفادى السيارات الأخرى واجمع النجوم بأطول طريق ممكن.</p>
-      <span class="soon-pill">🚧 قريبًا</span>
+
+  <div class="race-shell">
+    <div class="flight-hud">
+      <div class="hud-pill">⭐ النقاط: <span class="val" id="raceScore">0</span></div>
+      <div class="hud-pill">🏆 الأفضل: <span class="val" id="raceBest">0</span></div>
     </div>
+
+    <div class="race-canvas-wrap" id="raceWrap">
+      <canvas id="raceCanvas"></canvas>
+      <div class="flight-overlay" id="raceStartOverlay">
+        <div style="font-size:3rem;">🏎️</div>
+        <h3>جاهزة للسباق؟</h3>
+        <p>استخدمي الأسهم ⬅️➡️ بالكمبيوتر، أو اضغطي يمين/يسار من الشاشة بالموبايل. تفادي السيارات واجمعي النجوم!</p>
+        <button class="flight-btn" id="raceStartBtn" style="background:linear-gradient(135deg,#B98EFF 0%, #7C4FE0 100%); box-shadow:0 12px 26px rgba(124,79,224,0.35);">🚀 ابدأ السباق</button>
+      </div>
+      <div class="flight-overlay hidden" id="raceOverOverlay">
+        <div style="font-size:3rem;">💥</div>
+        <h3>محاولة حلوة!</h3>
+        <p>جمعتي <span id="raceFinalScore">0</span> نقطة. جاهزة لمحاولة ثانية؟</p>
+        <button class="flight-btn" id="raceRetryBtn" style="background:linear-gradient(135deg,#B98EFF 0%, #7C4FE0 100%); box-shadow:0 12px 26px rgba(124,79,224,0.35);">🔁 حاولي مرة ثانية</button>
+      </div>
+    </div>
+
+    <div class="race-controls-row">
+      <button class="ghost-btn" id="raceLeftBtn" aria-label="يسار">⬅️</button>
+      <button class="ghost-btn" id="raceRightBtn" aria-label="يمين">➡️</button>
+    </div>
+    <p class="flight-hint">على الكمبيوتر: استخدمي الأسهم ⬅️➡️ · على الموبايل: اضغطي الأزرار أو اسحبي بإصبعك</p>
   </div>
 </section>
 
@@ -883,15 +966,35 @@
   <div class="zone-head">
     <span class="zone-badge">🏍️ بوابة الموتوسيكلات</span>
     <h2>قفزات وتوازن</h2>
-    <p>اقفز فوق التلال وحافظ على توازن موتوسيكلتك — قريبًا في سحابة اللعب.</p>
+    <p>سرّعي وبطّئي للحفاظ على توازن موتوسيكلتك فوق التلال!</p>
   </div>
-  <div class="soon-grid">
-    <div class="soon-card">
-      <div class="ic" style="background:#FFE3D6;">🤸</div>
-      <h3>تحدي التلال</h3>
-      <p>حافظ على توازنك فوق التلال المتعرجة وكسّر رقمك القياسي.</p>
-      <span class="soon-pill">🚧 قريبًا</span>
+
+  <div class="hill-shell">
+    <div class="flight-hud">
+      <div class="hud-pill">📏 المسافة: <span class="val" id="hillScore">0</span> م</div>
+      <div class="hud-pill">🏆 الأفضل: <span class="val" id="hillBest">0</span> م</div>
     </div>
+
+    <div class="hill-canvas-wrap" id="hillWrap">
+      <canvas id="hillCanvas"></canvas>
+      <div class="flight-overlay" id="hillStartOverlay">
+        <div style="font-size:3rem;">🏍️</div>
+        <h3>جاهزة للتحدي؟</h3>
+        <p>اضغطي مطولًا (أو السهم لأعلى ⬆️) للتسريع فوق التلال. حافظي على توازن الموتوسيكلة وما تخليها تنقلب!</p>
+        <button class="flight-btn" id="hillStartBtn" style="background:linear-gradient(135deg,#FFA63D 0%, #E0602A 100%); box-shadow:0 12px 26px rgba(224,96,42,0.35);">🚀 ابدأ التحدي</button>
+      </div>
+      <div class="flight-overlay hidden" id="hillOverOverlay">
+        <div style="font-size:3rem;">🌄</div>
+        <h3>محاولة حلوة!</h3>
+        <p>وصلتي <span id="hillFinalScore">0</span> متر. جاهزة لمحاولة ثانية وتكسري رقمك؟</p>
+        <button class="flight-btn" id="hillRetryBtn" style="background:linear-gradient(135deg,#FFA63D 0%, #E0602A 100%); box-shadow:0 12px 26px rgba(224,96,42,0.35);">🔁 حاولي مرة ثانية</button>
+      </div>
+    </div>
+
+    <div class="hill-controls-row">
+      <button class="ghost-btn" id="hillGasBtn" aria-label="تسريع" style="color:#E0602A;">⬆️ غاز</button>
+    </div>
+    <p class="flight-hint">على الكمبيوتر: استخدمي السهم ⬆️ أو زر المسافة · على الموبايل: اضغطي مطولًا على الزر</p>
   </div>
 </section>
 
@@ -2035,6 +2138,619 @@
     renderDollPickerThumbs();
     renderDoll();
     refreshActiveStates();
+  })();
+  // ================= Car Race Game =================
+  (function initRace(){
+    const canvas = document.getElementById('raceCanvas');
+    const ctx = canvas.getContext('2d');
+    const wrap = document.getElementById('raceWrap');
+    const startOverlay = document.getElementById('raceStartOverlay');
+    const overOverlay = document.getElementById('raceOverOverlay');
+    const startBtn = document.getElementById('raceStartBtn');
+    const retryBtn = document.getElementById('raceRetryBtn');
+    const leftBtn = document.getElementById('raceLeftBtn');
+    const rightBtn = document.getElementById('raceRightBtn');
+    const scoreEl = document.getElementById('raceScore');
+    const bestEl = document.getElementById('raceBest');
+    const finalScoreEl = document.getElementById('raceFinalScore');
+
+    let dpr = window.devicePixelRatio || 1;
+    let cssW = 0, cssH = 0;
+    let state = 'idle'; // idle | playing | over
+    let rafId = null;
+
+    let best = 0;
+    try{
+      const saved = sessionStorage.getItem('raceBestScore');
+      if(saved) best = parseInt(saved, 10) || 0;
+    }catch(e){ best = 0; }
+    bestEl.textContent = best;
+
+    const LANES = 3;
+    let laneXs = [];
+    let player = { lane:1, x:0, y:0, w:46, h:74, targetX:0 };
+    let movingLeft = false, movingRight = false;
+
+    let obstacles = []; // {lane, y, w, h, passed}
+    let coins = []; // {lane, y, r, collected}
+    let roadDashOffset = 0;
+
+    let speed = 4.2;
+    let score = 0;
+    let frame = 0;
+    let spawnTimer = 0;
+    let spawnInterval = 70;
+
+    function computeLanes(){
+      const roadMargin = cssW * 0.08;
+      const roadW = cssW - roadMargin*2;
+      laneXs = [
+        roadMargin + roadW * (1/6),
+        roadMargin + roadW * (3/6),
+        roadMargin + roadW * (5/6)
+      ];
+    }
+
+    function resize(){
+      const rect = wrap.getBoundingClientRect();
+      cssW = rect.width;
+      cssH = canvas.clientHeight || 480;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      computeLanes();
+      if(state !== 'playing'){
+        player.lane = 1;
+        player.x = laneXs[1];
+        player.targetX = laneXs[1];
+        player.y = cssH - 100;
+      }
+      drawIdleFrame();
+    }
+
+    function resetGame(){
+      computeLanes();
+      player.lane = 1;
+      player.x = laneXs[1];
+      player.targetX = laneXs[1];
+      player.y = cssH - 100;
+      obstacles = [];
+      coins = [];
+      speed = 4.2;
+      score = 0;
+      frame = 0;
+      spawnTimer = 0;
+      spawnInterval = 70;
+      roadDashOffset = 0;
+      scoreEl.textContent = '0';
+    }
+
+    function spawnRow(){
+      // choose how many lanes get an obstacle this row (leave at least one free)
+      const blockedCount = Math.random() < 0.35 ? 2 : 1;
+      const lanesArr = [0,1,2];
+      for(let i=lanesArr.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [lanesArr[i],lanesArr[j]] = [lanesArr[j],lanesArr[i]];
+      }
+      const blockedLanes = lanesArr.slice(0, blockedCount);
+      blockedLanes.forEach(lane => {
+        obstacles.push({ lane, y:-90, w:50, h:80, passed:false });
+      });
+      const freeLanes = lanesArr.slice(blockedCount);
+      if(freeLanes.length && Math.random() < 0.7){
+        const coinLane = freeLanes[Math.floor(Math.random()*freeLanes.length)];
+        coins.push({ lane: coinLane, y:-60, r:12, collected:false });
+      }
+    }
+
+    function drawRoad(){
+      ctx.clearRect(0,0,cssW,cssH);
+      // grass sides
+      ctx.fillStyle = '#9ED98A';
+      ctx.fillRect(0,0,cssW,cssH);
+      const roadMargin = cssW * 0.08;
+      ctx.fillStyle = '#5A5F6B';
+      ctx.fillRect(roadMargin, 0, cssW - roadMargin*2, cssH);
+      // lane dashes
+      ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+      ctx.lineWidth = 4;
+      ctx.setLineDash([22, 22]);
+      ctx.lineDashOffset = -roadDashOffset;
+      [1,2].forEach(i => {
+        const x = roadMargin + (cssW - roadMargin*2) * (i/3);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, cssH);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+    }
+
+    function drawCarShape(x, y, w, h, bodyColor, windowColor){
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.fillStyle = bodyColor;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(-w/2, -h/2, w, h, 12) : ctx.rect(-w/2,-h/2,w,h);
+      ctx.fill();
+      ctx.fillStyle = windowColor;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(-w/2+7, -h/2+10, w-14, h*0.32, 8) : ctx.rect(-w/2+7,-h/2+10,w-14,h*0.32);
+      ctx.fill();
+      // wheels
+      ctx.fillStyle = '#22232A';
+      const wheelW = 7, wheelH = 16;
+      ctx.fillRect(-w/2-3, -h/2+10, wheelW, wheelH);
+      ctx.fillRect(w/2-4, -h/2+10, wheelW, wheelH);
+      ctx.fillRect(-w/2-3, h/2-26, wheelW, wheelH);
+      ctx.fillRect(w/2-4, h/2-26, wheelW, wheelH);
+      ctx.restore();
+    }
+
+    function drawPlayer(){
+      drawCarShape(player.x, player.y, player.w, player.h, '#FF5D8F', '#EAF8FF');
+    }
+
+    function drawObstacleCar(o){
+      const x = laneXs[o.lane];
+      drawCarShape(x, o.y, o.w, o.h, '#5FC9F0', '#FFFFFF');
+    }
+
+    function drawCoin(c){
+      if(c.collected) return;
+      const x = laneXs[c.lane];
+      ctx.save();
+      ctx.translate(x, c.y);
+      ctx.fillStyle = '#FFD23F';
+      ctx.beginPath();
+      const spikes = 5, outerR = c.r, innerR = c.r*0.45;
+      for(let i=0;i<spikes*2;i++){
+        const r = i % 2 === 0 ? outerR : innerR;
+        const angle = (Math.PI / spikes) * i - Math.PI/2;
+        const px = Math.cos(angle)*r, py = Math.sin(angle)*r;
+        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawIdleFrame(){
+      if(cssW === 0) return;
+      drawRoad();
+      drawPlayer();
+    }
+
+    function rectOverlap(ax, ay, aw, ah, bx, by, bw, bh){
+      return Math.abs(ax-bx) < (aw+bw)/2*0.82 && Math.abs(ay-by) < (ah+bh)/2*0.82;
+    }
+
+    function update(){
+      frame++;
+      roadDashOffset = (roadDashOffset + speed) % 44;
+
+      // smooth lane movement
+      player.targetX = laneXs[player.lane];
+      player.x += (player.targetX - player.x) * 0.22;
+
+      // spawn
+      spawnTimer++;
+      if(spawnTimer >= spawnInterval){
+        spawnTimer = 0;
+        spawnRow();
+      }
+
+      obstacles.forEach(o => { o.y += speed; });
+      obstacles = obstacles.filter(o => o.y < cssH + 100);
+
+      coins.forEach(c => { c.y += speed; });
+      coins = coins.filter(c => c.y < cssH + 60);
+
+      // collision
+      for(const o of obstacles){
+        const ox = laneXs[o.lane];
+        if(rectOverlap(player.x, player.y, player.w, player.h, ox, o.y, o.w, o.h)){
+          endGame();
+          return;
+        }
+        if(!o.passed && o.y > player.y + player.h){
+          o.passed = true;
+          score += 1;
+          scoreEl.textContent = score;
+          if(score % 6 === 0){
+            speed = Math.min(9.5, speed + 0.4);
+            spawnInterval = Math.max(46, spawnInterval - 3);
+          }
+        }
+      }
+
+      for(const c of coins){
+        if(!c.collected){
+          const cx = laneXs[c.lane];
+          const dx = player.x - cx, dy = player.y - c.y;
+          if(Math.sqrt(dx*dx+dy*dy) < (player.w/2 + c.r)){
+            c.collected = true;
+            score += 2;
+            scoreEl.textContent = score;
+          }
+        }
+      }
+    }
+
+    function render(){
+      drawRoad();
+      obstacles.forEach(drawObstacleCar);
+      coins.forEach(drawCoin);
+      drawPlayer();
+    }
+
+    function loop(){
+      if(state !== 'playing') return;
+      update();
+      if(state === 'playing'){
+        render();
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    function startGame(){
+      resetGame();
+      state = 'playing';
+      startOverlay.classList.add('hidden');
+      overOverlay.classList.add('hidden');
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function endGame(){
+      state = 'over';
+      if(rafId) cancelAnimationFrame(rafId);
+      if(score > best){
+        best = score;
+        bestEl.textContent = best;
+        try{ sessionStorage.setItem('raceBestScore', String(best)); }catch(e){}
+      }
+      finalScoreEl.textContent = score;
+      overOverlay.classList.remove('hidden');
+    }
+
+    function moveLeft(){
+      if(state === 'idle'){ startGame(); return; }
+      if(state !== 'playing') return;
+      player.lane = Math.max(0, player.lane - 1);
+    }
+    function moveRight(){
+      if(state === 'idle'){ startGame(); return; }
+      if(state !== 'playing') return;
+      player.lane = Math.min(LANES-1, player.lane + 1);
+    }
+
+    startBtn.addEventListener('click', startGame);
+    retryBtn.addEventListener('click', startGame);
+
+    document.addEventListener('keydown', (e) => {
+      if(e.code === 'ArrowLeft'){ e.preventDefault(); moveLeft(); }
+      if(e.code === 'ArrowRight'){ e.preventDefault(); moveRight(); }
+    });
+
+    leftBtn.addEventListener('click', moveLeft);
+    rightBtn.addEventListener('click', moveRight);
+
+    // swipe support
+    let touchStartX = null;
+    wrap.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      if(state === 'idle'){ startGame(); }
+    }, {passive:true});
+    wrap.addEventListener('touchend', (e) => {
+      if(touchStartX === null) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const dx = touchEndX - touchStartX;
+      if(Math.abs(dx) > 30){
+        if(dx > 0) moveRight(); else moveLeft();
+      }
+      touchStartX = null;
+    }, {passive:true});
+
+    window.addEventListener('resize', () => {
+      resize();
+    });
+
+    resize();
+  })();
+  // ================= Hill Climb Game =================
+  (function initHill(){
+    const canvas = document.getElementById('hillCanvas');
+    const ctx = canvas.getContext('2d');
+    const wrap = document.getElementById('hillWrap');
+    const startOverlay = document.getElementById('hillStartOverlay');
+    const overOverlay = document.getElementById('hillOverOverlay');
+    const startBtn = document.getElementById('hillStartBtn');
+    const retryBtn = document.getElementById('hillRetryBtn');
+    const gasBtn = document.getElementById('hillGasBtn');
+    const scoreEl = document.getElementById('hillScore');
+    const bestEl = document.getElementById('hillBest');
+    const finalScoreEl = document.getElementById('hillFinalScore');
+
+    let dpr = window.devicePixelRatio || 1;
+    let cssW = 0, cssH = 0;
+    let state = 'idle'; // idle | playing | over
+    let rafId = null;
+
+    let best = 0;
+    try{
+      const saved = sessionStorage.getItem('hillBestScore');
+      if(saved) best = parseInt(saved, 10) || 0;
+    }catch(e){ best = 0; }
+    bestEl.textContent = best;
+
+    // ---- Terrain ----
+    // Terrain is a sum of sine waves; groundY(worldX) returns height (css px from top).
+    function groundY(worldX){
+      const baseline = cssH * 0.62;
+      const h1 = Math.sin(worldX * 0.006) * 46;
+      const h2 = Math.sin(worldX * 0.017 + 1.3) * 22;
+      const h3 = Math.sin(worldX * 0.045 + 2.1) * 9;
+      return baseline - (h1 + h2 + h3);
+    }
+    function groundSlope(worldX){
+      const dx = 2;
+      return (groundY(worldX+dx) - groundY(worldX-dx)) / (dx*2);
+    }
+
+    let worldX = 0; // camera/world offset, increases as bike moves
+    let bikeSpeed = 0;
+    const MAX_SPEED = 6.2;
+    const ACCEL = 0.18;
+    const DECEL = 0.05;
+    const GRAVITY_PULL = 0.994; // speed decay on uphill handled via slope effect
+
+    let bike = { localX:0, y:0, vy:0, angle:0, wheelBase:46 };
+    let airborne = false;
+    let crashed = false;
+    let throttling = false;
+
+    let distanceScore = 0;
+    let bestThisRun = 0;
+
+    function resize(){
+      const rect = wrap.getBoundingClientRect();
+      cssW = rect.width;
+      cssH = canvas.clientHeight || 440;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      bike.localX = cssW * 0.32;
+      drawIdleFrame();
+    }
+
+    function resetGame(){
+      worldX = 0;
+      bikeSpeed = 0;
+      bike.localX = cssW * 0.32;
+      bike.y = groundY(bike.localX) - 22;
+      bike.vy = 0;
+      bike.angle = 0;
+      airborne = false;
+      crashed = false;
+      distanceScore = 0;
+      scoreEl.textContent = '0';
+    }
+
+    function drawTerrain(){
+      ctx.clearRect(0,0,cssW,cssH);
+      // sky already comes from container gradient background; draw sun + clouds lightly
+      ctx.save();
+      ctx.fillStyle = 'rgba(255,255,255,0.55)';
+      ctx.beginPath();
+      ctx.ellipse(cssW*0.78, cssH*0.18, 26, 16, 0, 0, Math.PI*2);
+      ctx.ellipse(cssW*0.78+20, cssH*0.18-6, 20, 14, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.moveTo(0, cssH);
+      const step = 8;
+      for(let sx=0; sx<=cssW; sx+=step){
+        const wx = sx + worldX;
+        ctx.lineTo(sx, groundY(wx));
+      }
+      ctx.lineTo(cssW, cssH);
+      ctx.closePath();
+      const grad = ctx.createLinearGradient(0,cssH*0.4,0,cssH);
+      grad.addColorStop(0, '#9ED98A');
+      grad.addColorStop(1, '#6FBF63');
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // grass tufts line
+      ctx.strokeStyle = '#5AA84F';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for(let sx=0; sx<=cssW; sx+=step){
+        const wx = sx + worldX;
+        const gy = groundY(wx);
+        if(sx===0) ctx.moveTo(sx, gy); else ctx.lineTo(sx, gy);
+      }
+      ctx.stroke();
+    }
+
+    function drawBike(){
+      const localGroundY = groundY(bike.localX + worldX);
+      const targetAngle = airborne ? bike.angle : Math.atan(groundSlope(bike.localX + worldX));
+      bike.angle += (targetAngle - bike.angle) * (airborne ? 0.06 : 0.25);
+
+      ctx.save();
+      ctx.translate(bike.localX, bike.y);
+      ctx.rotate(bike.angle);
+
+      // wheels
+      ctx.fillStyle = '#2B2B33';
+      ctx.beginPath(); ctx.arc(-18, 16, 11, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(18, 16, 11, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#7A7A85';
+      ctx.beginPath(); ctx.arc(-18, 16, 4, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(18, 16, 4, 0, Math.PI*2); ctx.fill();
+
+      // body
+      ctx.fillStyle = '#FFA63D';
+      ctx.beginPath();
+      ctx.moveTo(-20, 12);
+      ctx.lineTo(-6, -10);
+      ctx.lineTo(14, -10);
+      ctx.lineTo(20, 12);
+      ctx.closePath();
+      ctx.fill();
+
+      // seat
+      ctx.fillStyle = '#E0602A';
+      ctx.fillRect(-8, -14, 18, 6);
+
+      // rider (simple, faceless)
+      ctx.fillStyle = '#FF8FAB';
+      ctx.beginPath();
+      ctx.ellipse(0, -26, 9, 11, 0, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillRect(-6, -18, 12, 16);
+      ctx.fillStyle = '#5FC9F0';
+      ctx.fillRect(-7, -8, 7, 14);
+      ctx.fillRect(2, -8, 7, 14);
+
+      ctx.restore();
+    }
+
+    function drawIdleFrame(){
+      if(cssW === 0) return;
+      bike.localX = cssW * 0.32;
+      bike.y = groundY(bike.localX + worldX) - 22;
+      drawTerrain();
+      drawBike();
+    }
+
+    function update(){
+      if(throttling){
+        bikeSpeed = Math.min(MAX_SPEED, bikeSpeed + ACCEL);
+      } else {
+        bikeSpeed = Math.max(0, bikeSpeed - DECEL);
+      }
+
+      const slope = groundSlope(bike.localX + worldX);
+      // uphill slows you, downhill speeds you slightly
+      const effectiveSpeed = bikeSpeed - Math.max(0, slope) * 1.8 + Math.max(0, -slope) * 0.6;
+      worldX += Math.max(0.4, effectiveSpeed);
+
+      distanceScore = Math.floor(worldX / 12);
+      scoreEl.textContent = distanceScore;
+
+      const groundAtBike = groundY(bike.localX + worldX);
+      const desiredY = groundAtBike - 22;
+
+      if(!airborne){
+        bike.y = desiredY;
+        bike.vy = 0;
+        // airborne triggers on steep downhill drop-off (simulate small jumps)
+        if(slope < -0.55 && bikeSpeed > 3.2){
+          airborne = true;
+          bike.vy = -3.2;
+        }
+      } else {
+        bike.vy += 0.5; // gravity
+        bike.y += bike.vy;
+        if(bike.y >= desiredY){
+          bike.y = desiredY;
+          airborne = false;
+          bike.vy = 0;
+          // hard landing check
+          if(Math.abs(bike.angle) > 1.05){
+            crashGame();
+            return;
+          }
+        }
+      }
+
+      // crash if tipped too far while grounded and moving
+      if(!airborne && Math.abs(bike.angle) > 1.25){
+        crashGame();
+        return;
+      }
+    }
+
+    function render(){
+      drawTerrain();
+      drawBike();
+    }
+
+    function loop(){
+      if(state !== 'playing') return;
+      update();
+      if(state === 'playing'){
+        render();
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    function startGame(){
+      resetGame();
+      state = 'playing';
+      startOverlay.classList.add('hidden');
+      overOverlay.classList.add('hidden');
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function crashGame(){
+      state = 'over';
+      if(rafId) cancelAnimationFrame(rafId);
+      if(distanceScore > best){
+        best = distanceScore;
+        bestEl.textContent = best;
+        try{ sessionStorage.setItem('hillBestScore', String(best)); }catch(e){}
+      }
+      finalScoreEl.textContent = distanceScore;
+      overOverlay.classList.remove('hidden');
+    }
+
+    function setThrottle(v){
+      if(state === 'idle' && v){ startGame(); return; }
+      if(state !== 'playing') return;
+      throttling = v;
+    }
+
+    startBtn.addEventListener('click', startGame);
+    retryBtn.addEventListener('click', startGame);
+
+    document.addEventListener('keydown', (e) => {
+      if(e.code === 'ArrowUp' || e.code === 'Space'){
+        e.preventDefault();
+        setThrottle(true);
+      }
+    });
+    document.addEventListener('keyup', (e) => {
+      if(e.code === 'ArrowUp' || e.code === 'Space'){
+        setThrottle(false);
+      }
+    });
+
+    function pointerDown(e){ e.preventDefault(); setThrottle(true); }
+    function pointerUp(){ setThrottle(false); }
+
+    gasBtn.addEventListener('mousedown', pointerDown);
+    gasBtn.addEventListener('mouseup', pointerUp);
+    gasBtn.addEventListener('touchstart', pointerDown, {passive:false});
+    gasBtn.addEventListener('touchend', pointerUp);
+
+    wrap.addEventListener('mousedown', pointerDown);
+    window.addEventListener('mouseup', pointerUp);
+    wrap.addEventListener('touchstart', pointerDown, {passive:false});
+    wrap.addEventListener('touchend', pointerUp);
+
+    window.addEventListener('resize', () => {
+      const wasPlaying = state === 'playing';
+      resize();
+    });
+
+    resize();
   })();
 </script>
 
