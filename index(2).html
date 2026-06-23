@@ -1,2758 +1,1774 @@
-<!DOCTYPE html>
+✨ منصة لعب وتعلّم للأطفال
+عالم مليان ألعاب ومرح
+بانتظارك!
+
+ارسمي، طيري، تسابقي، وانقذي البط — كل هذا داخل سحابة واحدة مليانة ألوان وضحكات. اختاري بوابتك وابدأي المغامرة!
+
+🎮 شاهدي كل البوابات
+🦆 جربي لعبة البط الجديدة<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>سحابة اللعب | Cloud Play</title>
+<title>سحابة اللعب | عالم مليان ألعاب ومرح</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FFF8EE;
-    --cream-2:#FFEFD9;
-    --coral:#FF8FAB;
-    --coral-deep:#FF5D8F;
-    --sun:#FFA63D;
-    --sun-deep:#FF8A00;
-    --sky:#5FC9F0;
-    --sky-deep:#2BAAE2;
-    --violet:#B98EFF;
-    --ink:#4A3B45;
-    --ink-soft:#7A6873;
-    --white:#FFFFFF;
-    --radius-lg:32px;
-    --radius-md:22px;
-    --radius-sm:14px;
-    --shadow-soft:0 12px 30px rgba(255,93,143,0.18);
-    --shadow-card:0 10px 24px rgba(74,59,69,0.10);
-    font-size:16px;
-  }
+:root{
+  --cream:#FFF8EE;
+  --cream-2:#FFEFD9;
+  --coral:#FF8FAB;
+  --coral-deep:#FF5D8F;
+  --sky:#7FD4E8;
+  --sun:#FFD166;
+  --grass:#8FD19E;
+  --ink:#4A3B45;
+  --ink-soft:#8A7A86;
+  --white:#FFFFFF;
+  --shadow: 0 10px 30px rgba(255,93,143,0.18);
+  --radius: 28px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Tajawal', sans-serif;
-    overflow-x:hidden;
-    position:relative;
-  }
-  h1,h2,h3,.display{
-    font-family:'Baloo Bhaijaan 2', sans-serif;
-  }
-  a{text-decoration:none;color:inherit;}
-  button{font-family:inherit;cursor:pointer;border:none;background:none;}
-  ul{margin:0;padding:0;list-style:none;}
+/* decorative floating shapes */
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.bg-deco span{
+  position:absolute;font-size:28px;opacity:.35;
+  animation: float 9s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-22px) rotate(12deg);}
+}
+@media (prefers-reduced-motion: reduce){
+  .bg-deco span{animation:none;}
+}
 
-  /* ===== Ambient decorations ===== */
-  .sky-layer{
-    position:fixed;
-    inset:0;
-    z-index:0;
-    pointer-events:none;
-    overflow:hidden;
-  }
-  .cloud{
-    position:absolute;
-    opacity:0.9;
-    animation:drift linear infinite;
-  }
-  .cloud svg{display:block;width:100%;height:100%;}
-  @keyframes drift{
-    from{transform:translateX(-120px);}
-    to{transform:translateX(calc(100vw + 120px));}
-  }
-  .twinkle{
-    position:absolute;
-    animation:twinkle ease-in-out infinite;
-  }
-  @keyframes twinkle{
-    0%,100%{opacity:0.25; transform:scale(0.85) rotate(0deg);}
-    50%{opacity:1; transform:scale(1.15) rotate(15deg);}
-  }
-  .floaty-heart{
-    position:absolute;
-    animation:floatUp ease-in-out infinite;
-    opacity:0.5;
-  }
-  @keyframes floatUp{
-    0%{transform:translateY(0) rotate(-6deg); opacity:0.15;}
-    50%{transform:translateY(-26px) rotate(6deg); opacity:0.55;}
-    100%{transform:translateY(0) rotate(-6deg); opacity:0.15;}
-  }
+/* Header */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,248,238,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--cream-2);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:18px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.3rem;color:var(--coral-deep);}
+.brand .dot{
+  width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff, var(--sun) 60%, var(--coral) 100%);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  box-shadow:0 4px 10px rgba(255,209,102,.5);
+}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;}
+.nav-links a{
+  font-size:.88rem;font-weight:700;padding:8px 12px;border-radius:999px;
+  color:var(--ink);transition:.2s;white-space:nowrap;
+}
+.nav-links a:hover, .nav-links a:focus-visible{background:var(--cream-2);outline:2px solid var(--coral);}
+@media(max-width:980px){
+  .nav-links{display:none;}
+}
 
-  /* ===== Nav ===== */
-  .topbar{
-    position:sticky;
-    top:0;
-    z-index:50;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:14px 20px;
-    background:rgba(255,248,238,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:3px solid var(--cream-2);
-  }
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:1.35rem;
-    font-weight:700;
-    color:var(--coral-deep);
-    white-space:nowrap;
-  }
-  .brand .logo-badge{
-    width:40px;height:40px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--sun) 0%, var(--coral) 100%);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.3rem;
-    box-shadow:var(--shadow-soft);
-    flex-shrink:0;
-  }
-  .navlinks{
-    display:flex;
-    gap:6px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .navlinks a{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    padding:9px 16px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.95rem;
-    color:var(--ink);
-    transition:transform .18s ease, background .18s ease, color .18s ease;
-    white-space:nowrap;
-  }
-  .navlinks a:hover{
-    background:var(--white);
-    transform:translateY(-2px);
-    color:var(--coral-deep);
-    box-shadow:var(--shadow-card);
-  }
-  .nav-toggle{
-    display:none;
-    width:44px;height:44px;
-    border-radius:14px;
-    background:var(--white);
-    align-items:center;
-    justify-content:center;
-    font-size:1.4rem;
-    box-shadow:var(--shadow-card);
-  }
+/* Hero */
+.hero{padding:70px 0 50px;text-align:center;position:relative;z-index:1;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);border:2px solid var(--cream-2);
+  padding:8px 20px;border-radius:999px;font-weight:700;font-size:.85rem;
+  color:var(--coral-deep);box-shadow:0 4px 14px rgba(0,0,0,.04);
+  margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.25;margin:0 0 18px;
+  color:var(--ink);
+}
+.hero h1 .pink{color:var(--coral-deep);}
+.hero p{
+  max-width:560px;margin:0 auto 30px;color:var(--ink-soft);font-size:1.05rem;line-height:1.9;
+}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  padding:16px 30px;border-radius:999px;font-weight:800;font-size:1rem;
+  display:inline-flex;align-items:center;gap:10px;transition:transform .15s, box-shadow .15s;
+}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--coral),var(--coral-deep));
+  color:#fff;box-shadow:var(--shadow);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(255,93,143,.3);}
+.btn-ghost{
+  background:var(--white);color:var(--ink);border:2px solid var(--cream-2);
+}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--coral);}
+.btn:disabled{opacity:.55;cursor:default;transform:none !important;}
+.btn-sm{padding:10px 18px;font-size:.85rem;}
 
-  @media (max-width:880px){
-    .navlinks{
-      position:absolute;
-      top:100%;
-      right:0;left:0;
-      background:var(--cream);
-      flex-direction:column;
-      align-items:stretch;
-      padding:10px 16px 16px;
-      border-bottom:3px solid var(--cream-2);
-      display:none;
-    }
-    .navlinks.open{display:flex;}
-    .navlinks a{justify-content:flex-start;}
-    .nav-toggle{display:flex;}
-  }
+/* Gates grid */
+.gates{padding:30px 0 70px;position:relative;z-index:1;}
+.section-head{text-align:center;margin-bottom:38px;}
+.section-head .eyebrow{background:var(--cream-2);border-color:var(--cream-2);}
+.section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:10px 0 8px;}
+.section-head p{color:var(--ink-soft);margin:0;}
 
-  /* ===== Hero ===== */
-  .hero{
-    position:relative;
-    z-index:1;
-    padding:64px 20px 90px;
-    text-align:center;
-    max-width:880px;
-    margin:0 auto;
-  }
-  .hero .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    background:var(--white);
-    padding:8px 18px;
-    border-radius:999px;
-    font-weight:700;
-    color:var(--sun-deep);
-    box-shadow:var(--shadow-card);
-    margin-bottom:22px;
-    font-size:0.95rem;
-  }
-  .hero h1{
-    font-size:clamp(2.4rem, 6vw, 4.2rem);
-    line-height:1.15;
-    margin:0 0 18px;
-    color:var(--ink);
-  }
-  .hero h1 span{
-    color:var(--coral-deep);
-    position:relative;
-  }
-  .hero p{
-    font-size:1.15rem;
-    color:var(--ink-soft);
-    line-height:1.8;
-    max-width:600px;
-    margin:0 auto 32px;
-  }
-  .hero-cta{
-    display:inline-flex;
-    gap:14px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .btn{
-    padding:15px 30px;
-    border-radius:999px;
-    font-weight:800;
-    font-size:1.05rem;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    transition:transform .2s ease, box-shadow .2s ease;
-  }
-  .btn-primary{
-    background:linear-gradient(135deg,var(--coral) 0%, var(--coral-deep) 100%);
-    color:var(--white);
-    box-shadow:var(--shadow-soft);
-  }
-  .btn-secondary{
-    background:var(--white);
-    color:var(--ink);
-    box-shadow:var(--shadow-card);
-  }
-  .btn:hover{transform:translateY(-3px) scale(1.03);}
+.gate-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+}
+@media(max-width:980px){.gate-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.gate-grid{grid-template-columns:1fr;}}
 
-  /* ===== Section shell ===== */
-  section.zone{
-    position:relative;
-    z-index:1;
-    max-width:1180px;
-    margin:0 auto;
-    padding:50px 20px 70px;
-    scroll-margin-top:90px;
-  }
-  .zone-head{
-    text-align:center;
-    max-width:640px;
-    margin:0 auto 38px;
-  }
-  .zone-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:7px 16px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.9rem;
-    margin-bottom:14px;
-  }
-  .zone-head h2{
-    font-size:clamp(1.8rem, 4vw, 2.6rem);
-    margin:0 0 10px;
-  }
-  .zone-head p{
-    color:var(--ink-soft);
-    font-size:1.05rem;
-    line-height:1.75;
-    margin:0;
-  }
+.gate{
+  background:var(--white);border-radius:var(--radius);padding:26px 22px;
+  display:flex;flex-direction:column;gap:14px;align-items:flex-start;
+  border:2px solid var(--cream-2);transition:.25s;cursor:pointer;
+  text-align:right;position:relative;overflow:hidden;
+}
+.gate:hover, .gate:focus-visible{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow);border-color:var(--coral);
+}
+.gate .icon-badge{
+  width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+}
+.gate h3{margin:0;font-size:1.1rem;}
+.gate p{margin:0;color:var(--ink-soft);font-size:.88rem;line-height:1.7;}
+.gate .go{
+  margin-top:auto;font-weight:800;font-size:.86rem;color:var(--coral-deep);
+  display:flex;align-items:center;gap:6px;
+}
+.gate .go svg{transition:transform .2s;}
+.gate:hover .go svg{transform:translateX(-4px);}
 
-  /* zone theme colors */
-  #games .zone-badge{background:#FFE3EC;color:var(--coral-deep);}
-  #aviation .zone-badge{background:#DFF2FE;color:var(--sky-deep);}
-  #draw .zone-badge{background:#FFF1D6;color:var(--sun-deep);}
-  #cars .zone-badge{background:#EFE3FF;color:#7C4FE0;}
-  #moto .zone-badge{background:#FFE3D6;color:#E0602A;}
+.icon-cars{background:linear-gradient(135deg,#FFE3EC,#FFD0DF);}
+.icon-plane{background:linear-gradient(135deg,#DCF3FA,#BFE9F4);}
+.icon-duck{background:linear-gradient(135deg,#FFF6CF,#FFE9A3);}
+.icon-paint{background:linear-gradient(135deg,#FFF1CF,#FFE3A3);}
+.icon-jump{background:linear-gradient(135deg,#E4F6E8,#CDEFD4);}
+.icon-dress{background:linear-gradient(135deg,#FCE4F1,#F8C9E3);}
+.icon-acc{background:linear-gradient(135deg,#EDE7FB,#DCD2F5);}
+.icon-memory{background:linear-gradient(135deg,#E0F3FF,#C7E8FB);}
 
-  /* ===== Coming soon cards ===== */
-  .soon-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .soon-card{
-    background:var(--white);
-    border-radius:var(--radius-lg);
-    padding:36px 28px;
-    box-shadow:var(--shadow-card);
-    text-align:center;
-    position:relative;
-    overflow:hidden;
-    border:3px dashed transparent;
-  }
-  .soon-card .ic{
-    width:84px;height:84px;
-    margin:0 auto 18px;
-    border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-size:2.4rem;
-  }
-  .soon-card h3{
-    font-size:1.4rem;
-    margin:0 0 8px;
-  }
-  .soon-card p{
-    color:var(--ink-soft);
-    font-size:0.98rem;
-    line-height:1.7;
-    margin:0 0 18px;
-  }
-  .soon-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:7px 16px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.85rem;
-    background:var(--cream-2);
-    color:var(--ink-soft);
-  }
+/* Generic section shell used by game/dressup sections */
+.feature-section{
+  padding:60px 0;position:relative;z-index:1;
+  scroll-margin-top:90px;
+}
+.feature-section:nth-of-type(even){background:var(--white);}
+.feature-card{
+  background:var(--white);border-radius:32px;border:2px solid var(--cream-2);
+  padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.04);
+}
 
-  footer{
-    position:relative;
-    z-index:1;
-    text-align:center;
-    padding:34px 20px 44px;
-    color:var(--ink-soft);
-    font-size:0.92rem;
-  }
-  footer .heart-row{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-bottom:8px;
-    font-size:1.1rem;
-  }
+/* Generic game stage wrap */
+.game-stage-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+.game-hud{
+  display:flex;justify-content:space-between;width:100%;max-width:680px;
+  font-weight:800;color:var(--ink);font-size:.95rem;
+}
+.game-hud span{background:var(--cream-2);padding:6px 16px;border-radius:999px;}
+.game-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.game-msg{font-weight:700;color:var(--coral-deep);min-height:24px;text-align:center;}
+.dpad-hint{color:var(--ink-soft);font-size:.82rem;text-align:center;}
 
-  .sr-only{
-    position:absolute;width:1px;height:1px;
-    overflow:hidden;clip:rect(0,0,0,0);
-  }
+/* Plane game */
+#planeCanvas{
+  width:100%;max-width:680px;aspect-ratio:16/9;
+  background:linear-gradient(180deg,#BDEBF7 0%, #DFF5FA 60%, #EAF9EE 100%);
+  border-radius:24px;border:3px solid var(--sky);
+  touch-action:none;display:block;
+}
 
-  @media (prefers-reduced-motion: reduce){
-    .cloud,.twinkle,.floaty-heart{animation:none !important;}
-    html{scroll-behavior:auto;}
-  }
+/* Cars race canvas */
+#raceCanvas{
+  width:100%;max-width:680px;aspect-ratio:9/12;
+  border-radius:24px;border:3px solid #5B6470;
+  touch-action:none;display:block;
+  background:#5B6470;
+}
 
-  /* ===== Drawing Studio ===== */
-  .studio{
-    background:var(--white);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:22px;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-  }
-  .studio-toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    align-items:center;
-    justify-content:space-between;
-    background:var(--cream-2);
-    border-radius:var(--radius-md);
-    padding:14px 18px;
-  }
-  .tool-group{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .tool-group .grp-label{
-    font-weight:700;
-    font-size:0.85rem;
-    color:var(--ink-soft);
-    white-space:nowrap;
-  }
-  .swatches{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-  }
-  .swatch{
-    width:32px;height:32px;
-    border-radius:50%;
-    border:3px solid var(--white);
-    box-shadow:0 0 0 2px rgba(0,0,0,0.08);
-    cursor:pointer;
-    transition:transform .15s ease;
-    padding:0;
-  }
-  .swatch:hover{transform:scale(1.12);}
-  .swatch.active{
-    box-shadow:0 0 0 3px var(--ink);
-    transform:scale(1.12);
-  }
-  .color-custom{
-    width:32px;height:32px;
-    border-radius:50%;
-    border:none;
-    padding:0;
-    cursor:pointer;
-    background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);
-  }
-  .tool-btn{
-    width:42px;height:42px;
-    border-radius:14px;
-    background:var(--white);
-    display:flex;align-items:center;justify-content:center;
-    font-size:1.2rem;
-    box-shadow:var(--shadow-card);
-    transition:transform .15s ease, background .15s ease;
-  }
-  .tool-btn:hover{transform:translateY(-2px);}
-  .tool-btn.active{
-    background:linear-gradient(135deg,var(--coral) 0%, var(--coral-deep) 100%);
-    color:white;
-  }
-  .tool-btn:disabled{opacity:0.4; cursor:not-allowed; transform:none;}
-  .brush-sizes{
-    display:flex;
-    gap:8px;
-    align-items:center;
-  }
-  .size-dot-btn{
-    width:42px;height:42px;
-    border-radius:14px;
-    background:var(--white);
-    display:flex;align-items:center;justify-content:center;
-    box-shadow:var(--shadow-card);
-    transition:transform .15s ease, background .15s ease;
-  }
-  .size-dot-btn:hover{transform:translateY(-2px);}
-  .size-dot-btn.active{background:var(--sky); }
-  .size-dot-btn .dot{
-    border-radius:50%;
-    background:var(--ink);
-  }
-  .canvas-wrap{
-    position:relative;
-    border-radius:var(--radius-md);
-    overflow:hidden;
-    box-shadow:inset 0 0 0 3px var(--cream-2);
-    background:
-      repeating-conic-gradient(#fbfbfb 0% 25%, #ffffff 0% 50%) 50% / 26px 26px;
-    touch-action:none;
-  }
-  #drawCanvas{
-    display:block;
-    width:100%;
-    height:480px;
-    cursor:crosshair;
-    background:transparent;
-  }
-  .studio-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-  }
-  .action-btn{
-    padding:12px 22px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.95rem;
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    background:var(--cream-2);
-    color:var(--ink);
-    transition:transform .18s ease;
-  }
-  .action-btn:hover{transform:translateY(-2px);}
-  .action-btn.primary{
-    background:linear-gradient(135deg,var(--sun) 0%, var(--sun-deep) 100%);
-    color:white;
-    box-shadow:var(--shadow-soft);
-  }
-  .action-btn.danger{
-    background:#FFE3E3;
-    color:#C23B3B;
-  }
-  .action-btn:disabled{opacity:0.45;cursor:not-allowed;transform:none;}
-  .studio-hint{
-    text-align:center;
-    font-size:0.88rem;
-    color:var(--ink-soft);
-  }
-  @media (max-width:600px){
-    #drawCanvas{height:360px;}
-    .studio-toolbar{justify-content:center;}
-  }
+/* Duck pond canvas */
+#duckCanvas{
+  width:100%;max-width:680px;aspect-ratio:4/3;
+  border-radius:24px;border:3px solid var(--grass);
+  touch-action:none;display:block;
+  background:#BFE6C2;
+}
+.dpad{display:grid;grid-template-columns:54px 54px 54px;grid-template-rows:54px 54px 54px;gap:6px;justify-content:center;}
+.dpad button{
+  background:var(--white);border:2px solid var(--cream-2);border-radius:16px;
+  font-size:1.3rem;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.06);transition:.15s;user-select:none;
+}
+.dpad button:active{transform:scale(.92);background:var(--cream-2);}
+.dpad .empty{visibility:hidden;}
 
-  /* ===== Flight Game ===== */
-  .flight-shell{
-    background:linear-gradient(180deg, #BFE9FB 0%, #E8F8FF 55%, #FFF6E4 100%);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .flight-hud{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:10px;
-    padding:4px 10px;
-  }
-  .hud-pill{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:rgba(255,255,255,0.85);
-    padding:9px 18px;
-    border-radius:999px;
-    font-weight:800;
-    color:var(--ink);
-    box-shadow:var(--shadow-card);
-    font-size:0.95rem;
-  }
-  .hud-pill .val{color:var(--sky-deep); font-size:1.05rem;}
-  .flight-canvas-wrap{
-    position:relative;
-    border-radius:var(--radius-md);
-    overflow:hidden;
-    box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
-    touch-action:none;
-    cursor:pointer;
-  }
-  #flightCanvas{
-    display:block;
-    width:100%;
-    height:440px;
-  }
-  .flight-overlay{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:14px;
-    text-align:center;
-    background:rgba(255,248,238,0.88);
-    padding:24px;
-  }
-  .flight-overlay.hidden{display:none;}
-  .flight-overlay h3{
-    font-size:1.7rem;
-    margin:0;
-    color:var(--ink);
-  }
-  .flight-overlay p{
-    margin:0;
-    color:var(--ink-soft);
-    max-width:380px;
-    line-height:1.7;
-  }
-  .flight-btn{
-    padding:14px 30px;
-    border-radius:999px;
-    font-weight:800;
-    font-size:1.05rem;
-    background:linear-gradient(135deg,var(--sky) 0%, var(--sky-deep) 100%);
-    color:white;
-    box-shadow:0 12px 26px rgba(43,170,226,0.35);
-    transition:transform .18s ease;
-  }
-  .flight-btn:hover{transform:translateY(-3px) scale(1.03);}
-  .flight-controls-row{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-  }
-  .ghost-btn{
-    width:64px;height:64px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.9);
-    box-shadow:var(--shadow-card);
-    font-size:1.6rem;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--sky-deep);
-    -webkit-user-select:none;user-select:none;
-  }
-  .ghost-btn:active{transform:scale(0.92); background:var(--sky);}
-  .flight-hint{
-    text-align:center;
-    font-size:0.88rem;
-    color:var(--ink-soft);
-  }
-  @media (max-width:600px){
-    #flightCanvas{height:380px;}
-  }
+/* Jump balance */
+.jump-stage{
+  background:linear-gradient(180deg,#FFE9C7,#FFF6E2);
+  border-radius:24px;height:240px;position:relative;overflow:hidden;border:3px solid var(--sun);
+}
+.jump-ground{position:absolute;bottom:0;left:0;right:0;height:18px;background:#E9C77E;}
+.jumper{position:absolute;bottom:18px;font-size:36px;transition:bottom .25s;}
+.obstacle{position:absolute;bottom:18px;width:18px;height:34px;background:var(--coral-deep);border-radius:6px 6px 0 0;}
 
-  /* ===== Dress-Up Studio ===== */
-  .dress-shell{
-    display:grid;
-    grid-template-columns:1fr 1.1fr;
-    gap:22px;
-    align-items:start;
-  }
-  @media (max-width:880px){
-    .dress-shell{grid-template-columns:1fr;}
-  }
+/* Paint */
+.paint-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+.color-dot{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.06);cursor:pointer;}
+.color-dot.active{box-shadow:0 0 0 3px var(--ink);}
+#paintCanvas{width:100%;border-radius:20px;border:3px solid var(--cream-2);background:#fff;touch-action:none;cursor:crosshair;}
+.brush-size{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-soft);}
 
-  .doll-picker{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    margin-bottom:16px;
-  }
-  .doll-pick-btn{
-    width:64px;height:64px;
-    border-radius:18px;
-    background:var(--white);
-    box-shadow:var(--shadow-card);
-    display:flex;align-items:center;justify-content:center;
-    border:3px solid transparent;
-    transition:transform .15s ease;
-    overflow:hidden;
-  }
-  .doll-pick-btn svg{width:100%;height:100%;}
-  .doll-pick-btn:hover{transform:translateY(-2px);}
-  .doll-pick-btn.active{border-color:var(--coral-deep); transform:translateY(-2px);}
+/* Dress up */
+.dressup-layout{display:grid;grid-template-columns:280px 1fr;gap:26px;align-items:start;}
+@media(max-width:760px){.dressup-layout{grid-template-columns:1fr;}}
+.doll-stage{
+  background:linear-gradient(180deg,#FBE7F1,#FFF6FA);
+  border-radius:26px;border:3px solid var(--coral);
+  display:flex;align-items:center;justify-content:center;
+  height:400px;position:relative;overflow:hidden;
+}
+.doll-stage::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 15%, rgba(255,255,255,.6), transparent 40%);
+  pointer-events:none;
+}
+#dollSvg{height:360px;position:relative;z-index:1;}
+.option-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.option-tab{
+  padding:8px 16px;border-radius:999px;font-weight:700;font-size:.85rem;
+  background:var(--cream-2);color:var(--ink);
+}
+.option-tab.active{background:var(--coral-deep);color:#fff;}
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:10px;}
+.swatch{
+  aspect-ratio:1;border-radius:14px;border:3px solid #fff;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.15s;
+}
+.swatch:hover, .swatch:focus-visible{transform:scale(1.06);}
+.swatch.active{border-color:var(--coral-deep);}
 
-  .doll-stage{
-    background:linear-gradient(180deg,#FFF1D6 0%, var(--white) 60%);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    position:sticky;
-    top:90px;
-  }
-  @media (max-width:880px){ .doll-stage{position:static;} }
-  .doll-canvas-wrap{
-    width:100%;
-    max-width:320px;
-    aspect-ratio:3/5;
-  }
-  .doll-canvas-wrap svg{width:100%;height:100%;display:block;}
-  .doll-actions{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
+/* Accessories shelf */
+.shelf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;}
+.shelf-item{
+  background:var(--white);border-radius:22px;border:2px solid var(--cream-2);
+  padding:18px;text-align:center;transition:.2s;
+}
+.shelf-item:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.06);}
+.shelf-item.equipped{border-color:var(--coral-deep);background:var(--cream-2);}
+.shelf-item .emoji{font-size:2.4rem;display:block;margin-bottom:8px;}
+.shelf-item span.name{font-weight:700;font-size:.92rem;}
+.shelf-item span.cat{display:block;color:var(--ink-soft);font-size:.78rem;margin-top:2px;}
 
-  .wardrobe{
-    background:var(--white);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:20px;
-  }
-  .wardrobe-tabs{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:18px;
-    border-bottom:2px solid var(--cream-2);
-    padding-bottom:14px;
-  }
-  .wtab{
-    padding:9px 16px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:0.92rem;
-    background:var(--cream-2);
-    color:var(--ink-soft);
-    transition:background .15s ease, color .15s ease;
-  }
-  .wtab.active{
-    background:linear-gradient(135deg,var(--coral) 0%, var(--coral-deep) 100%);
-    color:white;
-  }
-  .wpanel{display:none;}
-  .wpanel.active{display:grid;}
-  .wpanel{
-    grid-template-columns:repeat(auto-fill, minmax(82px,1fr));
-    gap:12px;
-  }
-  .witem{
-    background:var(--cream);
-    border-radius:16px;
-    padding:10px 6px 8px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:6px;
-    border:3px solid transparent;
-    transition:transform .15s ease, border-color .15s ease;
-  }
-  .witem:hover{transform:translateY(-2px);}
-  .witem.active{border-color:var(--sky-deep); background:#EAF8FF;}
-  .witem .swimg{
-    width:48px;height:48px;
-    display:flex;align-items:center;justify-content:center;
-  }
-  .witem .swimg svg{width:100%;height:100%;}
-  .witem span.lbl{
-    font-size:0.74rem;
-    font-weight:700;
-    color:var(--ink-soft);
-    text-align:center;
-  }
-  .witem.none-item{
-    font-size:1.3rem;
-    color:var(--ink-soft);
-  }
+/* Memory game */
+.memory-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:520px;width:100%;margin:0 auto;
+}
+@media(max-width:480px){.memory-grid{grid-template-columns:repeat(4,1fr);gap:8px;}}
+.memory-card{
+  aspect-ratio:1;border-radius:16px;position:relative;cursor:pointer;
+  perspective:600px;
+}
+.memory-card-inner{
+  width:100%;height:100%;position:relative;transition:transform .4s;
+  transform-style:preserve-3d;
+}
+.memory-card.flipped .memory-card-inner{transform:rotateY(180deg);}
+.memory-card.matched .memory-card-inner{transform:rotateY(180deg);}
+.memory-face{
+  position:absolute;inset:0;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  backface-visibility:hidden;font-size:2.1rem;
+}
+.memory-face.front{
+  background:linear-gradient(135deg,var(--coral),var(--coral-deep));
+  color:#fff;font-size:1.6rem;font-weight:800;
+}
+.memory-face.back{
+  background:var(--white);border:3px solid var(--cream-2);
+  transform:rotateY(180deg);
+}
+.memory-card.matched .memory-face.back{border-color:var(--grass);background:#EEFBF0;}
+.memory-card:hover .memory-face.front{filter:brightness(1.08);}
 
-  /* ===== Car Race Game ===== */
-  .race-shell{
-    background:linear-gradient(180deg, #cdd6e0 0%, #e9edf3 100%);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .race-canvas-wrap{
-    position:relative;
-    border-radius:var(--radius-md);
-    overflow:hidden;
-    box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
-    touch-action:none;
-  }
-  #raceCanvas{
-    display:block;
-    width:100%;
-    height:480px;
-  }
-  .race-controls-row{
-    display:flex;
-    justify-content:center;
-    gap:18px;
-  }
-  @media (max-width:600px){
-    #raceCanvas{height:400px;}
-  }
-
-  /* ===== Hill Climb Game ===== */
-  .hill-shell{
-    background:linear-gradient(180deg, #BFE9FB 0%, #FFF1D6 100%);
-    border-radius:var(--radius-lg);
-    box-shadow:var(--shadow-card);
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .hill-canvas-wrap{
-    position:relative;
-    border-radius:var(--radius-md);
-    overflow:hidden;
-    box-shadow:inset 0 0 0 3px rgba(255,255,255,0.6);
-    touch-action:none;
-  }
-  #hillCanvas{
-    display:block;
-    width:100%;
-    height:440px;
-  }
-  .hill-controls-row{
-    display:flex;
-    justify-content:center;
-    gap:18px;
-  }
-  @media (max-width:600px){
-    #hillCanvas{height:380px;}
-  }
+footer{
+  text-align:center;padding:36px 20px;color:var(--ink-soft);font-size:.85rem;
+  border-top:2px solid var(--cream-2);background:var(--white);
+}
+.skip-link{
+  position:absolute;right:-9999px;background:var(--coral-deep);color:#fff;padding:10px 16px;border-radius:10px;z-index:100;
+}
+.skip-link:focus{right:14px;top:14px;}
 </style>
 </head>
 <body>
 
-<div class="sky-layer" id="skyLayer" aria-hidden="true"></div>
+<a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
-<header class="topbar">
-  <div class="brand">
-    <span class="logo-badge">☁️</span>
-    <span>سحابة اللعب</span>
+<div class="bg-deco" aria-hidden="true">
+  <span style="top:12%;left:6%;">✨</span>
+  <span style="top:25%;left:85%;animation-delay:1.2s;">💗</span>
+  <span style="top:60%;left:12%;animation-delay:2.4s;">⭐</span>
+  <span style="top:75%;left:88%;animation-delay:.6s;">✨</span>
+  <span style="top:40%;left:50%;animation-delay:1.8s;">💎</span>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot">☁️</span> سحابة اللعب</div>
+    <nav class="nav-links" aria-label="روابط الأقسام">
+      <a href="#cars">سيارات</a>
+      <a href="#plane">طيران</a>
+      <a href="#duck">البط والصيادون</a>
+      <a href="#memory">الذاكرة</a>
+      <a href="#paint">رسم</a>
+      <a href="#jump">قفزات</a>
+      <a href="#dressup">تلبيس</a>
+      <a href="#accessories">إكسسوارات</a>
+    </nav>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
-  <nav class="navlinks" id="navLinks">
-    <a href="#games">🎮 ألعاب</a>
-    <a href="#aviation">✈️ طيران</a>
-    <a href="#draw">🎨 أدوات رسم</a>
-    <a href="#cars">🚗 سيارات</a>
-    <a href="#moto">🏍️ موتوسيكلات</a>
-    <a href="#dressup">👗 تلبيس</a>
-  </nav>
 </header>
 
-<section class="hero">
-  <span class="eyebrow">✨ منصة لعب وتعلّم للأطفال ✨</span>
-  <h1>عالم مليان <span>ألعاب ومرح</span><br>بانتظارك!</h1>
-  <p>ارسم، طيّر، تسابق، ولعب — كل هذا داخل سحابة واحدة مليانة ألوان وضحكات. اختر بوابتك وابدأ المغامرة!</p>
-  <div class="hero-cta">
-    <a href="#draw" class="btn btn-primary">🎨 جرّب لوحة الرسم الآن</a>
-    <a href="#games" class="btn btn-secondary">🎮 شاهد كل البوابات</a>
-  </div>
-</section>
+<main id="main">
 
-<!-- GAMES PLACEHOLDER -->
-<section class="zone" id="games">
-  <div class="zone-head">
-    <span class="zone-badge">🎮 بوابة الألعاب</span>
-    <h2>ألعاب صغيرة، فرحة كبيرة</h2>
-    <p>مجموعة ألعاب خفيفة وسريعة تتحدى تركيزك وسرعتك — قريبًا في سحابة اللعب.</p>
-  </div>
-  <div class="soon-grid">
-    <div class="soon-card">
-      <div class="ic" style="background:#FFE3EC;">🧠</div>
-      <h3>لعبة الذاكرة والتركيز</h3>
-      <p>اقلب البطاقات ولاقي الأزواج المتشابهة قبل ما ينتهي الوقت!</p>
-      <span class="soon-pill">🚧 قريبًا</span>
+  <section class="hero wrap">
+    <span class="eyebrow">✨ منصة لعب وتعلّم للأطفال</span>
+    <h1>عالم مليان <span class="pink">ألعاب ومرح</span><br>بانتظارك!</h1>
+    <p>ارسمي، طيري، تسابقي، وانقذي البط — كل هذا داخل سحابة واحدة مليانة ألوان وضحكات. اختاري بوابتك وابدأي المغامرة!</p>
+    <div class="hero-ctas">
+      <a href="#gates" class="btn btn-primary">🎮 شاهدي كل البوابات</a>
+      <a href="#duck" class="btn btn-ghost">🦆 جربي لعبة البط الجديدة</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- AVIATION PLACEHOLDER -->
-<section class="zone" id="aviation">
-  <div class="zone-head">
-    <span class="zone-badge">✈️ بوابة الطيران</span>
-    <h2>حلّق بين الغيوم</h2>
-    <p>وجّهي طائرتك للأعلى والأسفل، تفادي السحب، واجمعي النجوم الذهبية!</p>
-  </div>
-
-  <div class="flight-shell">
-    <div class="flight-hud">
-      <div class="hud-pill">⭐ النقاط: <span class="val" id="flightScore">0</span></div>
-      <div class="hud-pill">🏆 الأفضل: <span class="val" id="flightBest">0</span></div>
+  <section class="gates wrap" id="gates">
+    <div class="gate-grid">
+      <a class="gate" href="#cars">
+        <span class="icon-badge icon-cars">🏎️</span>
+        <h3>سباق السيارات</h3>
+        <p>اختاري سيارتك وتسابقي على المضمار وتفادي السيارات المنافسة.</p>
+        <span class="go">ابدأي السباق <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#plane">
+        <span class="icon-badge icon-plane">✈️</span>
+        <h3>طيارة وتفادي</h3>
+        <p>حلّقي بطيارتك بين الغيوم وتفادي العقبات قبل ما تصطدمي فيها.</p>
+        <span class="go">طيري الآن <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#duck">
+        <span class="icon-badge icon-duck">🦆</span>
+        <h3>البط والصيادون</h3>
+        <p>تحكمي بالبطة واجمعي كل البيض قبل ما يمسكها الصيادون!</p>
+        <span class="go">انقذي البط <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#memory">
+        <span class="icon-badge icon-memory">🧠</span>
+        <h3>لعبة الذاكرة</h3>
+        <p>اقلبي البطاقات وطابقي كل زوج بأسرع وقت وأقل محاولات.</p>
+        <span class="go">شغّلي ذكاءك <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#paint">
+        <span class="icon-badge icon-paint">🖌️</span>
+        <h3>لوحة الرسم</h3>
+        <p>اختاري ألوانك وارسمي لوحتك الخاصة بكل حرية وإبداع.</p>
+        <span class="go">ابدأي الرسم <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#jump">
+        <span class="icon-badge icon-jump">🤸</span>
+        <h3>قفزات وتوازن</h3>
+        <p>اضغطي في الوقت الصحيح واقفزي فوق العقبات بدون ما توقعي.</p>
+        <span class="go">تحدي التنقل <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#dressup">
+        <span class="icon-badge icon-dress">👗</span>
+        <h3>بيتي عروستي المنسف</h3>
+        <p>صممي شعرها، عيونها، فستانها، وكعوبها بطريقتك الخاصة.</p>
+        <span class="go">ابدأي التصميم <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#accessories">
+        <span class="icon-badge icon-acc">💍</span>
+        <h3>إكسسوارات وكعوب</h3>
+        <p>تصفحي مجوهرات، حقائب، وكعوب لإكمال أجمل لوك.</p>
+        <span class="go">تصفّحي الرف <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
     </div>
+  </section>
 
-    <div class="flight-canvas-wrap" id="flightWrap">
-      <canvas id="flightCanvas"></canvas>
-      <div class="flight-overlay" id="flightStartOverlay">
-        <div style="font-size:3rem;">✈️</div>
-        <h3>جاهزة للطيران؟</h3>
-        <p>اضغطي مطولًا (أو اضغطي السهم لأعلى ⬆️) لترفعي الطائرة، واتركي عشان تنزل بهدوء. تفادي السحب واجمعي النجوم!</p>
-        <button class="flight-btn" id="flightStartBtn">🚀 ابدأ الطيران</button>
+  <section class="feature-section wrap" id="cars">
+    <div class="section-head">
+      <span class="eyebrow">🏁 بوابة السرعة</span>
+      <h2>سباق سيارات السرعة</h2>
+      <p>اضغطي الأسهم لتغيير المسار وتفادي سيارات السباق المنافسة على الطريق</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="raceStatus">المسافة: 0 م</span>
+        <span id="raceBest">أفضل نتيجة: 0 م</span>
       </div>
-      <div class="flight-overlay hidden" id="flightOverOverlay">
-        <div style="font-size:3rem;">🌥️</div>
-        <h3>محاولة حلوة!</h3>
-        <p>جمعتي <span id="flightFinalScore">0</span> نجمة. جاهزة لمحاولة ثانية وتكسري رقمك؟</p>
-        <button class="flight-btn" id="flightRetryBtn">🔁 حاولي مرة ثانية</button>
+      <canvas id="raceCanvas" width="360" height="480" role="img" aria-label="لعبة سباق سيارات على ثلاثة مسارات"></canvas>
+      <p class="game-msg" id="raceMsg">اضغطي ابدأ ثم استخدمي الأسهم للتنقل بين المسارات</p>
+      <div class="game-controls">
+        <button class="btn btn-ghost" id="laneLeft">⬅️ يسار</button>
+        <button class="btn btn-primary" id="raceStart">🏎️ ابدأي السباق</button>
+        <button class="btn btn-ghost" id="laneRight">يمين ➡️</button>
+      </div>
+      <p class="dpad-hint">تقدرين كذلك تستخدمين أسهم لوحة المفاتيح ⬅️➡️</p>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="plane">
+    <div class="section-head">
+      <span class="eyebrow">✈️ بوابة الطيران</span>
+      <h2>طيارة تطير وتتفادى عقبات</h2>
+      <p>اضغطي مع الاستمرار (أو اسحبي بإصبعك) لرفع الطيارة، واتركي للنزول</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="planeScore">النقاط: 0</span>
+        <span id="planeBest">الأفضل: 0</span>
+      </div>
+      <canvas id="planeCanvas" width="680" height="382" role="img" aria-label="لعبة طيارة تتفادى العقبات"></canvas>
+      <p class="game-msg" id="planeMsg">اضغطي ابدأ ثم استمري بالضغط للطيران للأعلى</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="planeStart">✈️ ابدأي الطيران</button>
       </div>
     </div>
+  </section>
 
-    <div class="flight-controls-row">
-      <button class="ghost-btn" id="flightUpBtn" aria-label="اطلعي للأعلى">⬆️</button>
+  <section class="feature-section wrap" id="duck">
+    <div class="section-head">
+      <span class="eyebrow">🦆 بوابة الإنقاذ</span>
+      <h2>البط والصيادون</h2>
+      <p>تحركي بالبطة في كل الاتجاهات واجمعي كل بيضات البط قبل أن يمسك بك الصيادون!</p>
     </div>
-    <p class="flight-hint">على الكمبيوتر: استخدمي السهم ⬆️ أو زر المسافة · على الموبايل: اضغطي مطولًا على الشاشة أو الزر</p>
-  </div>
-</section>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="duckScore">البيض: 0 / 0</span>
+        <span id="duckBest">الأفضل: 0</span>
+      </div>
+      <canvas id="duckCanvas" width="400" height="300" role="img" aria-label="لعبة البطة تجمع البيض وتتفادى الصيادين"></canvas>
+      <p class="game-msg" id="duckMsg">اضغطي ابدأ، ثم حركي البطة بالأسهم أو الأزرار وتجنبي الصيادين 🧑‍🌾</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="duckStart">🦆 ابدأي الإنقاذ</button>
+      </div>
+      <div class="dpad" aria-label="أزرار تحريك البطة">
+        <span class="empty"></span><button id="duckUp" aria-label="فوق">⬆️</button><span class="empty"></span>
+        <button id="duckRight" aria-label="يمين">➡️</button><span class="empty"></span><button id="duckLeft" aria-label="يسار">⬅️</button>
+        <span class="empty"></span><button id="duckDown" aria-label="تحت">⬇️</button><span class="empty"></span>
+      </div>
+      <p class="dpad-hint">تقدرين كذلك تستخدمين أسهم لوحة المفاتيح للتحرك بكل الاتجاهات</p>
+    </div>
+  </section>
 
-<!-- DRAWING TOOLS — FULL FEATURE -->
-<section class="zone" id="draw">
-  <div class="zone-head">
-    <span class="zone-badge">🎨 بوابة الرسم</span>
-    <h2>لوحتك السحرية</h2>
-    <p>اختر فرشاتك وألوانك ودع خيالك يرسم! لوحة رسم حقيقية تقدر تحفظ رسمتك فيها.</p>
-  </div>
-  <div id="drawAppMount">
-    <div class="studio">
-      <div class="studio-toolbar">
-        <div class="tool-group">
-          <span class="grp-label">🎨 الألوان</span>
-          <div class="swatches" id="swatches">
-            <button class="swatch active" style="background:#3A3A3A" data-color="#3A3A3A" aria-label="أسود"></button>
-            <button class="swatch" style="background:#FF5D8F" data-color="#FF5D8F" aria-label="وردي"></button>
-            <button class="swatch" style="background:#FF8A00" data-color="#FF8A00" aria-label="برتقالي"></button>
-            <button class="swatch" style="background:#FFD23F" data-color="#FFD23F" aria-label="أصفر"></button>
-            <button class="swatch" style="background:#3DDC84" data-color="#3DDC84" aria-label="أخضر"></button>
-            <button class="swatch" style="background:#2BAAE2" data-color="#2BAAE2" aria-label="أزرق"></button>
-            <button class="swatch" style="background:#B98EFF" data-color="#B98EFF" aria-label="بنفسجي"></button>
-            <button class="swatch" style="background:#FFFFFF" data-color="#FFFFFF" aria-label="أبيض"></button>
-            <input type="color" class="color-custom" id="customColor" aria-label="اختر لون مخصص" value="#3A3A3A">
+  <section class="feature-section wrap" id="memory">
+    <div class="section-head">
+      <span class="eyebrow">🧠 بوابة الذكاء</span>
+      <h2>لعبة الذاكرة والتطابق</h2>
+      <p>اقلبي بطاقتين في كل مرة — إذا تطابقتا تبقيان مكشوفتين، وإذا اختلفتا ترجعان مقلوبتين</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="memMoves">المحاولات: 0</span>
+        <span id="memBest">الأفضل: —</span>
+      </div>
+      <div class="memory-grid" id="memoryGrid"></div>
+      <p class="game-msg" id="memMsg">اضغطي ابدأ لتوزيع البطاقات من جديد</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="memStart">🔀 بطاقات جديدة</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="paint">
+    <div class="section-head">
+      <span class="eyebrow">🎨 بوابة الإبداع</span>
+      <h2>لوحة الرسم</h2>
+      <p>اختاري لون الفرشاة وحجمها وارسمي لوحتك الخاصة</p>
+    </div>
+    <div class="feature-card">
+      <div class="paint-toolbar">
+        <button class="color-dot active" data-color="#4A3B45" style="background:#4A3B45" aria-label="أسود بنفسجي"></button>
+        <button class="color-dot" data-color="#FF5D8F" style="background:#FF5D8F" aria-label="وردي"></button>
+        <button class="color-dot" data-color="#FFD166" style="background:#FFD166" aria-label="أصفر"></button>
+        <button class="color-dot" data-color="#7FD4E8" style="background:#7FD4E8" aria-label="سماوي"></button>
+        <button class="color-dot" data-color="#8FD19E" style="background:#8FD19E" aria-label="أخضر"></button>
+        <button class="color-dot" data-color="#B79CED" style="background:#B79CED" aria-label="بنفسجي"></button>
+        <button class="color-dot" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="ممحاة"></button>
+        <span class="brush-size">
+          <label for="brushSize">حجم الفرشاة</label>
+          <input type="range" id="brushSize" min="2" max="28" value="8">
+        </span>
+        <button class="btn btn-ghost" id="clearPaint">🧹 مسح الكل</button>
+      </div>
+      <canvas id="paintCanvas" width="960" height="480" role="img" aria-label="منطقة رسم تفاعلية"></canvas>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="jump">
+    <div class="section-head">
+      <span class="eyebrow">🤸 بوابة التوازن</span>
+      <h2>قفزات وتوازن</h2>
+      <p>اضغطي مسافة أو اضغطي على الشاشة في اللحظة الصحيحة للقفز فوق العقبات</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="jumpScore">النقاط: 0</span>
+        <span id="jumpBest">الأفضل: 0</span>
+      </div>
+      <div class="jump-stage" id="jumpStage" style="width:100%;max-width:680px;">
+        <div class="jump-ground"></div>
+        <div class="jumper" id="jumper" style="right:30px;">🏃‍♀️</div>
+      </div>
+      <p class="game-msg" id="jumpMsg">اضغطي ابدأ ثم اضغطي زر القفز عشان تتفادين العقبات</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="jumpStart">🤸 ابدأي التحدي</button>
+        <button class="btn btn-ghost" id="jumpBtn">⬆️ اقفزي</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="dressup">
+    <div class="section-head">
+      <span class="eyebrow">👗 بوابة التصميم</span>
+      <h2>بيتي عروستي المنسف</h2>
+      <p>غيّري عيونها، شعرها، فستانها، وكل التفاصيل واصنعي أجمل لوك</p>
+    </div>
+    <div class="feature-card">
+      <div class="dressup-layout">
+        <div class="doll-stage">
+          <svg id="dollSvg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="385" rx="55" ry="8" fill="#000" opacity="0.06"/>
+            <!-- legs -->
+            <rect x="86" y="278" width="13" height="68" rx="6" fill="#F4C7A1"/>
+            <rect x="101" y="278" width="13" height="68" rx="6" fill="#F4C7A1"/>
+            <!-- shoes -->
+            <g id="shoeGroupL">
+              <ellipse id="shoeL" cx="92" cy="350" rx="15" ry="9" fill="#FF5D8F"/>
+              <ellipse id="heelL" cx="92" cy="356" rx="4" ry="6" fill="#FF5D8F" opacity="0.85"/>
+            </g>
+            <g id="shoeGroupR">
+              <ellipse id="shoeR" cx="109" cy="350" rx="15" ry="9" fill="#FF5D8F"/>
+              <ellipse id="heelR" cx="109" cy="356" rx="4" ry="6" fill="#FF5D8F" opacity="0.85"/>
+            </g>
+            <!-- dress -->
+            <path id="dressShape" d="M68 172 L132 172 L154 296 Q100 318 46 296 Z" fill="#FF8FAB"/>
+            <path d="M68 172 L132 172 L123 200 L77 200 Z" fill="#ffffff" opacity="0.28"/>
+            <path id="dressPattern1" d="M60 250 Q100 262 140 250" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.35"/>
+            <path id="dressPattern2" d="M52 275 Q100 290 148 275" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.3"/>
+            <!-- arms -->
+            <rect x="55" y="178" width="14" height="62" rx="7" fill="#F4C7A1"/>
+            <rect x="131" y="178" width="14" height="62" rx="7" fill="#F4C7A1"/>
+            <!-- neck -->
+            <rect x="91" y="122" width="18" height="20" fill="#F4C7A1"/>
+            <!-- head -->
+            <circle cx="100" cy="96" r="44" fill="#F4C7A1"/>
+            <!-- ears -->
+            <ellipse cx="57" cy="98" rx="6" ry="9" fill="#F4C7A1"/>
+            <ellipse cx="143" cy="98" rx="6" ry="9" fill="#F4C7A1"/>
+            <!-- blush -->
+            <ellipse cx="76" cy="106" rx="8" ry="5" fill="#FF8FAB" opacity="0.45"/>
+            <ellipse cx="124" cy="106" rx="8" ry="5" fill="#FF8FAB" opacity="0.45"/>
+            <!-- eyebrows -->
+            <path id="browL" d="M73 76 Q82 70 92 75" stroke="#4A3B45" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path id="browR" d="M108 75 Q118 70 127 76" stroke="#4A3B45" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- eyes (group, swappable style) -->
+            <g id="eyesGroup">
+              <ellipse cx="82" cy="92" rx="9" ry="11" fill="#fff"/>
+              <ellipse cx="118" cy="92" rx="9" ry="11" fill="#fff"/>
+              <circle id="irisL" cx="82" cy="93" r="6.5" fill="#6B4226"/>
+              <circle id="irisR" cx="118" cy="93" r="6.5" fill="#6B4226"/>
+              <circle cx="82" cy="93" r="3" fill="#241509"/>
+              <circle cx="118" cy="93" r="3" fill="#241509"/>
+              <circle cx="79.5" cy="89.5" r="2" fill="#fff"/>
+              <circle cx="115.5" cy="89.5" r="2" fill="#fff"/>
+              <path d="M73 88 Q82 80 91 88" stroke="#4A3B45" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+              <path d="M109 88 Q118 80 127 88" stroke="#4A3B45" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- nose -->
+            <path d="M99 100 Q100 106 103 107" stroke="#D9A87A" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <!-- mouth -->
+            <path id="mouthShape" d="M86 113 Q100 122 114 113" stroke="#C2455F" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+            <!-- hair back -->
+            <path id="hairBack" d="M56 96 Q52 160 64 178 L78 178 Q66 132 72 90 Z" fill="#4A3B45"/>
+            <path id="hairBack2" d="M144 96 Q148 160 136 178 L122 178 Q134 132 128 90 Z" fill="#4A3B45"/>
+            <!-- hair top + fringe -->
+            <path id="hairTop" d="M55 98 Q50 46 100 40 Q150 46 145 98 Q138 64 100 62 Q62 64 55 98 Z" fill="#4A3B45"/>
+            <path id="hairFringe" d="M64 70 Q100 58 136 70 Q130 84 100 80 Q70 84 64 70 Z" fill="#4A3B45" opacity="0.92"/>
+            <!-- accessory slot (crown/headband) -->
+            <g id="headAccessory"></g>
+            <!-- necklace slot -->
+            <g id="neckAccessory"></g>
+            <!-- bag slot -->
+            <g id="bagAccessory"></g>
+            <!-- ring/bracelet slot -->
+            <g id="handAccessory"></g>
+          </svg>
+        </div>
+        <div class="doll-controls">
+          <div class="option-tabs" id="dressupTabs">
+            <button class="option-tab active" data-panel="dressColor">الفستان</button>
+            <button class="option-tab" data-panel="hairColor">الشعر</button>
+            <button class="option-tab" data-panel="eyeColor">العيون</button>
+            <button class="option-tab" data-panel="headAcc">إكسسوار الرأس</button>
+            <button class="option-tab" data-panel="shoeColor">الكعب</button>
+          </div>
+
+          <div class="option-panel" id="panel-dressColor">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="dress" data-color="#FF8FAB" style="background:#FF8FAB">👗</button>
+              <button class="swatch" data-target="dress" data-color="#B79CED" style="background:#B79CED">👗</button>
+              <button class="swatch" data-target="dress" data-color="#7FD4E8" style="background:#7FD4E8">👗</button>
+              <button class="swatch" data-target="dress" data-color="#FFD166" style="background:#FFD166">👗</button>
+              <button class="swatch" data-target="dress" data-color="#8FD19E" style="background:#8FD19E">👗</button>
+              <button class="swatch" data-target="dress" data-color="#FF5D8F" style="background:#FF5D8F">👗</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-hairColor" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="hair" data-color="#4A3B45" style="background:#4A3B45">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#2B1B12" style="background:#2B1B12">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#8B5A2B" style="background:#8B5A2B">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#D9A441" style="background:#D9A441">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#C24A4A" style="background:#C24A4A">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#E8E8E8" style="background:#E8E8E8">💇‍♀️</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-eyeColor" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="eye" data-color="#6B4226" style="background:#6B4226">👁️</button>
+              <button class="swatch" data-target="eye" data-color="#2E5E8C" style="background:#2E5E8C">👁️</button>
+              <button class="swatch" data-target="eye" data-color="#3E8C5E" style="background:#3E8C5E">👁️</button>
+              <button class="swatch" data-target="eye" data-color="#6E6E6E" style="background:#6E6E6E">👁️</button>
+              <button class="swatch" data-target="eye" data-color="#8C5E3E" style="background:#8C5E3E">👁️</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-headAcc" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-acc="none">🚫</button>
+              <button class="swatch" data-acc="crown">👑</button>
+              <button class="swatch" data-acc="band">🎀</button>
+              <button class="swatch" data-acc="flower">🌸</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-shoeColor" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="shoe" data-color="#FF5D8F" style="background:#FF5D8F">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#4A3B45" style="background:#4A3B45">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#FFD166" style="background:#FFD166">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#7FD4E8" style="background:#7FD4E8">👠</button>
+            </div>
           </div>
         </div>
-
-        <div class="tool-group">
-          <span class="grp-label">✏️ الحجم</span>
-          <div class="brush-sizes" id="brushSizes">
-            <button class="size-dot-btn" data-size="4" aria-label="رفيع"><span class="dot" style="width:6px;height:6px;"></span></button>
-            <button class="size-dot-btn active" data-size="10" aria-label="متوسط"><span class="dot" style="width:11px;height:11px;"></span></button>
-            <button class="size-dot-btn" data-size="20" aria-label="عريض"><span class="dot" style="width:18px;height:18px;"></span></button>
-            <button class="size-dot-btn" data-size="36" aria-label="عريض جدًا"><span class="dot" style="width:26px;height:26px;"></span></button>
-          </div>
-        </div>
-
-        <div class="tool-group">
-          <span class="grp-label">🧰 الأدوات</span>
-          <button class="tool-btn active" id="brushTool" aria-label="فرشاة" title="فرشاة">🖌️</button>
-          <button class="tool-btn" id="eraserTool" aria-label="ممحاة" title="ممحاة">🧽</button>
-          <button class="tool-btn" id="bucketTool" aria-label="تعبئة بالألوان" title="تعبئة منطقة">🪣</button>
-        </div>
-      </div>
-
-      <div class="canvas-wrap">
-        <canvas id="drawCanvas"></canvas>
-      </div>
-
-      <div class="studio-actions">
-        <button class="action-btn" id="undoBtn" title="تراجع">↩️ تراجع</button>
-        <button class="action-btn" id="redoBtn" title="إعادة">↪️ إعادة</button>
-        <button class="action-btn danger" id="clearBtn" title="مسح الكل">🗑️ مسح الكل</button>
-        <button class="action-btn primary" id="saveBtn" title="حفظ الرسمة">💾 حفظ رسمتي</button>
-      </div>
-      <p class="studio-hint">ارسمي بإصبعك أو بالماوس 🌈 — جربي التعبئة بالألوان بالضغط داخل أي شكل مغلق!</p>
-    </div>
-  </div>
-</section>
-
-<!-- CARS PLACEHOLDER -->
-<section class="zone" id="cars">
-  <div class="zone-head">
-    <span class="zone-badge">🚗 بوابة السيارات</span>
-    <h2>سباق مليان سرعة</h2>
-    <p>قُدي سيارتك يمين ويسار، تفادي العوائق، واجمعي النجوم!</p>
-  </div>
-
-  <div class="race-shell">
-    <div class="flight-hud">
-      <div class="hud-pill">⭐ النقاط: <span class="val" id="raceScore">0</span></div>
-      <div class="hud-pill">🏆 الأفضل: <span class="val" id="raceBest">0</span></div>
-    </div>
-
-    <div class="race-canvas-wrap" id="raceWrap">
-      <canvas id="raceCanvas"></canvas>
-      <div class="flight-overlay" id="raceStartOverlay">
-        <div style="font-size:3rem;">🏎️</div>
-        <h3>جاهزة للسباق؟</h3>
-        <p>استخدمي الأسهم ⬅️➡️ بالكمبيوتر، أو اضغطي يمين/يسار من الشاشة بالموبايل. تفادي السيارات واجمعي النجوم!</p>
-        <button class="flight-btn" id="raceStartBtn" style="background:linear-gradient(135deg,#B98EFF 0%, #7C4FE0 100%); box-shadow:0 12px 26px rgba(124,79,224,0.35);">🚀 ابدأ السباق</button>
-      </div>
-      <div class="flight-overlay hidden" id="raceOverOverlay">
-        <div style="font-size:3rem;">💥</div>
-        <h3>محاولة حلوة!</h3>
-        <p>جمعتي <span id="raceFinalScore">0</span> نقطة. جاهزة لمحاولة ثانية؟</p>
-        <button class="flight-btn" id="raceRetryBtn" style="background:linear-gradient(135deg,#B98EFF 0%, #7C4FE0 100%); box-shadow:0 12px 26px rgba(124,79,224,0.35);">🔁 حاولي مرة ثانية</button>
       </div>
     </div>
+  </section>
 
-    <div class="race-controls-row">
-      <button class="ghost-btn" id="raceLeftBtn" aria-label="يسار">⬅️</button>
-      <button class="ghost-btn" id="raceRightBtn" aria-label="يمين">➡️</button>
+  <section class="feature-section wrap" id="accessories">
+    <div class="section-head">
+      <span class="eyebrow">💍 بوابة التألق</span>
+      <h2>إكسسوارات، مجوهرات، وكعوب</h2>
+      <p>تصفحي الرف واضغطي على أي قطعة تحبينها لتجربتها على عروستك فوراً</p>
     </div>
-    <p class="flight-hint">على الكمبيوتر: استخدمي الأسهم ⬅️➡️ · على الموبايل: اضغطي الأزرار أو اسحبي بإصبعك</p>
-  </div>
-</section>
-
-<!-- MOTO PLACEHOLDER -->
-<section class="zone" id="moto">
-  <div class="zone-head">
-    <span class="zone-badge">🏍️ بوابة الموتوسيكلات</span>
-    <h2>قفزات وتوازن</h2>
-    <p>سرّعي وبطّئي للحفاظ على توازن موتوسيكلتك فوق التلال!</p>
-  </div>
-
-  <div class="hill-shell">
-    <div class="flight-hud">
-      <div class="hud-pill">📏 المسافة: <span class="val" id="hillScore">0</span> م</div>
-      <div class="hud-pill">🏆 الأفضل: <span class="val" id="hillBest">0</span> م</div>
+    <div class="shelf-grid" id="shelfGrid">
+      <div class="shelf-item" data-target="dollNecklace" data-piece="pearl"><span class="emoji">📿</span><span class="name">طوق لؤلؤي</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="dollNecklace" data-piece="gold"><span class="emoji">✨</span><span class="name">سلسلة ذهبية</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="head" data-piece="crown"><span class="emoji">👑</span><span class="name">تاج صغير</span><span class="cat">إكسسوار رأس</span></div>
+      <div class="shelf-item" data-target="head" data-piece="flower"><span class="emoji">🌸</span><span class="name">إكليل ورد</span><span class="cat">إكسسوار رأس</span></div>
+      <div class="shelf-item" data-target="bag" data-piece="pink"><span class="emoji">👛</span><span class="name">حقيبة وردية</span><span class="cat">حقائب</span></div>
+      <div class="shelf-item" data-target="bag" data-piece="star"><span class="emoji">⭐</span><span class="name">حقيبة نجوم</span><span class="cat">حقائب</span></div>
+      <div class="shelf-item" data-target="shoe" data-piece="pink"><span class="emoji">👠</span><span class="name">كعب وردي</span><span class="cat">أحذية</span></div>
+      <div class="shelf-item" data-target="shoe" data-piece="gold"><span class="emoji">🥿</span><span class="name">حذاء ذهبي</span><span class="cat">أحذية</span></div>
+      <div class="shelf-item" data-target="ring" data-piece="diamond"><span class="emoji">💍</span><span class="name">خاتم لامع</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="bracelet" data-piece="charm"><span class="emoji">💫</span><span class="name">سوار تعليقات</span><span class="cat">مجوهرات</span></div>
     </div>
+    <p class="game-msg" id="shelfMsg" style="margin-top:18px;"></p>
+  </section>
 
-    <div class="hill-canvas-wrap" id="hillWrap">
-      <canvas id="hillCanvas"></canvas>
-      <div class="flight-overlay" id="hillStartOverlay">
-        <div style="font-size:3rem;">🏍️</div>
-        <h3>جاهزة للتحدي؟</h3>
-        <p>اضغطي مطولًا (أو السهم لأعلى ⬆️) للتسريع فوق التلال. حافظي على توازن الموتوسيكلة وما تخليها تنقلب!</p>
-        <button class="flight-btn" id="hillStartBtn" style="background:linear-gradient(135deg,#FFA63D 0%, #E0602A 100%); box-shadow:0 12px 26px rgba(224,96,42,0.35);">🚀 ابدأ التحدي</button>
-      </div>
-      <div class="flight-overlay hidden" id="hillOverOverlay">
-        <div style="font-size:3rem;">🌄</div>
-        <h3>محاولة حلوة!</h3>
-        <p>وصلتي <span id="hillFinalScore">0</span> متر. جاهزة لمحاولة ثانية وتكسري رقمك؟</p>
-        <button class="flight-btn" id="hillRetryBtn" style="background:linear-gradient(135deg,#FFA63D 0%, #E0602A 100%); box-shadow:0 12px 26px rgba(224,96,42,0.35);">🔁 حاولي مرة ثانية</button>
-      </div>
-    </div>
-
-    <div class="hill-controls-row">
-      <button class="ghost-btn" id="hillGasBtn" aria-label="تسريع" style="color:#E0602A;">⬆️ غاز</button>
-    </div>
-    <p class="flight-hint">على الكمبيوتر: استخدمي السهم ⬆️ أو زر المسافة · على الموبايل: اضغطي مطولًا على الزر</p>
-  </div>
-</section>
-
-<!-- DRESS-UP PLACEHOLDER -->
-<section class="zone" id="dressup">
-  <div class="zone-head">
-    <span class="zone-badge" style="background:#FFE3EC;color:var(--coral-deep);">👗 بوابة التلبيس</span>
-    <h2>لبّسي عروستك المفضّلة</h2>
-    <p>اختاري العروسة، وغيّري فستانها وحذاءها وشعرها ومكياجها كما تحبين!</p>
-  </div>
-
-  <div class="doll-picker" id="dollPicker">
-    <button class="doll-pick-btn active" data-skin="light" aria-label="عروسة ببشرة فاتحة"></button>
-    <button class="doll-pick-btn" data-skin="tan" aria-label="عروسة ببشرة سمراء"></button>
-  </div>
-
-  <div class="dress-shell">
-    <div class="doll-stage">
-      <div class="doll-canvas-wrap" id="dollStageMount"></div>
-      <div class="doll-actions">
-        <button class="action-btn" id="dollRandomBtn">🎲 تشكيلة عشوائية</button>
-        <button class="action-btn danger" id="dollResetBtn">🔄 إعادة ضبط</button>
-      </div>
-    </div>
-
-    <div class="wardrobe">
-      <div class="wardrobe-tabs" id="wardrobeTabs">
-        <button class="wtab active" data-panel="dresses">👗 فساتين</button>
-        <button class="wtab" data-panel="casual">👖 ملابس عادية</button>
-        <button class="wtab" data-panel="shoes">👠 الكعوب</button>
-        <button class="wtab" data-panel="hair">💇‍♀️ تسريحات</button>
-        <button class="wtab" data-panel="hairacc">🎀 إكسسوارات شعر</button>
-        <button class="wtab" data-panel="makeup">💄 ميك أب</button>
-      </div>
-
-      <div class="wpanel active" id="panel-dresses"></div>
-      <div class="wpanel" id="panel-casual"></div>
-      <div class="wpanel" id="panel-shoes"></div>
-      <div class="wpanel" id="panel-hair"></div>
-      <div class="wpanel" id="panel-hairacc"></div>
-      <div class="wpanel" id="panel-makeup"></div>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer>
-  <div class="heart-row">💛 🩷 💙</div>
-  <p>سحابة اللعب — صُنعت بحب لأجل خيال الأطفال</p>
+  سحابة اللعب 🌤️ — منصة لعب وتعلّم صُممت بحب للأطفال
 </footer>
 
 <script>
-  // mobile nav toggle
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => {
-    const isOpen = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+/* ===================== PAINT TOOL ===================== */
+(function(){
+  const canvas = document.getElementById('paintCanvas');
+  const ctx = canvas.getContext('2d');
+  let drawing=false, color='#4A3B45', size=8, last=null;
+
+  function resizeCanvas(){
+    const ratio = canvas.width/canvas.height;
+    const displayWidth = canvas.clientWidth;
+    canvas.style.height = (displayWidth/ratio)+'px';
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function pos(e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width/rect.width;
+    const scaleY = canvas.height/rect.height;
+    const cx = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
+    const cy = (e.touches? e.touches[0].clientY : e.clientY) - rect.top;
+    return {x:cx*scaleX, y:cy*scaleY};
+  }
+  function start(e){ drawing=true; last=pos(e); e.preventDefault(); }
+  function move(e){
+    if(!drawing) return;
+    const p = pos(e);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = size;
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.beginPath();
+    ctx.moveTo(last.x,last.y);
+    ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+    last=p;
+    e.preventDefault();
+  }
+  function end(){ drawing=false; }
+
+  canvas.addEventListener('mousedown',start);
+  canvas.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});
+  canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',end);
+
+  document.querySelectorAll('.color-dot').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.color-dot').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      color = btn.dataset.color;
+    });
   });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
+  document.getElementById('brushSize').addEventListener('input',(e)=>{ size = +e.target.value; });
+  document.getElementById('clearPaint').addEventListener('click',()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  });
+})();
 
-  // ambient sky decorations
-  (function buildSky(){
-    const layer = document.getElementById('skyLayer');
-    const cloudSvg = `<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="60" cy="60" rx="55" ry="32" fill="white"/>
-      <ellipse cx="110" cy="45" rx="45" ry="38" fill="white"/>
-      <ellipse cx="150" cy="62" rx="40" ry="28" fill="white"/>
-    </svg>`;
+/* ===================== CAR RACE GAME (canvas) ===================== */
+(function(){
+  const canvas = document.getElementById('raceCanvas');
+  const ctx = canvas.getContext('2d');
+  const statusEl = document.getElementById('raceStatus');
+  const bestEl = document.getElementById('raceBest');
+  const msgEl = document.getElementById('raceMsg');
+  const startBtn = document.getElementById('raceStart');
+  const leftBtn = document.getElementById('laneLeft');
+  const rightBtn = document.getElementById('laneRight');
 
-    const cloudConfigs = [
-      {top:'6%', w:180, dur:46, delay:0, op:0.85},
-      {top:'18%', w:120, dur:60, delay:8, op:0.7},
-      {top:'2%', w:140, dur:52, delay:18, op:0.8},
-      {top:'30%', w:100, dur:70, delay:3, op:0.55},
-    ];
-    cloudConfigs.forEach(c => {
-      const el = document.createElement('div');
-      el.className = 'cloud';
-      el.style.top = c.top;
-      el.style.width = c.w + 'px';
-      el.style.height = (c.w * 0.5) + 'px';
-      el.style.animationDuration = c.dur + 's';
-      el.style.animationDelay = '-' + c.delay + 's';
-      el.style.opacity = c.op;
-      el.innerHTML = cloudSvg;
-      layer.appendChild(el);
-    });
+  const W = canvas.width, H = canvas.height;
+  const roadX = 30, roadW = W - 60;
+  const laneCount = 3, laneW = roadW/laneCount;
+  const laneCenterX = i => roadX + laneW*i + laneW/2;
 
-    const starPositions = [
-      {top:'10%',left:'8%',size:18,dur:3.2},
-      {top:'22%',left:'85%',size:14,dur:2.6},
-      {top:'40%',left:'92%',size:20,dur:3.8},
-      {top:'55%',left:'5%',size:16,dur:3.1},
-      {top:'75%',left:'90%',size:18,dur:2.9},
-      {top:'85%',left:'12%',size:14,dur:3.5},
-      {top:'5%',left:'45%',size:16,dur:3.0},
-      {top:'65%',left:'48%',size:14,dur:2.7},
-    ];
-    starPositions.forEach((s,i) => {
-      const el = document.createElement('div');
-      el.className = 'twinkle';
-      el.style.top = s.top;
-      el.style.left = s.left;
-      el.style.fontSize = s.size + 'px';
-      el.style.animationDuration = s.dur + 's';
-      el.style.animationDelay = (i * 0.4) + 's';
-      el.textContent = '✦';
-      el.style.color = i % 2 === 0 ? '#FFA63D' : '#5FC9F0';
-      layer.appendChild(el);
-    });
+  let lane = 1, running=false, distance=0, rivals=[], raf=null, best=0;
+  let playerY = H - 90, dashOffset = 0;
+  const carColors = ['#FF5D8F','#7FD4E8','#FFD166','#B79CED','#8FD19E'];
 
-    const heartPositions = [
-      {top:'15%',left:'20%',size:20,dur:5},
-      {top:'45%',left:'78%',size:16,dur:6},
-      {top:'70%',left:'30%',size:18,dur:5.5},
-      {top:'88%',left:'70%',size:14,dur:4.6},
-    ];
-    heartPositions.forEach((h,i) => {
-      const el = document.createElement('div');
-      el.className = 'floaty-heart';
-      el.style.top = h.top;
-      el.style.left = h.left;
-      el.style.fontSize = h.size + 'px';
-      el.style.animationDuration = h.dur + 's';
-      el.style.animationDelay = (i * 0.7) + 's';
-      el.textContent = '💗';
-      layer.appendChild(el);
-    });
-  })();
+  try{ best = +(localStorage.getItem('race_best_v2')||0); }catch(e){ best=0; }
+  bestEl.textContent = 'أفضل نتيجة: '+best+' م';
 
-  // ================= Drawing Studio =================
-  (function initStudio(){
-    const canvas = document.getElementById('drawCanvas');
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    const wrap = canvas.parentElement;
+  function drawCar(x, y, color, isPlayer){
+    ctx.save();
+    ctx.translate(x, y);
+    const w = 46, h = 76;
+    // shadow
+    ctx.beginPath();
+    ctx.ellipse(0, h/2+6, w/2+4, 8, 0, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    ctx.fill();
+    // body
+    const grad = ctx.createLinearGradient(-w/2,-h/2,w/2,h/2);
+    grad.addColorStop(0, color);
+    grad.addColorStop(1, shadeColor(color, -22));
+    ctx.fillStyle = grad;
+    roundRect(ctx, -w/2, -h/2, w, h, 14);
+    ctx.fill();
+    // windshield + cabin
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    roundRect(ctx, -w/2+8, -h/2+12, w-16, h*0.32, 8);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(74,59,69,0.55)';
+    roundRect(ctx, -w/2+10, -h/2+14, w-20, h*0.24, 6);
+    ctx.fill();
+    // racing stripe
+    ctx.fillStyle = 'rgba(255,255,255,0.9)';
+    ctx.fillRect(-4, -h/2+6, 8, h-12);
+    // spoiler
+    ctx.fillStyle = shadeColor(color,-30);
+    ctx.fillRect(-w/2-3, h/2-14, w+6, 6);
+    ctx.fillRect(-w/2+2, h/2-22, 5, 10);
+    ctx.fillRect(w/2-7, h/2-22, 5, 10);
+    // wheels
+    ctx.fillStyle = '#2B2228';
+    roundRect(ctx, -w/2-5, -h/2+10, 8, 18, 3); ctx.fill();
+    roundRect(ctx, w/2-3, -h/2+10, 8, 18, 3); ctx.fill();
+    roundRect(ctx, -w/2-5, h/2-28, 8, 18, 3); ctx.fill();
+    roundRect(ctx, w/2-3, h/2-28, 8, 18, 3); ctx.fill();
+    // headlights/taillights
+    ctx.fillStyle = isPlayer ? '#FFF6D6' : '#FFD8D8';
+    ctx.beginPath(); ctx.arc(-w/2+8, -h/2+5, 4, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(w/2-8, -h/2+5, 4, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
 
-    let currentColor = '#3A3A3A';
-    let currentSize = 10;
-    let currentTool = 'brush'; // 'brush' | 'eraser' | 'bucket'
-    let drawing = false;
-    let lastX = 0, lastY = 0;
+  function roundRect(c,x,y,w,h,r){
+    c.beginPath();
+    c.moveTo(x+r,y);
+    c.arcTo(x+w,y,x+w,y+h,r);
+    c.arcTo(x+w,y+h,x,y+h,r);
+    c.arcTo(x,y+h,x,y,r);
+    c.arcTo(x,y,x+w,y,r);
+    c.closePath();
+  }
+  function shadeColor(hex, percent){
+    const num = parseInt(hex.slice(1),16);
+    let r = (num>>16) + percent, g = (num>>8 & 0x00FF) + percent, b = (num & 0x0000FF) + percent;
+    r = Math.max(Math.min(255,r),0); g = Math.max(Math.min(255,g),0); b = Math.max(Math.min(255,b),0);
+    return '#'+(0x1000000 + r*0x10000 + g*0x100 + b).toString(16).slice(1);
+  }
 
-    let undoStack = [];
-    let redoStack = [];
-    const MAX_STACK = 25;
-
-    function resizeCanvas(preserve){
-      const rect = wrap.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      let snapshot = null;
-      if(preserve && canvas.width > 0){
-        snapshot = document.createElement('canvas');
-        snapshot.width = canvas.width;
-        snapshot.height = canvas.height;
-        snapshot.getContext('2d').drawImage(canvas, 0, 0);
-      }
-      const cssHeight = canvas.clientHeight || 480;
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(cssHeight * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      fillBackground();
-      if(snapshot){
-        ctx.save();
-        ctx.setTransform(1,0,0,1,0,0);
-        ctx.drawImage(snapshot, 0, 0, snapshot.width, snapshot.height, 0, 0, canvas.width, canvas.height);
-        ctx.restore();
-        ctx.setTransform(dpr,0,0,dpr,0,0);
-      }
+  function drawRoad(speed){
+    ctx.fillStyle = '#5B6470';
+    ctx.fillRect(0,0,W,H);
+    // grass shoulders
+    ctx.fillStyle = '#7BAF6B';
+    ctx.fillRect(0,0,roadX,H);
+    ctx.fillRect(roadX+roadW,0,W-(roadX+roadW),H);
+    // road
+    ctx.fillStyle = '#454C57';
+    ctx.fillRect(roadX,0,roadW,H);
+    // curb stripes
+    ctx.fillStyle = '#FF5D8F';
+    for(let y=-40; y<H; y+=40){
+      ctx.fillRect(roadX-6, y+dashOffset, 6, 22);
+      ctx.fillRect(roadX+roadW, y+dashOffset, 6, 22);
     }
-
-    function fillBackground(){
-      ctx.save();
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.fillStyle = '#FFFFFF';
-      ctx.globalCompositeOperation = 'destination-over';
-      // only fill once on truly blank canvas (handled by caller for clear)
-      ctx.restore();
-    }
-
-    function pushHistory(){
-      try{
-        undoStack.push(canvas.toDataURL());
-        if(undoStack.length > MAX_STACK) undoStack.shift();
-        redoStack = [];
-        updateActionButtons();
-      }catch(e){ /* ignore */ }
-    }
-
-    function restoreFromData(dataUrl, cb){
-      const img = new Image();
-      img.onload = function(){
-        ctx.save();
-        ctx.setTransform(1,0,0,1,0,0);
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        ctx.restore();
-        if(cb) cb();
-      };
-      img.src = dataUrl;
-    }
-
-    function updateActionButtons(){
-      document.getElementById('undoBtn').disabled = undoStack.length === 0;
-      document.getElementById('redoBtn').disabled = redoStack.length === 0;
-    }
-
-    function getPos(e){
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left),
-        y: (clientY - rect.top)
-      };
-    }
-
-    function startDraw(e){
-      if(currentTool === 'bucket'){
-        const p = getPos(e);
-        floodFill(Math.round(p.x), Math.round(p.y), currentColor);
-        pushHistory();
-        return;
-      }
-      drawing = true;
-      const p = getPos(e);
-      lastX = p.x; lastY = p.y;
+    // lane dashes
+    ctx.strokeStyle = 'rgba(255,255,255,.45)';
+    ctx.lineWidth = 4;
+    ctx.setLineDash([24,22]);
+    for(let i=1;i<laneCount;i++){
+      const x = roadX + laneW*i;
       ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      // draw a dot for single clicks/taps
-      drawLine(lastX, lastY, lastX + 0.01, lastY + 0.01);
-    }
-
-    function moveDraw(e){
-      if(!drawing) return;
-      e.preventDefault();
-      const p = getPos(e);
-      drawLine(lastX, lastY, p.x, p.y);
-      lastX = p.x; lastY = p.y;
-    }
-
-    function endDraw(){
-      if(!drawing) return;
-      drawing = false;
-      pushHistory();
-    }
-
-    function drawLine(x1, y1, x2, y2){
-      ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
-      ctx.lineWidth = currentSize;
-      if(currentTool === 'eraser'){
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.strokeStyle = 'rgba(0,0,0,1)';
-      } else {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = currentColor;
-      }
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
+      ctx.moveTo(x, dashOffset-46);
+      ctx.lineTo(x, H);
       ctx.stroke();
     }
+    ctx.setLineDash([]);
+    dashOffset = (dashOffset + speed) % 46;
+  }
 
-    // ---- Flood fill (bucket tool) ----
-    function hexToRgba(hex){
-      const h = hex.replace('#','');
-      const bigint = parseInt(h.length === 3 ?
-        h.split('').map(c=>c+c).join('') : h, 16);
-      return [(bigint>>16)&255, (bigint>>8)&255, bigint&255, 255];
-    }
+  function setLane(i){
+    lane = Math.max(0, Math.min(laneCount-1, i));
+  }
+  leftBtn.addEventListener('click',()=> setLane(lane-1));
+  rightBtn.addEventListener('click',()=> setLane(lane+1));
+  window.addEventListener('keydown',(e)=>{
+    if(!running) return;
+    if(e.key==='ArrowLeft') setLane(lane-1);
+    if(e.key==='ArrowRight') setLane(lane+1);
+  });
+  canvas.addEventListener('touchstart',(e)=>{
+    const rect = canvas.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    if(x < rect.width/2) setLane(lane-1); else setLane(lane+1);
+  });
 
-    function floodFill(startX, startY, fillColorHex){
-      const dpr = window.devicePixelRatio || 1;
-      const px = Math.round(startX * dpr);
-      const py = Math.round(startY * dpr);
-      const w = canvas.width, h = canvas.height;
-      if(px < 0 || py < 0 || px >= w || py >= h) return;
+  function spawnRival(){
+    const rLane = Math.floor(Math.random()*laneCount);
+    rivals.push({lane:rLane, y:-100, color: carColors[Math.floor(Math.random()*carColors.length)]});
+  }
 
-      const imgData = ctx.getImageData(0, 0, w, h);
-      const data = imgData.data;
-      const idx = (py * w + px) * 4;
-      const target = [data[idx], data[idx+1], data[idx+2], data[idx+3]];
-      const fill = hexToRgba(fillColorHex);
+  function reset(){
+    rivals=[]; distance=0; setLane(1);
+    statusEl.textContent='المسافة: 0 م';
+    msgEl.textContent='';
+  }
 
-      if(target[0]===fill[0] && target[1]===fill[1] && target[2]===fill[2] && target[3]===fill[3]) return;
+  let playerX = laneCenterX(1);
 
-      const tolerance = 40;
-      function matches(i){
-        return Math.abs(data[i]-target[0]) <= tolerance &&
-               Math.abs(data[i+1]-target[1]) <= tolerance &&
-               Math.abs(data[i+2]-target[2]) <= tolerance &&
-               Math.abs(data[i+3]-target[3]) <= tolerance;
-      }
+  function loop(){
+    distance += 1;
+    statusEl.textContent='المسافة: '+distance+' م';
+    const speed = 5 + Math.min(distance/180, 7);
 
-      const stack = [[px,py]];
-      const visited = new Uint8Array(w*h);
-      let iterations = 0;
-      const maxIterations = w*h*1.2;
+    if(Math.random() < 0.035) spawnRival();
 
-      while(stack.length && iterations < maxIterations){
-        iterations++;
-        const [x,y] = stack.pop();
-        if(x<0||x>=w||y<0||y>=h) continue;
-        const vIdx = y*w+x;
-        if(visited[vIdx]) continue;
-        const i = vIdx*4;
-        if(!matches(i)) continue;
-        visited[vIdx] = 1;
-        data[i] = fill[0]; data[i+1] = fill[1]; data[i+2] = fill[2]; data[i+3] = fill[3];
-        stack.push([x+1,y]);
-        stack.push([x-1,y]);
-        stack.push([x,y+1]);
-        stack.push([x,y-1]);
-      }
-      ctx.putImageData(imgData, 0, 0);
-    }
+    rivals.forEach(r=> r.y += speed);
+    rivals = rivals.filter(r=> r.y < H+100);
 
-    // ---- Events ----
-    canvas.addEventListener('mousedown', startDraw);
-    canvas.addEventListener('mousemove', moveDraw);
-    window.addEventListener('mouseup', endDraw);
-    canvas.addEventListener('touchstart', startDraw, {passive:false});
-    canvas.addEventListener('touchmove', moveDraw, {passive:false});
-    canvas.addEventListener('touchend', endDraw);
+    const targetX = laneCenterX(lane);
+    playerX += (targetX - playerX) * 0.22;
 
-    // ---- Toolbar wiring ----
-    document.querySelectorAll('#swatches .swatch').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#swatches .swatch').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        currentColor = btn.dataset.color;
-        setTool('brush');
-      });
-    });
-    document.getElementById('customColor').addEventListener('input', (e) => {
-      currentColor = e.target.value;
-      document.querySelectorAll('#swatches .swatch').forEach(b=>b.classList.remove('active'));
-      setTool('brush');
-    });
+    drawRoad(speed);
+    rivals.forEach(r=> drawCar(laneCenterX(r.lane), r.y, r.color, false));
+    drawCar(playerX, playerY, '#FF5D8F', true);
 
-    document.querySelectorAll('#brushSizes .size-dot-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#brushSizes .size-dot-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        currentSize = parseInt(btn.dataset.size, 10);
-      });
-    });
-
-    function setTool(tool){
-      currentTool = tool;
-      document.getElementById('brushTool').classList.toggle('active', tool==='brush');
-      document.getElementById('eraserTool').classList.toggle('active', tool==='eraser');
-      document.getElementById('bucketTool').classList.toggle('active', tool==='bucket');
-    }
-    document.getElementById('brushTool').addEventListener('click', () => setTool('brush'));
-    document.getElementById('eraserTool').addEventListener('click', () => setTool('eraser'));
-    document.getElementById('bucketTool').addEventListener('click', () => setTool('bucket'));
-
-    document.getElementById('undoBtn').addEventListener('click', () => {
-      if(undoStack.length === 0) return;
-      const last = undoStack.pop();
-      redoStack.push(last);
-      const prev = undoStack[undoStack.length - 1];
-      if(prev){
-        restoreFromData(prev);
-      } else {
-        ctx.save();
-        ctx.setTransform(1,0,0,1,0,0);
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.restore();
-      }
-      updateActionButtons();
-    });
-
-    document.getElementById('redoBtn').addEventListener('click', () => {
-      if(redoStack.length === 0) return;
-      const next = redoStack.pop();
-      undoStack.push(next);
-      restoreFromData(next);
-      updateActionButtons();
-    });
-
-    document.getElementById('clearBtn').addEventListener('click', () => {
-      ctx.save();
-      ctx.setTransform(1,0,0,1,0,0);
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.restore();
-      pushHistory();
-    });
-
-    document.getElementById('saveBtn').addEventListener('click', () => {
-      const exportCanvas = document.createElement('canvas');
-      exportCanvas.width = canvas.width;
-      exportCanvas.height = canvas.height;
-      const exCtx = exportCanvas.getContext('2d');
-      exCtx.fillStyle = '#FFFFFF';
-      exCtx.fillRect(0,0,exportCanvas.width, exportCanvas.height);
-      exCtx.drawImage(canvas, 0, 0);
-      const link = document.createElement('a');
-      link.download = 'رسمتي-سحابة-اللعب.png';
-      link.href = exportCanvas.toDataURL('image/png');
-      link.click();
-    });
-
-    // ---- Init ----
-    window.addEventListener('resize', () => resizeCanvas(true));
-    resizeCanvas(false);
-    pushHistory();
-    updateActionButtons();
-  })();
-
-  // ================= Flight Game =================
-  (function initFlight(){
-    const canvas = document.getElementById('flightCanvas');
-    const ctx = canvas.getContext('2d');
-    const wrap = document.getElementById('flightWrap');
-    const startOverlay = document.getElementById('flightStartOverlay');
-    const overOverlay = document.getElementById('flightOverOverlay');
-    const startBtn = document.getElementById('flightStartBtn');
-    const retryBtn = document.getElementById('flightRetryBtn');
-    const upBtn = document.getElementById('flightUpBtn');
-    const scoreEl = document.getElementById('flightScore');
-    const bestEl = document.getElementById('flightBest');
-    const finalScoreEl = document.getElementById('flightFinalScore');
-
-    let dpr = window.devicePixelRatio || 1;
-    let cssW = 0, cssH = 0;
-    let state = 'idle'; // idle | playing | over
-    let rafId = null;
-
-    let best = 0;
-    try{
-      const saved = sessionStorage.getItem('flightBestScore');
-      if(saved) best = parseInt(saved, 10) || 0;
-    }catch(e){ best = 0; }
-    bestEl.textContent = best;
-
-    // plane physics
-    let plane = { x:0, y:0, vy:0, radius:18, rotation:0 };
-    const GRAVITY = 0.45;
-    const LIFT = -0.95;
-    const MAX_FALL = 8.5;
-    const MAX_RISE = -7.5;
-
-    let holding = false;
-    let obstacles = []; // {x, gapY, gapH, w, passed}
-    let stars = []; // {x, y, r, collected}
-    let frame = 0;
-    let speed = 3.2;
-    let score = 0;
-    let spawnTimer = 0;
-    let spawnInterval = 95;
-
-    function resize(){
-      const rect = wrap.getBoundingClientRect();
-      cssW = rect.width;
-      cssH = canvas.clientHeight || 440;
-      dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.round(cssW * dpr);
-      canvas.height = Math.round(cssH * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if(state !== 'playing'){
-        plane.x = cssW * 0.22;
-        plane.y = cssH * 0.5;
-      }
-      drawIdleFrame();
-    }
-
-    function resetGame(){
-      plane.x = cssW * 0.22;
-      plane.y = cssH * 0.5;
-      plane.vy = 0;
-      plane.rotation = 0;
-      obstacles = [];
-      stars = [];
-      frame = 0;
-      speed = 3.2;
-      score = 0;
-      spawnTimer = 0;
-      spawnInterval = 95;
-      scoreEl.textContent = '0';
-    }
-
-    function spawnObstacle(){
-      const minGap = Math.max(110, 190 - Math.floor(score/5)*6);
-      const gapH = minGap;
-      const margin = 40;
-      const gapY = margin + Math.random() * (cssH - margin*2 - gapH);
-      obstacles.push({ x: cssW + 30, gapY, gapH, w: 54, passed:false });
-      if(Math.random() < 0.65){
-        stars.push({
-          x: cssW + 30 + 27,
-          y: gapY + gapH/2,
-          r: 11,
-          collected:false
-        });
-      }
-    }
-
-    function drawCloudShape(x,y,scale,alpha){
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = '#FFFFFF';
-      ctx.beginPath();
-      ctx.ellipse(x, y, 26*scale, 16*scale, 0, 0, Math.PI*2);
-      ctx.ellipse(x+22*scale, y-8*scale, 20*scale, 16*scale, 0, 0, Math.PI*2);
-      ctx.ellipse(x+40*scale, y, 18*scale, 13*scale, 0, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function drawPlane(){
-      ctx.save();
-      ctx.translate(plane.x, plane.y);
-      const targetRot = Math.max(-0.4, Math.min(0.5, plane.vy * 0.07));
-      plane.rotation += (targetRot - plane.rotation) * 0.15;
-      ctx.rotate(plane.rotation);
-      // body
-      ctx.fillStyle = '#FF8FAB';
-      ctx.beginPath();
-      ctx.ellipse(0, 0, 22, 11, 0, 0, Math.PI*2);
-      ctx.fill();
-      // tail wing
-      ctx.fillStyle = '#FF5D8F';
-      ctx.beginPath();
-      ctx.moveTo(-14, -2);
-      ctx.lineTo(-26, -14);
-      ctx.lineTo(-10, -4);
-      ctx.closePath();
-      ctx.fill();
-      // top wing
-      ctx.fillStyle = '#5FC9F0';
-      ctx.beginPath();
-      ctx.moveTo(-2, -8);
-      ctx.lineTo(8, -22);
-      ctx.lineTo(10, -6);
-      ctx.closePath();
-      ctx.fill();
-      // bottom wing
-      ctx.beginPath();
-      ctx.moveTo(-2, 8);
-      ctx.lineTo(6, 18);
-      ctx.lineTo(10, 6);
-      ctx.closePath();
-      ctx.fill();
-      // window
-      ctx.fillStyle = '#FFF8EE';
-      ctx.beginPath();
-      ctx.arc(8, -1, 5, 0, Math.PI*2);
-      ctx.fill();
-      // nose
-      ctx.fillStyle = '#FFA63D';
-      ctx.beginPath();
-      ctx.ellipse(19, 0, 5, 7, 0, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function drawStar(s){
-      if(s.collected) return;
-      ctx.save();
-      ctx.translate(s.x, s.y);
-      ctx.fillStyle = '#FFD23F';
-      ctx.beginPath();
-      const spikes = 5, outerR = s.r, innerR = s.r*0.45;
-      for(let i=0;i<spikes*2;i++){
-        const r = i % 2 === 0 ? outerR : innerR;
-        const angle = (Math.PI / spikes) * i - Math.PI/2;
-        const px = Math.cos(angle)*r, py = Math.sin(angle)*r;
-        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
-      }
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function drawObstacle(o){
-      ctx.fillStyle = '#7FD8FF';
-      // top piece
-      ctx.beginPath();
-      ctx.roundRect ? ctx.roundRect(o.x, 0, o.w, o.gapY, 10) : ctx.rect(o.x, 0, o.w, o.gapY);
-      ctx.fill();
-      // bottom piece
-      ctx.beginPath();
-      const bottomY = o.gapY + o.gapH;
-      ctx.roundRect ? ctx.roundRect(o.x, bottomY, o.w, cssH - bottomY, 10) : ctx.rect(o.x, bottomY, o.w, cssH - bottomY);
-      ctx.fill();
-      // little cloud puffs on edges for theme
-      drawCloudShape(o.x + o.w/2, Math.max(14, o.gapY - 6), 0.45, 0.9);
-      drawCloudShape(o.x + o.w/2, Math.min(cssH-14, bottomY + 6), 0.45, 0.9);
-    }
-
-    function drawBackground(){
-      ctx.clearRect(0,0,cssW,cssH);
-      // soft drifting background clouds (decorative, non-colliding)
-      bgClouds.forEach(c => {
-        drawCloudShape(c.x, c.y, c.scale, 0.5);
-      });
-    }
-
-    let bgClouds = [];
-    function initBgClouds(){
-      bgClouds = [];
-      for(let i=0;i<4;i++){
-        bgClouds.push({
-          x: Math.random()*cssW,
-          y: 30 + Math.random()*(cssH-60),
-          scale: 0.6 + Math.random()*0.6,
-          speed: 0.3 + Math.random()*0.4
-        });
-      }
-    }
-
-    function drawIdleFrame(){
-      if(cssW === 0) return;
-      initBgClouds();
-      drawBackground();
-      drawPlane();
-    }
-
-    function circleRectCollide(cx, cy, cr, rx, ry, rw, rh){
-      const closestX = Math.max(rx, Math.min(cx, rx+rw));
-      const closestY = Math.max(ry, Math.min(cy, ry+rh));
-      const dx = cx - closestX, dy = cy - closestY;
-      return (dx*dx + dy*dy) < (cr*cr);
-    }
-
-    function update(){
-      frame++;
-      // physics
-      if(holding){
-        plane.vy += LIFT;
-      } else {
-        plane.vy += GRAVITY;
-      }
-      plane.vy = Math.max(MAX_RISE, Math.min(MAX_FALL, plane.vy));
-      plane.y += plane.vy;
-
-      // bounds: gentle clamp (ceiling/floor act softly, real edges still end run)
-      if(plane.y < plane.radius*0.4){
-        plane.y = plane.radius*0.4;
-        plane.vy = 1;
-      }
-      if(plane.y > cssH - plane.radius*0.4){
+    // collision check
+    rivals.forEach(r=>{
+      if(r.lane===lane && Math.abs(r.y - playerY) < 62){
         endGame();
-        return;
       }
+    });
 
-      // background clouds drift
-      bgClouds.forEach(c => {
-        c.x -= c.speed;
-        if(c.x < -60) c.x = cssW + 60;
-      });
+    if(running) raf = requestAnimationFrame(loop);
+  }
 
-      // spawn
-      spawnTimer++;
-      if(spawnTimer >= spawnInterval){
-        spawnTimer = 0;
-        spawnObstacle();
-      }
+  function endGame(){
+    running=false;
+    cancelAnimationFrame(raf);
+    msgEl.textContent = '🏁 خسرتي! وصلتي '+distance+' متر — جربي تتفادين أكثر بالمرة الجاية';
+    if(distance>best){
+      best=distance;
+      try{ localStorage.setItem('race_best_v2', best); }catch(e){}
+      bestEl.textContent='أفضل نتيجة: '+best+' م';
+      msgEl.textContent='🎉 رقم قياسي جديد! '+distance+' متر';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
 
-      // move obstacles
-      obstacles.forEach(o => { o.x -= speed; });
-      obstacles = obstacles.filter(o => o.x + o.w > -10);
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='🏎️ يلا سباق!';
+    raf = requestAnimationFrame(loop);
+  });
 
-      // move stars
-      stars.forEach(s => { s.x -= speed; });
-      stars = stars.filter(s => s.x > -30);
+  // initial paint
+  drawRoad(0);
+  drawCar(playerX, playerY, '#FF5D8F', true);
+})();
 
-      // collision + scoring
-      for(const o of obstacles){
-        const hitTop = circleRectCollide(plane.x, plane.y, plane.radius*0.78, o.x, 0, o.w, o.gapY);
-        const hitBottom = circleRectCollide(plane.x, plane.y, plane.radius*0.78, o.x, o.gapY+o.gapH, o.w, cssH-(o.gapY+o.gapH));
-        if(hitTop || hitBottom){
+/* ===================== PLANE DODGE GAME (improved) ===================== */
+(function(){
+  const canvas = document.getElementById('planeCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('planeScore');
+  const bestEl = document.getElementById('planeBest');
+  const msgEl = document.getElementById('planeMsg');
+  const startBtn = document.getElementById('planeStart');
+
+  const W = canvas.width, H = canvas.height;
+  let plane = {x:100, y:H/2, vy:0, r:20, tilt:0};
+  let obstacles = [];
+  let clouds = [];
+  let particles = [];
+  let running=false, holding=false, score=0, best=0, frame=0, raf=null;
+
+  try{ best = +(localStorage.getItem('plane_best_v2')||0); }catch(e){ best=0; }
+  bestEl.textContent = 'الأفضل: '+best;
+
+  for(let i=0;i<7;i++){
+    clouds.push({x:Math.random()*W, y:20+Math.random()*(H-40), s:18+Math.random()*26, v:0.3+Math.random()*0.5, depth: Math.random()});
+  }
+
+  function reset(){
+    plane = {x:100, y:H/2, vy:0, r:20, tilt:0};
+    obstacles=[]; particles=[]; score=0; frame=0;
+    scoreEl.textContent='النقاط: 0';
+    msgEl.textContent='';
+  }
+
+  function spawnObstacle(){
+    const gapH = 138;
+    const gapY = 46 + Math.random()*(H-92-gapH);
+    obstacles.push({x:W+30, gapY, gapH, w:46, passed:false});
+  }
+
+  function drawPlane(x,y,tilt){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(tilt*0.5);
+    // trail puff
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.ellipse(-22,4,9,5,0,0,Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    // body (fuselage)
+    const bodyGrad = ctx.createLinearGradient(-22,-8,22,8);
+    bodyGrad.addColorStop(0,'#FFFFFF');
+    bodyGrad.addColorStop(1,'#FFE3EC');
+    ctx.fillStyle = bodyGrad;
+    ctx.beginPath();
+    ctx.moveTo(24,0);
+    ctx.quadraticCurveTo(14,-10, -18,-7);
+    ctx.quadraticCurveTo(-24,-3,-24,0);
+    ctx.quadraticCurveTo(-24,3,-18,7);
+    ctx.quadraticCurveTo(14,10,24,0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = '#FF5D8F'; ctx.lineWidth=1.6; ctx.stroke();
+    // tail wing
+    ctx.fillStyle = '#FF8FAB';
+    ctx.beginPath();
+    ctx.moveTo(-16,-6); ctx.lineTo(-26,-16); ctx.lineTo(-12,-5); ctx.closePath(); ctx.fill();
+    // main wing
+    ctx.fillStyle = '#7FD4E8';
+    ctx.beginPath();
+    ctx.moveTo(2,-2); ctx.lineTo(-6,-20); ctx.lineTo(8,-4); ctx.closePath(); ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(2,4); ctx.lineTo(-6,20); ctx.lineTo(8,6); ctx.closePath(); ctx.fill();
+    // cockpit window
+    ctx.fillStyle = 'rgba(127,212,232,0.9)';
+    ctx.beginPath(); ctx.ellipse(10,-1,7,5,0,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#fff'; ctx.lineWidth=1; ctx.stroke();
+    // nose tip
+    ctx.fillStyle = '#FFD166';
+    ctx.beginPath(); ctx.ellipse(23,0,3,4,0,0,Math.PI*2); ctx.fill();
+    // propeller blur
+    ctx.strokeStyle = 'rgba(74,59,69,0.5)';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(27,0,2,9,0,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawCloud(c){
+    ctx.save();
+    ctx.globalAlpha = 0.55 + c.depth*0.35;
+    const s = c.s;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.ellipse(c.x, c.y, s*0.6, s*0.38, 0, 0, Math.PI*2);
+    ctx.ellipse(c.x-s*0.45, c.y+s*0.08, s*0.4, s*0.28, 0, 0, Math.PI*2);
+    ctx.ellipse(c.x+s*0.45, c.y+s*0.05, s*0.42, s*0.3, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawObstaclePillar(x,y0,y1,w){
+    const grad = ctx.createLinearGradient(x,0,x+w,0);
+    grad.addColorStop(0,'#9FE3D8');
+    grad.addColorStop(1,'#6FCBC0');
+    ctx.fillStyle = grad;
+    roundRectP(x,y0,w,y1-y0,10);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+    ctx.lineWidth=2;
+    roundRectP(x,y0,w,y1-y0,10);
+    ctx.stroke();
+    // little leaf/cloud caps to keep it friendly
+    ctx.fillStyle = '#FFFFFF';
+    ctx.globalAlpha = 0.5;
+    for(let i=0;i<3;i++){
+      ctx.beginPath();
+      ctx.ellipse(x+w/2, y0+y1>y0? (y0===0? y1-14-i*16 : y0+14+i*16) : 0, w*0.32, 7,0,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function roundRectP(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+
+  function loop(){
+    frame++;
+    ctx.clearRect(0,0,W,H);
+
+    clouds.forEach(c=>{
+      c.x -= c.v;
+      if(c.x < -50) c.x = W+50;
+      drawCloud(c);
+    });
+
+    plane.vy += holding ? -0.55 : 0.5;
+    plane.vy = Math.max(-7.5, Math.min(7.5, plane.vy));
+    plane.y += plane.vy;
+    plane.y = Math.max(plane.r, Math.min(H-plane.r, plane.y));
+    plane.tilt = Math.max(-0.6, Math.min(0.6, -plane.vy/8));
+
+    if(frame % 95 === 0) spawnObstacle();
+
+    const speed = 3.2 + Math.min(score/8, 3.5);
+    obstacles.forEach(o=>{ o.x -= speed; });
+    obstacles = obstacles.filter(o=> o.x > -70);
+
+    obstacles.forEach(o=>{
+      drawObstaclePillar(o.x, 0, o.gapY, o.w);
+      const bottomY = o.gapY+o.gapH;
+      drawObstaclePillar(o.x, bottomY, H, o.w);
+
+      const px = plane.x, py = plane.y, pr = plane.r*0.5;
+      if(px+pr > o.x && px-pr < o.x+o.w){
+        if(py-pr < o.gapY || py+pr > bottomY){
           endGame();
-          return;
-        }
-        if(!o.passed && o.x + o.w < plane.x){
-          o.passed = true;
-          score += 1;
-          scoreEl.textContent = score;
-          if(score % 5 === 0){
-            speed = Math.min(7.5, speed + 0.35);
-            spawnInterval = Math.max(62, spawnInterval - 4);
-          }
         }
       }
+      if(!o.passed && o.x+o.w < plane.x){
+        o.passed = true;
+        score++;
+        scoreEl.textContent='النقاط: '+score;
+      }
+    });
 
-      for(const s of stars){
-        if(!s.collected){
-          const dx = plane.x - s.x, dy = plane.y - s.y;
-          if(Math.sqrt(dx*dx+dy*dy) < plane.radius + s.r){
-            s.collected = true;
-            score += 2;
-            scoreEl.textContent = score;
-          }
+    drawPlane(plane.x, plane.y, plane.tilt);
+
+    if(running) raf = requestAnimationFrame(loop);
+  }
+
+  function endGame(){
+    running=false;
+    cancelAnimationFrame(raf);
+    msgEl.textContent='💥 اصطدمتي! نقاطك: '+score;
+    if(score>best){
+      best=score;
+      try{ localStorage.setItem('plane_best_v2', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+      msgEl.textContent='🎉 رقم قياسي جديد! '+score+' نقطة';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
+
+  function press(e){ holding=true; e.preventDefault(); }
+  function release(){ holding=false; }
+  canvas.addEventListener('mousedown',press);
+  window.addEventListener('mouseup',release);
+  canvas.addEventListener('touchstart',press,{passive:false});
+  canvas.addEventListener('touchend',release);
+  window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); holding=true; } });
+  window.addEventListener('keyup',(e)=>{ if(e.code==='Space'){ holding=false; } });
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='✈️ يلا طيري!';
+    raf = requestAnimationFrame(loop);
+  });
+
+  ctx.clearRect(0,0,W,H);
+  clouds.forEach(drawCloud);
+  drawPlane(plane.x,plane.y,0);
+})();
+
+/* ===================== DUCK & HUNTERS GAME ===================== */
+(function(){
+  const canvas = document.getElementById('duckCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('duckScore');
+  const bestEl = document.getElementById('duckBest');
+  const msgEl = document.getElementById('duckMsg');
+  const startBtn = document.getElementById('duckStart');
+
+  const W = canvas.width, H = canvas.height;
+  const margin = 26;
+  let duck, eggs, hunters, running=false, won=false, raf=null, best=0, collected=0, frame=0;
+  let keys = {up:false,down:false,left:false,right:false};
+  let waddle = 0;
+
+  try{ best = +(localStorage.getItem('duck_best')||0); }catch(e){ best=0; }
+  bestEl.textContent = 'الأفضل: '+best;
+
+  function eggPositions(){
+    // eggs in every corner + edges, "كل الزوايا"
+    return [
+      {x: margin+14, y: margin+14},
+      {x: W-margin-14, y: margin+14},
+      {x: margin+14, y: H-margin-14},
+      {x: W-margin-14, y: H-margin-14},
+      {x: W/2, y: margin+10},
+      {x: W/2, y: H-margin-10},
+      {x: margin+10, y: H/2},
+      {x: W-margin-10, y: H/2},
+    ];
+  }
+
+  function reset(){
+    duck = {x:W/2, y:H/2, r:16, dx:0, dy:0};
+    eggs = eggPositions().map(p=>({...p, taken:false}));
+    hunters = [
+      {x:40, y:40, r:15, speed:1.35, color:'#7A5C3E'},
+      {x:W-40, y:H-40, r:15, speed:1.5, color:'#5C4630'},
+      {x:W-40, y:40, r:15, speed:1.2, color:'#8A6B47'}
+    ];
+    collected = 0; frame=0; won=false;
+    scoreEl.textContent = 'البيض: 0 / '+eggs.length;
+    msgEl.textContent = '';
+  }
+
+  function drawPond(){
+    // grass background
+    ctx.fillStyle = '#BFE6C2';
+    ctx.fillRect(0,0,W,H);
+    // pond in the middle
+    ctx.save();
+    ctx.fillStyle = '#9FD9E8';
+    ctx.beginPath();
+    ctx.ellipse(W/2, H/2, W*0.3, H*0.22, 0, 0, Math.PI*2);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth=4;
+    ctx.stroke();
+    ctx.restore();
+    // little flowers/grass tufts decoration
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    for(let i=0;i<6;i++){
+      ctx.beginPath();
+      ctx.arc(20+i*((W-40)/5), 16, 6, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+
+  function drawEgg(e){
+    if(e.taken) return;
+    ctx.save();
+    ctx.translate(e.x, e.y);
+    ctx.beginPath();
+    ctx.ellipse(0,2,9,12,0,0,Math.PI*2);
+    ctx.fillStyle = '#FFF8EE';
+    ctx.fill();
+    ctx.strokeStyle = '#E9C77E';
+    ctx.lineWidth=2;
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(233,199,126,0.5)';
+    ctx.beginPath(); ctx.ellipse(-3,-2,2,3,0.4,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(2,3,1.6,2.4,0.2,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawDuck(d, wob){
+    ctx.save();
+    ctx.translate(d.x, d.y);
+    const dir = d.dx < -0.1 ? -1 : 1; // face left/right
+    ctx.scale(dir,1);
+    // shadow
+    ctx.beginPath(); ctx.ellipse(0,16,15,5,0,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,0,0,0.15)'; ctx.fill();
+    // body
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.ellipse(0, 4+wob, 15, 12, 0, 0, Math.PI*2);
+    ctx.fill();
+    // wing
+    ctx.fillStyle = '#F1E9DC';
+    ctx.beginPath();
+    ctx.ellipse(-3, 6+wob, 8, 7, 0.3, 0, Math.PI*2);
+    ctx.fill();
+    // tail
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.moveTo(-13,2+wob); ctx.lineTo(-19,-3+wob); ctx.lineTo(-12,-2+wob); ctx.closePath();
+    ctx.fill();
+    // head
+    ctx.beginPath();
+    ctx.arc(10, -6+wob, 9, 0, Math.PI*2);
+    ctx.fill();
+    // beak
+    ctx.fillStyle = '#FFB23E';
+    ctx.beginPath();
+    ctx.moveTo(17,-7+wob); ctx.lineTo(26,-5+wob); ctx.lineTo(17,-3+wob); ctx.closePath();
+    ctx.fill();
+    // eye
+    ctx.fillStyle = '#3A2E1F';
+    ctx.beginPath(); ctx.arc(13,-9+wob,1.6,0,Math.PI*2); ctx.fill();
+    // feet
+    ctx.fillStyle = '#FFB23E';
+    ctx.beginPath(); ctx.ellipse(-2, 16+wob, 4, 2, 0, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(4, 16+wob, 4, 2, 0, 0, Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawHunter(h){
+    ctx.save();
+    ctx.translate(h.x, h.y);
+    // shadow
+    ctx.beginPath(); ctx.ellipse(0,17,13,4,0,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,0,0,0.18)'; ctx.fill();
+    // legs
+    ctx.fillStyle = '#3E3228';
+    ctx.fillRect(-7,8,5,12);
+    ctx.fillRect(2,8,5,12);
+    // body / coat
+    ctx.fillStyle = h.color;
+    roundRectH(-11,-8,22,20,6);
+    ctx.fill();
+    // arms
+    ctx.fillStyle = h.color;
+    ctx.fillRect(-14,-4,5,12);
+    ctx.fillRect(9,-4,5,12);
+    // head
+    ctx.fillStyle = '#E8B98C';
+    ctx.beginPath(); ctx.arc(0,-14,8,0,Math.PI*2); ctx.fill();
+    // hat
+    ctx.fillStyle = '#3E3228';
+    roundRectH(-9,-24,18,7,3); ctx.fill();
+    ctx.fillRect(-10,-19,20,3);
+    // simple face
+    ctx.fillStyle = '#2A2018';
+    ctx.beginPath(); ctx.arc(-3,-14,1.3,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(3,-14,1.3,0,Math.PI*2); ctx.fill();
+    // net/basket detail
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(-11,-2); ctx.lineTo(11,-2); ctx.stroke();
+    ctx.restore();
+  }
+  function roundRectH(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+
+  function moveDuck(){
+    let dx=0, dy=0;
+    if(keys.up) dy -= 1;
+    if(keys.down) dy += 1;
+    if(keys.left) dx -= 1;
+    if(keys.right) dx += 1;
+    const len = Math.hypot(dx,dy) || 1;
+    const speed = 2.6;
+    duck.dx = dx/len*speed;
+    duck.dy = dy/len*speed;
+    duck.x += duck.dx;
+    duck.y += duck.dy;
+    duck.x = Math.max(margin, Math.min(W-margin, duck.x));
+    duck.y = Math.max(margin, Math.min(H-margin, duck.y));
+  }
+
+  function moveHunters(){
+    hunters.forEach(h=>{
+      // find nearest un-taken egg as a target, else chase the duck
+      let target = null, bestD = Infinity;
+      eggs.forEach(e=>{
+        if(e.taken) return;
+        const d = Math.hypot(e.x-h.x, e.y-h.y);
+        if(d < bestD){ bestD = d; target = e; }
+      });
+      if(!target) target = duck;
+      const tdx = target.x - h.x, tdy = target.y - h.y;
+      const len = Math.hypot(tdx,tdy) || 1;
+      h.x += (tdx/len) * h.speed;
+      h.y += (tdy/len) * h.speed;
+      h.x = Math.max(margin, Math.min(W-margin, h.x));
+      h.y = Math.max(margin, Math.min(H-margin, h.y));
+    });
+  }
+
+  function checkCollisions(){
+    eggs.forEach(e=>{
+      if(e.taken) return;
+      if(Math.hypot(e.x-duck.x, e.y-duck.y) < duck.r+6){
+        e.taken = true;
+        collected++;
+        scoreEl.textContent = 'البيض: '+collected+' / '+eggs.length;
+        if(collected === eggs.length){
+          win();
         }
       }
-    }
-
-    function render(){
-      drawBackground();
-      obstacles.forEach(drawObstacle);
-      stars.forEach(drawStar);
-      drawPlane();
-    }
-
-    function loop(){
-      if(state !== 'playing') return;
-      update();
-      if(state === 'playing'){
-        render();
-        rafId = requestAnimationFrame(loop);
-      }
-    }
-
-    function startGame(){
-      resetGame();
-      state = 'playing';
-      startOverlay.classList.add('hidden');
-      overOverlay.classList.add('hidden');
-      rafId = requestAnimationFrame(loop);
-    }
-
-    function endGame(){
-      state = 'over';
-      if(rafId) cancelAnimationFrame(rafId);
-      if(score > best){
-        best = score;
-        bestEl.textContent = best;
-        try{ sessionStorage.setItem('flightBestScore', String(best)); }catch(e){}
-      }
-      finalScoreEl.textContent = score;
-      overOverlay.classList.remove('hidden');
-    }
-
-    // ---- Controls ----
-    function setHolding(v){
-      if(state !== 'playing') return;
-      holding = v;
-    }
-
-    startBtn.addEventListener('click', startGame);
-    retryBtn.addEventListener('click', startGame);
-
-    document.addEventListener('keydown', (e) => {
-      if(e.code === 'ArrowUp' || e.code === 'Space'){
-        e.preventDefault();
-        if(state === 'idle'){ startGame(); }
-        setHolding(true);
+    });
+    hunters.forEach(h=>{
+      if(Math.hypot(h.x-duck.x, h.y-duck.y) < duck.r+15){
+        lose();
       }
     });
-    document.addEventListener('keyup', (e) => {
-      if(e.code === 'ArrowUp' || e.code === 'Space'){
-        setHolding(false);
-      }
+  }
+
+  function win(){
+    running=false; won=true;
+    cancelAnimationFrame(raf);
+    msgEl.textContent = '🎉 جمعتي كل البيض! نجحتي بإنقاذ البط';
+    if(collected>best){
+      best=collected;
+      try{ localStorage.setItem('duck_best', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+    }
+    startBtn.textContent = '🔁 جولة جديدة';
+  }
+
+  function lose(){
+    running=false;
+    cancelAnimationFrame(raf);
+    msgEl.textContent = '😱 أمسك بك أحد الصيادين! جمعتي '+collected+' بيضة — حاولي بسرعة أكثر';
+    if(collected>best){
+      best=collected;
+      try{ localStorage.setItem('duck_best', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+    }
+    startBtn.textContent = '🔁 حاولي مرة ثانية';
+  }
+
+  function loop(){
+    frame++;
+    waddle = Math.sin(frame*0.3)*1.5;
+    moveDuck();
+    moveHunters();
+    checkCollisions();
+
+    drawPond();
+    eggs.forEach(drawEgg);
+    hunters.forEach(drawHunter);
+    drawDuck(duck, waddle);
+
+    if(running) raf = requestAnimationFrame(loop);
+  }
+
+  // controls: keyboard
+  window.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowUp'){ keys.up=true; e.preventDefault(); }
+    if(e.key==='ArrowDown'){ keys.down=true; e.preventDefault(); }
+    if(e.key==='ArrowLeft'){ keys.left=true; e.preventDefault(); }
+    if(e.key==='ArrowRight'){ keys.right=true; e.preventDefault(); }
+  });
+  window.addEventListener('keyup',(e)=>{
+    if(e.key==='ArrowUp') keys.up=false;
+    if(e.key==='ArrowDown') keys.down=false;
+    if(e.key==='ArrowLeft') keys.left=false;
+    if(e.key==='ArrowRight') keys.right=false;
+  });
+
+  // controls: on-screen dpad (note: RTL page, but movement is real screen direction)
+  function bindHold(btn, key){
+    const press = (e)=>{ keys[key]=true; e.preventDefault(); };
+    const release = ()=>{ keys[key]=false; };
+    btn.addEventListener('mousedown',press);
+    btn.addEventListener('touchstart',press,{passive:false});
+    window.addEventListener('mouseup',release);
+    btn.addEventListener('touchend',release);
+  }
+  bindHold(document.getElementById('duckUp'),'up');
+  bindHold(document.getElementById('duckDown'),'down');
+  bindHold(document.getElementById('duckLeft'),'left');
+  bindHold(document.getElementById('duckRight'),'right');
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent = '🦆 يلا أنقذي البط!';
+    raf = requestAnimationFrame(loop);
+  });
+
+  // initial paint
+  duck = {x:W/2, y:H/2, r:16, dx:0, dy:0};
+  eggs = eggPositions().map(p=>({...p, taken:false}));
+  hunters = [
+    {x:40, y:40, r:15, speed:1.35, color:'#7A5C3E'},
+    {x:W-40, y:H-40, r:15, speed:1.5, color:'#5C4630'},
+    {x:W-40, y:40, r:15, speed:1.2, color:'#8A6B47'}
+  ];
+  scoreEl.textContent = 'البيض: 0 / '+eggs.length;
+  drawPond();
+  eggs.forEach(drawEgg);
+  hunters.forEach(drawHunter);
+  drawDuck(duck,0);
+})();
+
+/* ===================== MEMORY MATCH GAME ===================== */
+(function(){
+  const grid = document.getElementById('memoryGrid');
+  const movesEl = document.getElementById('memMoves');
+  const bestEl = document.getElementById('memBest');
+  const msgEl = document.getElementById('memMsg');
+  const startBtn = document.getElementById('memStart');
+
+  const symbols = ['🦆','🌸','⭐','💎','🎈','🍩','🦋','🌈'];
+  let cards = [], flipped = [], moves = 0, matchedCount = 0, best = null, lockBoard = false;
+
+  try{ const b = localStorage.getItem('memory_best'); best = b ? +b : null; }catch(e){ best=null; }
+  bestEl.textContent = 'الأفضل: ' + (best===null ? '—' : best+' محاولة');
+
+  function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+    return arr;
+  }
+
+  function build(){
+    grid.innerHTML = '';
+    const deck = shuffle([...symbols, ...symbols]);
+    cards = deck.map((sym, idx)=>({sym, idx, matched:false}));
+    flipped = []; moves = 0; matchedCount = 0; lockBoard = false;
+    movesEl.textContent = 'المحاولات: 0';
+    msgEl.textContent = '';
+
+    cards.forEach(card=>{
+      const el = document.createElement('div');
+      el.className = 'memory-card';
+      el.dataset.idx = card.idx;
+      el.innerHTML = `
+        <div class="memory-card-inner">
+          <div class="memory-face front">؟</div>
+          <div class="memory-face back">${card.sym}</div>
+        </div>`;
+      el.addEventListener('click', ()=> onCardClick(el, card));
+      grid.appendChild(el);
     });
-
-    function pointerDown(e){
-      e.preventDefault();
-      if(state === 'idle'){ startGame(); }
-      setHolding(true);
-    }
-    function pointerUp(e){
-      setHolding(false);
-    }
-    wrap.addEventListener('mousedown', pointerDown);
-    window.addEventListener('mouseup', pointerUp);
-    wrap.addEventListener('touchstart', pointerDown, {passive:false});
-    wrap.addEventListener('touchend', pointerUp);
-
-    upBtn.addEventListener('mousedown', pointerDown);
-    upBtn.addEventListener('mouseup', pointerUp);
-    upBtn.addEventListener('touchstart', pointerDown, {passive:false});
-    upBtn.addEventListener('touchend', pointerUp);
-
-    window.addEventListener('resize', () => {
-      const wasPlaying = state === 'playing';
-      resize();
-      if(wasPlaying){ /* keep playing, just resized canvas */ }
-    });
-
-    resize();
-  })();
-  // ================= Dress-Up Studio =================
-  (function initDressUp(){
-    const stageMount = document.getElementById('dollStageMount');
-    const dollPicker = document.getElementById('dollPicker');
-    const tabs = document.querySelectorAll('#wardrobeTabs .wtab');
-    const panels = {
-      dresses: document.getElementById('panel-dresses'),
-      casual: document.getElementById('panel-casual'),
-      shoes: document.getElementById('panel-shoes'),
-      hair: document.getElementById('panel-hair'),
-      hairacc: document.getElementById('panel-hairacc'),
-      makeup: document.getElementById('panel-makeup')
-    };
-
-    const SKIN_COLORS = {
-      light: { base:'#FFD9B8', shade:'#F2BD8E' },
-      tan:   { base:'#B8754A', shade:'#9A5E38' }
-    };
-
-    let outfit = {
-      skin: 'light',
-      bottom: null,   // 'dress-rose' | 'dress-sky' | 'dress-black' | 'dress-red' | 'jeans-tee' | null
-      shoes: null,    // 'heel-silver' | 'heel-white' | 'heel-beige' | null
-      hair: 'down',   // hair style key
-      hairAcc: null,  // hair accessory key
-      makeup: null    // makeup key
-    };
-
-    // ---------- Wardrobe item definitions ----------
-    const DRESSES = [
-      { key:'dress-rose', label:'فستان وردي بالورد', swatch:'#FF8FAB' },
-      { key:'dress-sky', label:'فستان سماوي بالشمس', swatch:'#5FC9F0' },
-      { key:'dress-black', label:'فستان أسود لامع', swatch:'#2B2B33' },
-      { key:'dress-red', label:'فستان أحمر', swatch:'#E0303D' }
-    ];
-    const CASUAL = [
-      { key:'jeans-tee', label:'جينز وتيشيرت', swatch:'#4F6FA8' }
-    ];
-    const SHOES = [
-      { key:'heel-silver', label:'كعب فضي', swatch:'#C9CDD3' },
-      { key:'heel-white', label:'كعب أبيض', swatch:'#FFFFFF' },
-      { key:'heel-beige', label:'كعب بيج', swatch:'#E3C9A8' }
-    ];
-    const HAIRS = [
-      { key:'down', label:'شعر منسدل' },
-      { key:'ponytail', label:'ذيل حصان' },
-      { key:'braid', label:'ضفيرة' },
-      { key:'bun', label:'كعكة' }
-    ];
-    const HAIR_ACC = [
-      { key:'bow-pink', label:'فيونكة وردية', swatch:'#FF5D8F' },
-      { key:'band-gold', label:'تاج ذهبي', swatch:'#FFD23F' },
-      { key:'flower', label:'إكليل ورد', swatch:'#FFAFC4' }
-    ];
-    const MAKEUP = [
-      { key:'lash-lip-pink', label:'رموش وروج وردي', swatch:'#FF8FAB' },
-      { key:'lash-lip-red', label:'رموش وروج أحمر', swatch:'#E0303D' },
-      { key:'lash-only', label:'رموش فقط', swatch:'#3A3A3A' }
-    ];
-
-    // ---------- SVG fragment builders ----------
-    // All coordinates are in a 240x400 viewBox doll figure.
-
-    function svgBody(skinKey){
-      const c = SKIN_COLORS[skinKey];
-      return `
-        <g id="layer-body">
-          <ellipse cx="120" cy="86" rx="40" ry="46" fill="${c.base}"/>
-          <ellipse cx="120" cy="100" rx="34" ry="20" fill="${c.shade}" opacity="0.35"/>
-          <rect x="104" y="118" width="32" height="34" rx="14" fill="${c.base}"/>
-          <rect x="78" y="150" width="84" height="90" rx="30" fill="${c.base}"/>
-          <rect x="60" y="160" width="26" height="86" rx="13" fill="${c.base}"/>
-          <rect x="154" y="160" width="26" height="86" rx="13" fill="${c.base}"/>
-          <rect x="100" y="232" width="18" height="74" rx="9" fill="${c.base}"/>
-          <rect x="122" y="232" width="18" height="74" rx="9" fill="${c.base}"/>
-          <ellipse cx="109" cy="304" rx="13" ry="8" fill="${c.shade}"/>
-          <ellipse cx="131" cy="304" rx="13" ry="8" fill="${c.shade}"/>
-        </g>`;
-    }
-
-    function svgDress(key){
-      if(key === 'dress-rose'){
-        return `
-        <g id="layer-outfit">
-          <path d="M90,150 Q120,140 150,150 L168,250 Q120,272 72,250 Z" fill="#FF8FAB"/>
-          <path d="M90,150 Q120,140 150,150 L160,176 Q120,188 80,176 Z" fill="#FF5D8F"/>
-          <circle cx="100" cy="200" r="6" fill="#FFE3EC"/>
-          <circle cx="140" cy="210" r="6" fill="#FFE3EC"/>
-          <circle cx="115" cy="232" r="6" fill="#FFE3EC"/>
-          <circle cx="148" cy="240" r="5" fill="#FFE3EC"/>
-          <circle cx="88" cy="228" r="5" fill="#FFE3EC"/>
-          <rect x="60" y="158" width="24" height="58" rx="12" fill="#FF8FAB"/>
-          <rect x="156" y="158" width="24" height="58" rx="12" fill="#FF8FAB"/>
-        </g>`;
-      }
-      if(key === 'dress-sky'){
-        return `
-        <g id="layer-outfit">
-          <path d="M90,150 Q120,140 150,150 L168,250 Q120,272 72,250 Z" fill="#5FC9F0"/>
-          <path d="M90,150 Q120,140 150,150 L160,176 Q120,188 80,176 Z" fill="#2BAAE2"/>
-          <circle cx="105" cy="205" r="9" fill="#FFD23F"/>
-          <g stroke="#FFD23F" stroke-width="2">
-            <line x1="105" y1="190" x2="105" y2="196"/>
-            <line x1="105" y1="214" x2="105" y2="220"/>
-            <line x1="92" y1="205" x2="98" y2="205"/>
-            <line x1="112" y1="205" x2="118" y2="205"/>
-          </g>
-          <circle cx="138" cy="232" r="7" fill="#FFD23F"/>
-          <rect x="60" y="158" width="24" height="58" rx="12" fill="#5FC9F0"/>
-          <rect x="156" y="158" width="24" height="58" rx="12" fill="#5FC9F0"/>
-        </g>`;
-      }
-      if(key === 'dress-black'){
-        return `
-        <g id="layer-outfit">
-          <path d="M90,150 Q120,140 150,150 L168,250 Q120,272 72,250 Z" fill="#2B2B33"/>
-          <path d="M90,150 Q120,140 150,150 L160,176 Q120,188 80,176 Z" fill="#17171C"/>
-          <path d="M90,150 Q120,144 150,150 L148,160 Q120,166 92,160 Z" fill="#54545F" opacity="0.7"/>
-          <rect x="60" y="158" width="24" height="58" rx="12" fill="#2B2B33"/>
-          <rect x="156" y="158" width="24" height="58" rx="12" fill="#2B2B33"/>
-        </g>`;
-      }
-      if(key === 'dress-red'){
-        return `
-        <g id="layer-outfit">
-          <path d="M90,150 Q120,140 150,150 L168,250 Q120,272 72,250 Z" fill="#E0303D"/>
-          <path d="M90,150 Q120,140 150,150 L160,176 Q120,188 80,176 Z" fill="#B81E2A"/>
-          <rect x="60" y="158" width="24" height="58" rx="12" fill="#E0303D"/>
-          <rect x="156" y="158" width="24" height="58" rx="12" fill="#E0303D"/>
-        </g>`;
-      }
-      if(key === 'jeans-tee'){
-        return `
-        <g id="layer-outfit">
-          <rect x="78" y="150" width="84" height="50" rx="18" fill="#FFFFFF"/>
-          <rect x="100" y="232" width="18" height="74" rx="9" fill="#4F6FA8"/>
-          <rect x="122" y="232" width="18" height="74" rx="9" fill="#4F6FA8"/>
-          <rect x="84" y="196" width="72" height="44" rx="16" fill="#4F6FA8"/>
-          <rect x="60" y="158" width="24" height="46" rx="12" fill="#FFFFFF"/>
-          <rect x="156" y="158" width="24" height="46" rx="12" fill="#FFFFFF"/>
-        </g>`;
-      }
-      return `<g id="layer-outfit"></g>`;
-    }
-
-    function svgShoes(key){
-      const colorMap = { 'heel-silver':'#C9CDD3', 'heel-white':'#FFFFFF', 'heel-beige':'#E3C9A8' };
-      if(!key) return `<g id="layer-shoes"></g>`;
-      const c = colorMap[key];
-      return `
-        <g id="layer-shoes">
-          <path d="M92,300 L126,300 L126,312 L86,312 Q82,304 92,300 Z" fill="${c}" stroke="#00000022"/>
-          <path d="M114,300 L148,300 L154,312 L114,312 Z" fill="${c}" stroke="#00000022"/>
-          <rect x="120" y="306" width="4" height="10" fill="${c}"/>
-          <rect x="142" y="306" width="4" height="10" fill="${c}"/>
-        </g>`;
-    }
-
-    function svgHair(key, skinKey){
-      const hairColor = '#5A3A2E';
-      if(key === 'down'){
-        return `
-        <g id="layer-hair">
-          <path d="M80,70 Q75,40 120,34 Q165,40 160,70 Q168,110 156,140 Q150,90 120,90 Q90,90 84,140 Q72,110 80,70 Z" fill="${hairColor}"/>
-        </g>`;
-      }
-      if(key === 'ponytail'){
-        return `
-        <g id="layer-hair">
-          <path d="M82,68 Q78,40 120,34 Q162,40 158,68 Q164,76 152,80 Q120,68 88,80 Q76,76 82,68 Z" fill="${hairColor}"/>
-          <path d="M156,72 Q190,90 178,150 Q172,156 164,148 Q172,96 148,76 Z" fill="${hairColor}"/>
-        </g>`;
-      }
-      if(key === 'braid'){
-        return `
-        <g id="layer-hair">
-          <path d="M82,68 Q78,40 120,34 Q162,40 158,68 Q166,78 152,82 Q120,68 88,82 Q74,78 82,68 Z" fill="${hairColor}"/>
-          <path d="M150,78 q14,10 4,22 q12,8 0,20 q12,8 0,20 q10,8 -2,18" fill="none" stroke="${hairColor}" stroke-width="11" stroke-linecap="round"/>
-        </g>`;
-      }
-      if(key === 'bun'){
-        return `
-        <g id="layer-hair">
-          <path d="M82,68 Q78,40 120,34 Q162,40 158,68 Q166,78 152,82 Q120,70 88,82 Q74,78 82,68 Z" fill="${hairColor}"/>
-          <circle cx="120" cy="28" r="18" fill="${hairColor}"/>
-        </g>`;
-      }
-      return `<g id="layer-hair"></g>`;
-    }
-
-    function svgHairAcc(key){
-      if(key === 'bow-pink'){
-        return `
-        <g id="layer-hairacc">
-          <path d="M120,30 l-16,-12 q-4,10 4,16 Z" fill="#FF5D8F"/>
-          <path d="M120,30 l16,-12 q4,10 -4,16 Z" fill="#FF5D8F"/>
-          <circle cx="120" cy="30" r="5" fill="#FF3D78"/>
-        </g>`;
-      }
-      if(key === 'band-gold'){
-        return `
-        <g id="layer-hairacc">
-          <path d="M86,46 Q120,18 154,46" fill="none" stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>
-          <circle cx="120" cy="30" r="6" fill="#FFA63D"/>
-        </g>`;
-      }
-      if(key === 'flower'){
-        return `
-        <g id="layer-hairacc">
-          <g transform="translate(92,42)">
-            <circle r="5" fill="#FF8FAB"/><circle cx="7" cy="-3" r="5" fill="#FFD23F"/><circle cx="-7" cy="-3" r="5" fill="#FF8FAB"/>
-          </g>
-          <g transform="translate(150,42)">
-            <circle r="5" fill="#FF8FAB"/><circle cx="7" cy="-3" r="5" fill="#FFD23F"/><circle cx="-7" cy="-3" r="5" fill="#FF8FAB"/>
-          </g>
-        </g>`;
-      }
-      return `<g id="layer-hairacc"></g>`;
-    }
-
-    function svgMakeup(key){
-      if(key === 'lash-lip-pink' || key === 'lash-lip-red' || key === 'lash-only'){
-        const lip = key === 'lash-lip-pink' ? '#FF5D8F' : (key === 'lash-lip-red' ? '#D8232F' : null);
-        return `
-        <g id="layer-makeup">
-          <path d="M100,82 q4,-6 10,-2" fill="none" stroke="#3A3A3A" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M130,82 q6,-4 10,2" fill="none" stroke="#3A3A3A" stroke-width="2.4" stroke-linecap="round"/>
-          ${lip ? `<path d="M112,100 Q120,106 128,100 Q120,104 112,100 Z" fill="${lip}"/>` : ''}
-        </g>`;
-      }
-      return `<g id="layer-makeup"></g>`;
-    }
-
-    function renderDoll(){
-      const svg = `
-        <svg viewBox="0 0 240 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="عروسة تلبيس">
-          ${svgBody(outfit.skin)}
-          ${svgHair(outfit.hair, outfit.skin)}
-          ${svgDress(outfit.bottom)}
-          ${svgShoes(outfit.shoes)}
-          ${svgHairAcc(outfit.hairAcc)}
-          ${svgMakeup(outfit.makeup)}
-        </svg>`;
-      stageMount.innerHTML = svg;
-    }
-
-    // ---------- Wardrobe panel builders ----------
-    function smallSwatchSvg(hex){
-      return `<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="${hex}" stroke="#ffffff" stroke-width="3"/></svg>`;
-    }
-
-    function buildPanel(panelEl, items, groupKey, noneLabel){
-      let html = '';
-      if(noneLabel){
-        html += `<button class="witem none-item" data-group="${groupKey}" data-key="">
-          <div class="swimg">🚫</div><span class="lbl">${noneLabel}</span>
-        </button>`;
-      }
-      items.forEach(it => {
-        html += `<button class="witem" data-group="${groupKey}" data-key="${it.key}">
-          <div class="swimg">${smallSwatchSvg(it.swatch || '#ddd')}</div>
-          <span class="lbl">${it.label}</span>
-        </button>`;
-      });
-      panelEl.innerHTML = html;
-    }
-
-    function buildHairPanel(){
-      let html = '';
-      HAIRS.forEach(it => {
-        html += `<button class="witem" data-group="hair" data-key="${it.key}">
-          <div class="swimg">💇‍♀️</div><span class="lbl">${it.label}</span>
-        </button>`;
-      });
-      panels.hair.innerHTML = html;
-    }
-
-    buildPanel(panels.dresses, DRESSES, 'bottom', null);
-    buildPanel(panels.casual, CASUAL, 'bottom', 'بدون');
-    buildPanel(panels.shoes, SHOES, 'shoes', 'بدون حذاء');
-    buildHairPanel();
-    buildPanel(panels.hairacc, HAIR_ACC, 'hairAcc', 'بدون إكسسوار');
-    buildPanel(panels.makeup, MAKEUP, 'makeup', 'بدون مكياج');
-
-    function refreshActiveStates(){
-      document.querySelectorAll('.witem').forEach(btn => {
-        const group = btn.dataset.group;
-        const key = btn.dataset.key;
-        const current = outfit[group] || '';
-        btn.classList.toggle('active', current === key);
-      });
-    }
-
-    // ---------- Event wiring ----------
-    document.querySelectorAll('.wpanel').forEach(panel => {
-      panel.addEventListener('click', (e) => {
-        const btn = e.target.closest('.witem');
-        if(!btn) return;
-        const group = btn.dataset.group;
-        const key = btn.dataset.key;
-        outfit[group] = key || null;
-        renderDoll();
-        refreshActiveStates();
-      });
-    });
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        Object.values(panels).forEach(p => p.classList.remove('active'));
-        panels[tab.dataset.panel].classList.add('active');
-      });
-    });
-
-    dollPicker.querySelectorAll('.doll-pick-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        dollPicker.querySelectorAll('.doll-pick-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        outfit.skin = btn.dataset.skin;
-        renderDoll();
-      });
-    });
-
-    function renderDollPickerThumbs(){
-      dollPicker.querySelectorAll('.doll-pick-btn').forEach(btn => {
-        const c = SKIN_COLORS[btn.dataset.skin];
-        btn.innerHTML = `<svg viewBox="0 0 64 64"><circle cx="32" cy="24" r="16" fill="${c.base}"/><rect x="18" y="38" width="28" height="24" rx="10" fill="${c.base}"/></svg>`;
-      });
-    }
-
-    document.getElementById('dollRandomBtn').addEventListener('click', () => {
-      const allBottoms = [...DRESSES, ...CASUAL].map(i=>i.key);
-      outfit.bottom = allBottoms[Math.floor(Math.random()*allBottoms.length)];
-      outfit.shoes = SHOES[Math.floor(Math.random()*SHOES.length)].key;
-      outfit.hair = HAIRS[Math.floor(Math.random()*HAIRS.length)].key;
-      outfit.hairAcc = Math.random() < 0.75 ? HAIR_ACC[Math.floor(Math.random()*HAIR_ACC.length)].key : null;
-      outfit.makeup = Math.random() < 0.75 ? MAKEUP[Math.floor(Math.random()*MAKEUP.length)].key : null;
-      renderDoll();
-      refreshActiveStates();
-    });
-
-    document.getElementById('dollResetBtn').addEventListener('click', () => {
-      outfit.bottom = null;
-      outfit.shoes = null;
-      outfit.hair = 'down';
-      outfit.hairAcc = null;
-      outfit.makeup = null;
-      renderDoll();
-      refreshActiveStates();
-    });
-
-    // ---- Init ----
-    renderDollPickerThumbs();
-    renderDoll();
-    refreshActiveStates();
-  })();
-  // ================= Car Race Game =================
-  (function initRace(){
-    const canvas = document.getElementById('raceCanvas');
-    const ctx = canvas.getContext('2d');
-    const wrap = document.getElementById('raceWrap');
-    const startOverlay = document.getElementById('raceStartOverlay');
-    const overOverlay = document.getElementById('raceOverOverlay');
-    const startBtn = document.getElementById('raceStartBtn');
-    const retryBtn = document.getElementById('raceRetryBtn');
-    const leftBtn = document.getElementById('raceLeftBtn');
-    const rightBtn = document.getElementById('raceRightBtn');
-    const scoreEl = document.getElementById('raceScore');
-    const bestEl = document.getElementById('raceBest');
-    const finalScoreEl = document.getElementById('raceFinalScore');
-
-    let dpr = window.devicePixelRatio || 1;
-    let cssW = 0, cssH = 0;
-    let state = 'idle'; // idle | playing | over
-    let rafId = null;
-
-    let best = 0;
-    try{
-      const saved = sessionStorage.getItem('raceBestScore');
-      if(saved) best = parseInt(saved, 10) || 0;
-    }catch(e){ best = 0; }
-    bestEl.textContent = best;
-
-    const LANES = 3;
-    let laneXs = [];
-    let player = { lane:1, x:0, y:0, w:46, h:74, targetX:0 };
-    let movingLeft = false, movingRight = false;
-
-    let obstacles = []; // {lane, y, w, h, passed}
-    let coins = []; // {lane, y, r, collected}
-    let roadDashOffset = 0;
-
-    let speed = 4.2;
-    let score = 0;
-    let frame = 0;
-    let spawnTimer = 0;
-    let spawnInterval = 70;
-
-    function computeLanes(){
-      const roadMargin = cssW * 0.08;
-      const roadW = cssW - roadMargin*2;
-      laneXs = [
-        roadMargin + roadW * (1/6),
-        roadMargin + roadW * (3/6),
-        roadMargin + roadW * (5/6)
-      ];
-    }
-
-    function resize(){
-      const rect = wrap.getBoundingClientRect();
-      cssW = rect.width;
-      cssH = canvas.clientHeight || 480;
-      dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.round(cssW * dpr);
-      canvas.height = Math.round(cssH * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      computeLanes();
-      if(state !== 'playing'){
-        player.lane = 1;
-        player.x = laneXs[1];
-        player.targetX = laneXs[1];
-        player.y = cssH - 100;
-      }
-      drawIdleFrame();
-    }
-
-    function resetGame(){
-      computeLanes();
-      player.lane = 1;
-      player.x = laneXs[1];
-      player.targetX = laneXs[1];
-      player.y = cssH - 100;
-      obstacles = [];
-      coins = [];
-      speed = 4.2;
-      score = 0;
-      frame = 0;
-      spawnTimer = 0;
-      spawnInterval = 70;
-      roadDashOffset = 0;
-      scoreEl.textContent = '0';
-    }
-
-    function spawnRow(){
-      // choose how many lanes get an obstacle this row (leave at least one free)
-      const blockedCount = Math.random() < 0.35 ? 2 : 1;
-      const lanesArr = [0,1,2];
-      for(let i=lanesArr.length-1;i>0;i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [lanesArr[i],lanesArr[j]] = [lanesArr[j],lanesArr[i]];
-      }
-      const blockedLanes = lanesArr.slice(0, blockedCount);
-      blockedLanes.forEach(lane => {
-        obstacles.push({ lane, y:-90, w:50, h:80, passed:false });
-      });
-      const freeLanes = lanesArr.slice(blockedCount);
-      if(freeLanes.length && Math.random() < 0.7){
-        const coinLane = freeLanes[Math.floor(Math.random()*freeLanes.length)];
-        coins.push({ lane: coinLane, y:-60, r:12, collected:false });
-      }
-    }
-
-    function drawRoad(){
-      ctx.clearRect(0,0,cssW,cssH);
-      // grass sides
-      ctx.fillStyle = '#9ED98A';
-      ctx.fillRect(0,0,cssW,cssH);
-      const roadMargin = cssW * 0.08;
-      ctx.fillStyle = '#5A5F6B';
-      ctx.fillRect(roadMargin, 0, cssW - roadMargin*2, cssH);
-      // lane dashes
-      ctx.strokeStyle = 'rgba(255,255,255,0.85)';
-      ctx.lineWidth = 4;
-      ctx.setLineDash([22, 22]);
-      ctx.lineDashOffset = -roadDashOffset;
-      [1,2].forEach(i => {
-        const x = roadMargin + (cssW - roadMargin*2) * (i/3);
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, cssH);
-        ctx.stroke();
-      });
-      ctx.setLineDash([]);
-    }
-
-    function drawCarShape(x, y, w, h, bodyColor, windowColor){
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.fillStyle = bodyColor;
-      ctx.beginPath();
-      ctx.roundRect ? ctx.roundRect(-w/2, -h/2, w, h, 12) : ctx.rect(-w/2,-h/2,w,h);
-      ctx.fill();
-      ctx.fillStyle = windowColor;
-      ctx.beginPath();
-      ctx.roundRect ? ctx.roundRect(-w/2+7, -h/2+10, w-14, h*0.32, 8) : ctx.rect(-w/2+7,-h/2+10,w-14,h*0.32);
-      ctx.fill();
-      // wheels
-      ctx.fillStyle = '#22232A';
-      const wheelW = 7, wheelH = 16;
-      ctx.fillRect(-w/2-3, -h/2+10, wheelW, wheelH);
-      ctx.fillRect(w/2-4, -h/2+10, wheelW, wheelH);
-      ctx.fillRect(-w/2-3, h/2-26, wheelW, wheelH);
-      ctx.fillRect(w/2-4, h/2-26, wheelW, wheelH);
-      ctx.restore();
-    }
-
-    function drawPlayer(){
-      drawCarShape(player.x, player.y, player.w, player.h, '#FF5D8F', '#EAF8FF');
-    }
-
-    function drawObstacleCar(o){
-      const x = laneXs[o.lane];
-      drawCarShape(x, o.y, o.w, o.h, '#5FC9F0', '#FFFFFF');
-    }
-
-    function drawCoin(c){
-      if(c.collected) return;
-      const x = laneXs[c.lane];
-      ctx.save();
-      ctx.translate(x, c.y);
-      ctx.fillStyle = '#FFD23F';
-      ctx.beginPath();
-      const spikes = 5, outerR = c.r, innerR = c.r*0.45;
-      for(let i=0;i<spikes*2;i++){
-        const r = i % 2 === 0 ? outerR : innerR;
-        const angle = (Math.PI / spikes) * i - Math.PI/2;
-        const px = Math.cos(angle)*r, py = Math.sin(angle)*r;
-        if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
-      }
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-
-    function drawIdleFrame(){
-      if(cssW === 0) return;
-      drawRoad();
-      drawPlayer();
-    }
-
-    function rectOverlap(ax, ay, aw, ah, bx, by, bw, bh){
-      return Math.abs(ax-bx) < (aw+bw)/2*0.82 && Math.abs(ay-by) < (ah+bh)/2*0.82;
-    }
-
-    function update(){
-      frame++;
-      roadDashOffset = (roadDashOffset + speed) % 44;
-
-      // smooth lane movement
-      player.targetX = laneXs[player.lane];
-      player.x += (player.targetX - player.x) * 0.22;
-
-      // spawn
-      spawnTimer++;
-      if(spawnTimer >= spawnInterval){
-        spawnTimer = 0;
-        spawnRow();
-      }
-
-      obstacles.forEach(o => { o.y += speed; });
-      obstacles = obstacles.filter(o => o.y < cssH + 100);
-
-      coins.forEach(c => { c.y += speed; });
-      coins = coins.filter(c => c.y < cssH + 60);
-
-      // collision
-      for(const o of obstacles){
-        const ox = laneXs[o.lane];
-        if(rectOverlap(player.x, player.y, player.w, player.h, ox, o.y, o.w, o.h)){
-          endGame();
-          return;
-        }
-        if(!o.passed && o.y > player.y + player.h){
-          o.passed = true;
-          score += 1;
-          scoreEl.textContent = score;
-          if(score % 6 === 0){
-            speed = Math.min(9.5, speed + 0.4);
-            spawnInterval = Math.max(46, spawnInterval - 3);
-          }
-        }
-      }
-
-      for(const c of coins){
-        if(!c.collected){
-          const cx = laneXs[c.lane];
-          const dx = player.x - cx, dy = player.y - c.y;
-          if(Math.sqrt(dx*dx+dy*dy) < (player.w/2 + c.r)){
-            c.collected = true;
-            score += 2;
-            scoreEl.textContent = score;
-          }
-        }
-      }
-    }
-
-    function render(){
-      drawRoad();
-      obstacles.forEach(drawObstacleCar);
-      coins.forEach(drawCoin);
-      drawPlayer();
-    }
-
-    function loop(){
-      if(state !== 'playing') return;
-      update();
-      if(state === 'playing'){
-        render();
-        rafId = requestAnimationFrame(loop);
-      }
-    }
-
-    function startGame(){
-      resetGame();
-      state = 'playing';
-      startOverlay.classList.add('hidden');
-      overOverlay.classList.add('hidden');
-      rafId = requestAnimationFrame(loop);
-    }
-
-    function endGame(){
-      state = 'over';
-      if(rafId) cancelAnimationFrame(rafId);
-      if(score > best){
-        best = score;
-        bestEl.textContent = best;
-        try{ sessionStorage.setItem('raceBestScore', String(best)); }catch(e){}
-      }
-      finalScoreEl.textContent = score;
-      overOverlay.classList.remove('hidden');
-    }
-
-    function moveLeft(){
-      if(state === 'idle'){ startGame(); return; }
-      if(state !== 'playing') return;
-      player.lane = Math.max(0, player.lane - 1);
-    }
-    function moveRight(){
-      if(state === 'idle'){ startGame(); return; }
-      if(state !== 'playing') return;
-      player.lane = Math.min(LANES-1, player.lane + 1);
-    }
-
-    startBtn.addEventListener('click', startGame);
-    retryBtn.addEventListener('click', startGame);
-
-    document.addEventListener('keydown', (e) => {
-      if(e.code === 'ArrowLeft'){ e.preventDefault(); moveLeft(); }
-      if(e.code === 'ArrowRight'){ e.preventDefault(); moveRight(); }
-    });
-
-    leftBtn.addEventListener('click', moveLeft);
-    rightBtn.addEventListener('click', moveRight);
-
-    // swipe support
-    let touchStartX = null;
-    wrap.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      if(state === 'idle'){ startGame(); }
-    }, {passive:true});
-    wrap.addEventListener('touchend', (e) => {
-      if(touchStartX === null) return;
-      const touchEndX = e.changedTouches[0].clientX;
-      const dx = touchEndX - touchStartX;
-      if(Math.abs(dx) > 30){
-        if(dx > 0) moveRight(); else moveLeft();
-      }
-      touchStartX = null;
-    }, {passive:true});
-
-    window.addEventListener('resize', () => {
-      resize();
-    });
-
-    resize();
-  })();
-  // ================= Hill Climb Game =================
-  (function initHill(){
-    const canvas = document.getElementById('hillCanvas');
-    const ctx = canvas.getContext('2d');
-    const wrap = document.getElementById('hillWrap');
-    const startOverlay = document.getElementById('hillStartOverlay');
-    const overOverlay = document.getElementById('hillOverOverlay');
-    const startBtn = document.getElementById('hillStartBtn');
-    const retryBtn = document.getElementById('hillRetryBtn');
-    const gasBtn = document.getElementById('hillGasBtn');
-    const scoreEl = document.getElementById('hillScore');
-    const bestEl = document.getElementById('hillBest');
-    const finalScoreEl = document.getElementById('hillFinalScore');
-
-    let dpr = window.devicePixelRatio || 1;
-    let cssW = 0, cssH = 0;
-    let state = 'idle'; // idle | playing | over
-    let rafId = null;
-
-    let best = 0;
-    try{
-      const saved = sessionStorage.getItem('hillBestScore');
-      if(saved) best = parseInt(saved, 10) || 0;
-    }catch(e){ best = 0; }
-    bestEl.textContent = best;
-
-    // ---- Terrain ----
-    // Terrain is a sum of sine waves; groundY(worldX) returns height (css px from top).
-    function groundY(worldX){
-      const baseline = cssH * 0.62;
-      const h1 = Math.sin(worldX * 0.006) * 46;
-      const h2 = Math.sin(worldX * 0.017 + 1.3) * 22;
-      const h3 = Math.sin(worldX * 0.045 + 2.1) * 9;
-      return baseline - (h1 + h2 + h3);
-    }
-    function groundSlope(worldX){
-      const dx = 2;
-      return (groundY(worldX+dx) - groundY(worldX-dx)) / (dx*2);
-    }
-
-    let worldX = 0; // camera/world offset, increases as bike moves
-    let bikeSpeed = 0;
-    const MAX_SPEED = 6.2;
-    const ACCEL = 0.18;
-    const DECEL = 0.05;
-    const GRAVITY_PULL = 0.994; // speed decay on uphill handled via slope effect
-
-    let bike = { localX:0, y:0, vy:0, angle:0, wheelBase:46 };
-    let airborne = false;
-    let crashed = false;
-    let throttling = false;
-
-    let distanceScore = 0;
-    let bestThisRun = 0;
-
-    function resize(){
-      const rect = wrap.getBoundingClientRect();
-      cssW = rect.width;
-      cssH = canvas.clientHeight || 440;
-      dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.round(cssW * dpr);
-      canvas.height = Math.round(cssH * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      bike.localX = cssW * 0.32;
-      drawIdleFrame();
-    }
-
-    function resetGame(){
-      worldX = 0;
-      bikeSpeed = 0;
-      bike.localX = cssW * 0.32;
-      bike.y = groundY(bike.localX) - 22;
-      bike.vy = 0;
-      bike.angle = 0;
-      airborne = false;
-      crashed = false;
-      distanceScore = 0;
-      scoreEl.textContent = '0';
-    }
-
-    function drawTerrain(){
-      ctx.clearRect(0,0,cssW,cssH);
-      // sky already comes from container gradient background; draw sun + clouds lightly
-      ctx.save();
-      ctx.fillStyle = 'rgba(255,255,255,0.55)';
-      ctx.beginPath();
-      ctx.ellipse(cssW*0.78, cssH*0.18, 26, 16, 0, 0, Math.PI*2);
-      ctx.ellipse(cssW*0.78+20, cssH*0.18-6, 20, 14, 0, 0, Math.PI*2);
-      ctx.fill();
-      ctx.restore();
-
-      ctx.beginPath();
-      ctx.moveTo(0, cssH);
-      const step = 8;
-      for(let sx=0; sx<=cssW; sx+=step){
-        const wx = sx + worldX;
-        ctx.lineTo(sx, groundY(wx));
-      }
-      ctx.lineTo(cssW, cssH);
-      ctx.closePath();
-      const grad = ctx.createLinearGradient(0,cssH*0.4,0,cssH);
-      grad.addColorStop(0, '#9ED98A');
-      grad.addColorStop(1, '#6FBF63');
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // grass tufts line
-      ctx.strokeStyle = '#5AA84F';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for(let sx=0; sx<=cssW; sx+=step){
-        const wx = sx + worldX;
-        const gy = groundY(wx);
-        if(sx===0) ctx.moveTo(sx, gy); else ctx.lineTo(sx, gy);
-      }
-      ctx.stroke();
-    }
-
-    function drawBike(){
-      const localGroundY = groundY(bike.localX + worldX);
-      const targetAngle = airborne ? bike.angle : Math.atan(groundSlope(bike.localX + worldX));
-      bike.angle += (targetAngle - bike.angle) * (airborne ? 0.06 : 0.25);
-
-      ctx.save();
-      ctx.translate(bike.localX, bike.y);
-      ctx.rotate(bike.angle);
-
-      // wheels
-      ctx.fillStyle = '#2B2B33';
-      ctx.beginPath(); ctx.arc(-18, 16, 11, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(18, 16, 11, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = '#7A7A85';
-      ctx.beginPath(); ctx.arc(-18, 16, 4, 0, Math.PI*2); ctx.fill();
-      ctx.beginPath(); ctx.arc(18, 16, 4, 0, Math.PI*2); ctx.fill();
-
-      // body
-      ctx.fillStyle = '#FFA63D';
-      ctx.beginPath();
-      ctx.moveTo(-20, 12);
-      ctx.lineTo(-6, -10);
-      ctx.lineTo(14, -10);
-      ctx.lineTo(20, 12);
-      ctx.closePath();
-      ctx.fill();
-
-      // seat
-      ctx.fillStyle = '#E0602A';
-      ctx.fillRect(-8, -14, 18, 6);
-
-      // rider (simple, faceless)
-      ctx.fillStyle = '#FF8FAB';
-      ctx.beginPath();
-      ctx.ellipse(0, -26, 9, 11, 0, 0, Math.PI*2);
-      ctx.fill();
-      ctx.fillRect(-6, -18, 12, 16);
-      ctx.fillStyle = '#5FC9F0';
-      ctx.fillRect(-7, -8, 7, 14);
-      ctx.fillRect(2, -8, 7, 14);
-
-      ctx.restore();
-    }
-
-    function drawIdleFrame(){
-      if(cssW === 0) return;
-      bike.localX = cssW * 0.32;
-      bike.y = groundY(bike.localX + worldX) - 22;
-      drawTerrain();
-      drawBike();
-    }
-
-    function update(){
-      if(throttling){
-        bikeSpeed = Math.min(MAX_SPEED, bikeSpeed + ACCEL);
-      } else {
-        bikeSpeed = Math.max(0, bikeSpeed - DECEL);
-      }
-
-      const slope = groundSlope(bike.localX + worldX);
-      // uphill slows you, downhill speeds you slightly
-      const effectiveSpeed = bikeSpeed - Math.max(0, slope) * 1.8 + Math.max(0, -slope) * 0.6;
-      worldX += Math.max(0.4, effectiveSpeed);
-
-      distanceScore = Math.floor(worldX / 12);
-      scoreEl.textContent = distanceScore;
-
-      const groundAtBike = groundY(bike.localX + worldX);
-      const desiredY = groundAtBike - 22;
-
-      if(!airborne){
-        bike.y = desiredY;
-        bike.vy = 0;
-        // airborne triggers on steep downhill drop-off (simulate small jumps)
-        if(slope < -0.55 && bikeSpeed > 3.2){
-          airborne = true;
-          bike.vy = -3.2;
+  }
+
+  function onCardClick(el, card){
+    if(lockBoard || card.matched || flipped.find(f=>f.card.idx===card.idx)) return;
+    el.classList.add('flipped');
+    flipped.push({el, card});
+
+    if(flipped.length === 2){
+      moves++;
+      movesEl.textContent = 'المحاولات: ' + moves;
+      lockBoard = true;
+      const [a,b] = flipped;
+      if(a.card.sym === b.card.sym){
+        a.card.matched = true; b.card.matched = true;
+        a.el.classList.add('matched'); b.el.classList.add('matched');
+        matchedCount += 2;
+        flipped = [];
+        lockBoard = false;
+        if(matchedCount === cards.length){
+          finishGame();
         }
       } else {
-        bike.vy += 0.5; // gravity
-        bike.y += bike.vy;
-        if(bike.y >= desiredY){
-          bike.y = desiredY;
-          airborne = false;
-          bike.vy = 0;
-          // hard landing check
-          if(Math.abs(bike.angle) > 1.05){
-            crashGame();
-            return;
-          }
+        setTimeout(()=>{
+          a.el.classList.remove('flipped');
+          b.el.classList.remove('flipped');
+          flipped = [];
+          lockBoard = false;
+        }, 700);
+      }
+    }
+  }
+
+  function finishGame(){
+    msgEl.textContent = '🎉 ممتاز! خلّصتي كل البطاقات في ' + moves + ' محاولة';
+    if(best === null || moves < best){
+      best = moves;
+      try{ localStorage.setItem('memory_best', best); }catch(e){}
+      bestEl.textContent = 'الأفضل: ' + best + ' محاولة';
+      msgEl.textContent = '🏆 رقم قياسي جديد! ' + moves + ' محاولة فقط';
+    }
+  }
+
+  startBtn.addEventListener('click', build);
+  build();
+})();
+
+/* ===================== JUMP & BALANCE GAME ===================== */
+(function(){
+  const jumper = document.getElementById('jumper');
+  const stage = document.getElementById('jumpStage');
+  const scoreEl = document.getElementById('jumpScore');
+  const bestEl = document.getElementById('jumpBest');
+  const msgEl = document.getElementById('jumpMsg');
+  const startBtn = document.getElementById('jumpStart');
+  const jumpBtn = document.getElementById('jumpBtn');
+  let running=false, jumping=false, obstacles=[], score=0, best=0, tick=null, spawnTimer=0;
+
+  try{ best = +(localStorage.getItem('jump_best')||0); }catch(e){ best=0; }
+  bestEl.textContent='الأفضل: '+best;
+
+  function doJump(){
+    if(!running || jumping) return;
+    jumping=true;
+    jumper.style.bottom='130px';
+    setTimeout(()=>{ jumper.style.bottom='18px'; jumping=false; }, 480);
+  }
+  jumpBtn.addEventListener('click', doJump);
+  window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); doJump(); } });
+  stage.addEventListener('touchstart', doJump);
+
+  function spawnObstacle(){
+    const el = document.createElement('div');
+    el.className='obstacle';
+    el.style.right='-20px';
+    stage.appendChild(el);
+    obstacles.push({el, x:-20});
+  }
+
+  function reset(){
+    obstacles.forEach(o=>o.el.remove());
+    obstacles=[]; score=0; jumping=false;
+    jumper.style.bottom='18px';
+    scoreEl.textContent='النقاط: 0';
+    msgEl.textContent='';
+    spawnTimer=0;
+  }
+
+  function loop(){
+    const speed = 5 + Math.min(score/15, 6);
+    spawnTimer--;
+    if(spawnTimer<=0){
+      spawnObstacle();
+      spawnTimer = 40 + Math.random()*30;
+    }
+    const stageWidth = stage.clientWidth;
+    obstacles.forEach(o=>{
+      o.x += speed;
+      o.el.style.right = o.x+'px';
+    });
+    obstacles = obstacles.filter(o=>{
+      if(o.x > stageWidth+20){
+        o.el.remove();
+        score++;
+        scoreEl.textContent='النقاط: '+score;
+        return false;
+      }
+      return true;
+    });
+
+    const jumperBottom = parseInt(jumper.style.bottom);
+    obstacles.forEach(o=>{
+      if(o.x > 14 && o.x < 60 && jumperBottom < 60){
+        endGame();
+      }
+    });
+  }
+
+  function endGame(){
+    running=false;
+    clearInterval(tick);
+    msgEl.textContent='💥 لمستي عقبة! نتيجتك: '+score;
+    if(score>best){
+      best=score;
+      try{ localStorage.setItem('jump_best', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+      msgEl.textContent='🎉 رقم قياسي جديد! '+score+' نقطة';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='🤸 يلا قفزي!';
+    tick=setInterval(loop, 45);
+  });
+})();
+
+/* ===================== DRESS UP DOLL (improved: eyes, hair, accessories) ===================== */
+(function(){
+  const tabs = document.querySelectorAll('.option-tab');
+  const panels = {
+    dressColor: document.getElementById('panel-dressColor'),
+    hairColor: document.getElementById('panel-hairColor'),
+    eyeColor: document.getElementById('panel-eyeColor'),
+    headAcc: document.getElementById('panel-headAcc'),
+    shoeColor: document.getElementById('panel-shoeColor'),
+  };
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      Object.values(panels).forEach(p=>{ if(p) p.style.display='none'; });
+      panels[tab.dataset.panel].style.display='block';
+    });
+  });
+
+  document.querySelectorAll('.swatch[data-target]').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      const group = sw.parentElement;
+      group.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+      sw.classList.add('active');
+      const color = sw.dataset.color;
+      const target = sw.dataset.target;
+      if(target==='dress'){
+        document.getElementById('dressShape').setAttribute('fill', color);
+      } else if(target==='hair'){
+        ['hairBack','hairBack2','hairTop','hairFringe'].forEach(id=>{
+          document.getElementById(id).setAttribute('fill', color);
+        });
+      } else if(target==='eye'){
+        document.getElementById('irisL').setAttribute('fill', color);
+        document.getElementById('irisR').setAttribute('fill', color);
+      } else if(target==='shoe'){
+        document.getElementById('shoeL').setAttribute('fill', color);
+        document.getElementById('shoeR').setAttribute('fill', color);
+        document.getElementById('heelL').setAttribute('fill', color);
+        document.getElementById('heelR').setAttribute('fill', color);
+      }
+    });
+  });
+
+  const accMap = {
+    none: '',
+    crown: '<path d="M78 46 L84 32 L92 44 L100 28 L108 44 L116 32 L122 46 Z" fill="#FFD166" stroke="#E8B23A" stroke-width="1.5"/><circle cx="100" cy="30" r="3" fill="#FF8FAB"/>',
+    band: '<path d="M56 68 Q100 50 144 68" stroke="#FF5D8F" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="144" cy="68" r="10" fill="#FF8FAB"/><circle cx="144" cy="68" r="4" fill="#fff" opacity="0.6"/>',
+    flower: '<circle cx="64" cy="62" r="8" fill="#FF8FAB"/><circle cx="56" cy="69" r="6.5" fill="#FFD166"/><circle cx="73" cy="70" r="6.5" fill="#7FD4E8"/><circle cx="64" cy="62" r="3" fill="#fff" opacity="0.7"/>'
+  };
+  document.querySelectorAll('.swatch[data-acc]').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      sw.parentElement.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+      sw.classList.add('active');
+      document.getElementById('headAccessory').innerHTML = accMap[sw.dataset.acc] || '';
+    });
+  });
+
+  const shelfMsg = document.getElementById('shelfMsg');
+  const neckMap = {
+    pearl: '<circle cx="100" cy="150" r="3.4" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="91" cy="152" r="3.4" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="109" cy="152" r="3.4" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="83" cy="148" r="3" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="117" cy="148" r="3" fill="#fff" stroke="#ddd" stroke-width="1"/>',
+    gold: '<path d="M86 145 Q100 158 114 145" stroke="#FFD166" stroke-width="3.4" fill="none" stroke-linecap="round"/><circle cx="100" cy="156" r="3" fill="#FFD166"/>'
+  };
+  const bagMap = {
+    pink: '<g transform="translate(28,210)"><path d="M0 14 Q0 4 12 4 Q24 4 24 14 L24 30 Q24 36 12 36 Q0 36 0 30 Z" fill="#FF8FAB"/><path d="M4 4 Q12 -10 20 4" stroke="#FF5D8F" stroke-width="3" fill="none"/><circle cx="12" cy="20" r="2.4" fill="#fff" opacity="0.7"/></g>',
+    star: '<g transform="translate(28,210)"><path d="M0 14 Q0 4 12 4 Q24 4 24 14 L24 30 Q24 36 12 36 Q0 36 0 30 Z" fill="#7FD4E8"/><path d="M4 4 Q12 -10 20 4" stroke="#5BB7CC" stroke-width="3" fill="none"/><path d="M12 14 l2 4 4 .6-3 3 .8 4-3.8-2-3.8 2 .8-4-3-3 4-.6Z" fill="#FFD166"/></g>'
+  };
+  document.querySelectorAll('.shelf-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+      const target = item.dataset.target;
+      const piece = item.dataset.piece;
+      const name = item.querySelector('.name').textContent;
+      if(target==='dollNecklace'){
+        document.getElementById('neckAccessory').innerHTML = neckMap[piece] || '';
+      } else if(target==='head'){
+        document.getElementById('headAccessory').innerHTML = accMap[piece] || '';
+        document.querySelectorAll('#panel-headAcc .swatch').forEach(s=>s.classList.remove('active'));
+      } else if(target==='shoe'){
+        const color = piece==='gold' ? '#FFD166' : '#FF5D8F';
+        document.getElementById('shoeL').setAttribute('fill', color);
+        document.getElementById('shoeR').setAttribute('fill', color);
+        document.getElementById('heelL').setAttribute('fill', color);
+        document.getElementById('heelR').setAttribute('fill', color);
+      } else if(target==='bag'){
+        document.getElementById('bagAccessory').innerHTML = bagMap[piece] || '';
+      } else if(target==='ring' || target==='bracelet'){
+        const hand = document.getElementById('handAccessory');
+        if(target==='ring'){
+          hand.innerHTML += '<circle cx="58" cy="236" r="3.5" fill="none" stroke="#7FD4E8" stroke-width="2.4"/><circle cx="58" cy="233" r="2" fill="#fff" opacity="0.8"/>';
+        } else {
+          hand.innerHTML += '<rect x="128" y="225" width="14" height="6" rx="3" fill="#FFD166"/>';
         }
       }
-
-      // crash if tipped too far while grounded and moving
-      if(!airborne && Math.abs(bike.angle) > 1.25){
-        crashGame();
-        return;
-      }
-    }
-
-    function render(){
-      drawTerrain();
-      drawBike();
-    }
-
-    function loop(){
-      if(state !== 'playing') return;
-      update();
-      if(state === 'playing'){
-        render();
-        rafId = requestAnimationFrame(loop);
-      }
-    }
-
-    function startGame(){
-      resetGame();
-      state = 'playing';
-      startOverlay.classList.add('hidden');
-      overOverlay.classList.add('hidden');
-      rafId = requestAnimationFrame(loop);
-    }
-
-    function crashGame(){
-      state = 'over';
-      if(rafId) cancelAnimationFrame(rafId);
-      if(distanceScore > best){
-        best = distanceScore;
-        bestEl.textContent = best;
-        try{ sessionStorage.setItem('hillBestScore', String(best)); }catch(e){}
-      }
-      finalScoreEl.textContent = distanceScore;
-      overOverlay.classList.remove('hidden');
-    }
-
-    function setThrottle(v){
-      if(state === 'idle' && v){ startGame(); return; }
-      if(state !== 'playing') return;
-      throttling = v;
-    }
-
-    startBtn.addEventListener('click', startGame);
-    retryBtn.addEventListener('click', startGame);
-
-    document.addEventListener('keydown', (e) => {
-      if(e.code === 'ArrowUp' || e.code === 'Space'){
-        e.preventDefault();
-        setThrottle(true);
-      }
+      document.querySelectorAll('.shelf-item').forEach(i=>i.classList.remove('equipped'));
+      item.classList.add('equipped');
+      shelfMsg.textContent = '✨ تمت إضافة: '+name+' — شوفيها على العروستك بالأعلى!';
+      document.getElementById('dressup').scrollIntoView({behavior:'smooth', block:'center'});
     });
-    document.addEventListener('keyup', (e) => {
-      if(e.code === 'ArrowUp' || e.code === 'Space'){
-        setThrottle(false);
-      }
-    });
-
-    function pointerDown(e){ e.preventDefault(); setThrottle(true); }
-    function pointerUp(){ setThrottle(false); }
-
-    gasBtn.addEventListener('mousedown', pointerDown);
-    gasBtn.addEventListener('mouseup', pointerUp);
-    gasBtn.addEventListener('touchstart', pointerDown, {passive:false});
-    gasBtn.addEventListener('touchend', pointerUp);
-
-    wrap.addEventListener('mousedown', pointerDown);
-    window.addEventListener('mouseup', pointerUp);
-    wrap.addEventListener('touchstart', pointerDown, {passive:false});
-    wrap.addEventListener('touchend', pointerUp);
-
-    window.addEventListener('resize', () => {
-      const wasPlaying = state === 'playing';
-      resize();
-    });
-
-    resize();
-  })();
+  });
+})();
 </script>
+
 
 </body>
 </html>
