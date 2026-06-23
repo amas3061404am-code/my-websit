@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>سحابة اللعب | عالم مليان ألعاب ومرح</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF8EE;
+  --cream-2:#FFEFD9;
+  --coral:#FF8FAB;
+  --coral-deep:#FF5D8F;
+  --sky:#7FD4E8;
+  --sun:#FFD166;
+  --grass:#8FD19E;
+  --ink:#4A3B45;
+  --ink-soft:#8A7A86;
+  --white:#FFFFFF;
+  --shadow: 0 10px 30px rgba(255,93,143,0.18);
+  --radius: 28px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{
+  font-family:'Baloo Bhaijaan 2',sans-serif;
+}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+
+/* decorative floating shapes */
+.bg-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.bg-deco span{
+  position:absolute;font-size:28px;opacity:.35;
+  animation: float 9s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-22px) rotate(12deg);}
+}
+@media (prefers-reduced-motion: reduce){
+  .bg-deco span{animation:none;}
+}
+
+/* Header */
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,248,238,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:2px solid var(--cream-2);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:18px;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Baloo Bhaijaan 2';font-weight:800;font-size:1.3rem;color:var(--coral-deep);}
+.brand .dot{
+  width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #fff, var(--sun) 60%, var(--coral) 100%);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  box-shadow:0 4px 10px rgba(255,209,102,.5);
+}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;}
+.nav-links a{
+  font-size:.92rem;font-weight:700;padding:8px 14px;border-radius:999px;
+  color:var(--ink);transition:.2s;white-space:nowrap;
+}
+.nav-links a:hover, .nav-links a:focus-visible{background:var(--cream-2);outline:2px solid var(--coral);}
+@media(max-width:880px){
+  .nav-links{display:none;}
+}
+
+/* Hero */
+.hero{padding:70px 0 50px;text-align:center;position:relative;z-index:1;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);border:2px solid var(--cream-2);
+  padding:8px 20px;border-radius:999px;font-weight:700;font-size:.85rem;
+  color:var(--coral-deep);box-shadow:0 4px 14px rgba(0,0,0,.04);
+  margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2rem,5.2vw,3.4rem);font-weight:800;line-height:1.25;margin:0 0 18px;
+  color:var(--ink);
+}
+.hero h1 .pink{color:var(--coral-deep);}
+.hero p{
+  max-width:560px;margin:0 auto 30px;color:var(--ink-soft);font-size:1.05rem;line-height:1.9;
+}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  padding:16px 30px;border-radius:999px;font-weight:800;font-size:1rem;
+  display:inline-flex;align-items:center;gap:10px;transition:transform .15s, box-shadow .15s;
+}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--coral),var(--coral-deep));
+  color:#fff;box-shadow:var(--shadow);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(255,93,143,.3);}
+.btn-ghost{
+  background:var(--white);color:var(--ink);border:2px solid var(--cream-2);
+}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--coral);}
+
+/* Gates grid */
+.gates{padding:30px 0 70px;position:relative;z-index:1;}
+.section-head{text-align:center;margin-bottom:38px;}
+.section-head .eyebrow{background:var(--cream-2);border-color:var(--cream-2);}
+.section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);margin:10px 0 8px;}
+.section-head p{color:var(--ink-soft);margin:0;}
+
+.gate-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
+}
+@media(max-width:980px){.gate-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.gate-grid{grid-template-columns:1fr;}}
+
+.gate{
+  background:var(--white);border-radius:var(--radius);padding:26px 22px;
+  display:flex;flex-direction:column;gap:14px;align-items:flex-start;
+  border:2px solid var(--cream-2);transition:.25s;cursor:pointer;
+  text-align:right;position:relative;overflow:hidden;
+}
+.gate:hover, .gate:focus-visible{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow);border-color:var(--coral);
+}
+.gate .icon-badge{
+  width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;
+  font-size:28px;
+}
+.gate h3{margin:0;font-size:1.15rem;}
+.gate p{margin:0;color:var(--ink-soft);font-size:.9rem;line-height:1.7;}
+.gate .go{
+  margin-top:auto;font-weight:800;font-size:.88rem;color:var(--coral-deep);
+  display:flex;align-items:center;gap:6px;
+}
+.gate .go svg{transition:transform .2s;}
+.gate:hover .go svg{transform:translateX(-4px);}
+
+.icon-cars{background:linear-gradient(135deg,#FFE3EC,#FFD0DF);}
+.icon-plane{background:linear-gradient(135deg,#DCF3FA,#BFE9F4);}
+.icon-paint{background:linear-gradient(135deg,#FFF1CF,#FFE3A3);}
+.icon-jump{background:linear-gradient(135deg,#E4F6E8,#CDEFD4);}
+.icon-dress{background:linear-gradient(135deg,#FCE4F1,#F8C9E3);}
+.icon-acc{background:linear-gradient(135deg,#EDE7FB,#DCD2F5);}
+
+/* Generic section shell used by game/dressup sections */
+.feature-section{
+  padding:60px 0;position:relative;z-index:1;
+  scroll-margin-top:90px;
+}
+.feature-section:nth-of-type(even){background:var(--white);}
+.feature-card{
+  background:var(--white);border-radius:32px;border:2px solid var(--cream-2);
+  padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.04);
+}
+
+/* Plane game */
+.game-stage-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;}
+#planeCanvas{
+  width:100%;max-width:680px;aspect-ratio:16/9;
+  background:linear-gradient(180deg,#BDEBF7 0%, #DFF5FA 60%, #EAF9EE 100%);
+  border-radius:24px;border:3px solid var(--sky);
+  touch-action:none;display:block;
+}
+.game-hud{
+  display:flex;justify-content:space-between;width:100%;max-width:680px;
+  font-weight:800;color:var(--ink);font-size:.95rem;
+}
+.game-hud span{background:var(--cream-2);padding:6px 16px;border-radius:999px;}
+.game-controls{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.game-msg{font-weight:700;color:var(--coral-deep);min-height:24px;text-align:center;}
+
+/* Cars race */
+.race-stage{
+  background:linear-gradient(180deg,#5B6470,#454C57);
+  border-radius:24px;padding:20px;position:relative;overflow:hidden;
+  height:280px;
+}
+.race-stage .lane-line{
+  position:absolute;left:0;right:0;height:0;border-top:4px dashed rgba(255,255,255,.35);
+}
+.race-stage .player-car, .race-stage .rival-car{
+  position:absolute;font-size:34px;transition:left .12s linear;
+}
+.race-track-label{display:flex;justify-content:space-between;color:var(--ink-soft);font-size:.85rem;margin-top:10px;}
+
+/* Jump balance */
+.jump-stage{
+  background:linear-gradient(180deg,#FFE9C7,#FFF6E2);
+  border-radius:24px;height:240px;position:relative;overflow:hidden;border:3px solid var(--sun);
+}
+.jump-ground{position:absolute;bottom:0;left:0;right:0;height:18px;background:#E9C77E;}
+.jumper{position:absolute;bottom:18px;font-size:36px;transition:bottom .25s;}
+.obstacle{position:absolute;bottom:18px;width:18px;height:34px;background:var(--coral-deep);border-radius:6px 6px 0 0;}
+
+/* Paint */
+.paint-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px;}
+.color-dot{width:30px;height:30px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px rgba(0,0,0,.06);cursor:pointer;}
+.color-dot.active{box-shadow:0 0 0 3px var(--ink);}
+#paintCanvas{width:100%;border-radius:20px;border:3px solid var(--cream-2);background:#fff;touch-action:none;cursor:crosshair;}
+.brush-size{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-soft);}
+
+/* Dress up */
+.dressup-layout{display:grid;grid-template-columns:280px 1fr;gap:26px;align-items:start;}
+@media(max-width:760px){.dressup-layout{grid-template-columns:1fr;}}
+.doll-stage{
+  background:linear-gradient(180deg,#FBE7F1,#FFF6FA);
+  border-radius:26px;border:3px solid var(--coral);
+  display:flex;align-items:center;justify-content:center;
+  height:380px;position:relative;
+}
+#dollSvg{height:340px;}
+.option-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.option-tab{
+  padding:8px 16px;border-radius:999px;font-weight:700;font-size:.85rem;
+  background:var(--cream-2);color:var(--ink);
+}
+.option-tab.active{background:var(--coral-deep);color:#fff;}
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:10px;}
+.swatch{
+  aspect-ratio:1;border-radius:14px;border:3px solid #fff;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:.15s;
+}
+.swatch:hover, .swatch:focus-visible{transform:scale(1.06);}
+.swatch.active{border-color:var(--coral-deep);}
+
+/* Accessories shelf */
+.shelf-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;}
+.shelf-item{
+  background:var(--white);border-radius:22px;border:2px solid var(--cream-2);
+  padding:18px;text-align:center;transition:.2s;
+}
+.shelf-item:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.06);}
+.shelf-item .emoji{font-size:2.4rem;display:block;margin-bottom:8px;}
+.shelf-item span.name{font-weight:700;font-size:.92rem;}
+.shelf-item span.cat{display:block;color:var(--ink-soft);font-size:.78rem;margin-top:2px;}
+
+footer{
+  text-align:center;padding:36px 20px;color:var(--ink-soft);font-size:.85rem;
+  border-top:2px solid var(--cream-2);background:var(--white);
+}
+.skip-link{
+  position:absolute;right:-9999px;background:var(--coral-deep);color:#fff;padding:10px 16px;border-radius:10px;z-index:100;
+}
+.skip-link:focus{right:14px;top:14px;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">تخطي إلى المحتوى</a>
+
+<div class="bg-deco" aria-hidden="true">
+  <span style="top:12%;left:6%;">✨</span>
+  <span style="top:25%;left:85%;animation-delay:1.2s;">💗</span>
+  <span style="top:60%;left:12%;animation-delay:2.4s;">⭐</span>
+  <span style="top:75%;left:88%;animation-delay:.6s;">✨</span>
+  <span style="top:40%;left:50%;animation-delay:1.8s;">💎</span>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot">☁️</span> سحابة اللعب</div>
+    <nav class="nav-links" aria-label="روابط الأقسام">
+      <a href="#cars">سيارات</a>
+      <a href="#plane">طيران</a>
+      <a href="#paint">أدوات رسم</a>
+      <a href="#jump">قفزات</a>
+      <a href="#dressup">تلبيس</a>
+      <a href="#accessories">إكسسوارات</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero wrap">
+    <span class="eyebrow">✨ منصة لعب وتعلّم للأطفال</span>
+    <h1>عالم مليان <span class="pink">ألعاب ومرح</span><br>بانتظارك!</h1>
+    <p>ارسم، طِر، تسابق، ولعب — كل هذا داخل سحابة واحدة مليانة ألوان وضحكات. اختر بوابتك وابدأ المغامرة!</p>
+    <div class="hero-ctas">
+      <a href="#gates" class="btn btn-primary">🎮 شاهد كل البوابات</a>
+      <a href="#paint" class="btn btn-ghost">🎨 جرّب لوحة الرسم الآن</a>
+    </div>
+  </section>
+
+  <section class="gates wrap" id="gates">
+    <div class="gate-grid">
+      <a class="gate" href="#cars">
+        <span class="icon-badge icon-cars">🏎️</span>
+        <h3>سباق السيارات</h3>
+        <p>اختر سيارتك وتسابق على المضمار وتفادى السيارات المنافسة.</p>
+        <span class="go">ابدأ السباق <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#plane">
+        <span class="icon-badge icon-plane">✈️</span>
+        <h3>طيارة وتفادي</h3>
+        <p>حلّقي بطيارتك بين الغيوم وتفادي العقبات قبل ما تصطدمي فيها.</p>
+        <span class="go">طِر الآن <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#paint">
+        <span class="icon-badge icon-paint">🖌️</span>
+        <h3>لوحة الرسم</h3>
+        <p>اختاري ألوانك وارسمي لوحتك الخاصة بكل حرية وإبداع.</p>
+        <span class="go">ابدأ الرسم <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#jump">
+        <span class="icon-badge icon-jump">🤸</span>
+        <h3>قفزات وتوازن</h3>
+        <p>اضغطي في الوقت الصحيح واقفزي فوق العقبات بدون ما توقعي.</p>
+        <span class="go">تحدي التنقل <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#dressup">
+        <span class="icon-badge icon-dress">👗</span>
+        <h3>بيتي عروستي المنسف</h3>
+        <p>صممي شعرها، فستانها، وكل تفصيلة بطريقتك الخاصة.</p>
+        <span class="go">ابدأ التصميم <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+      <a class="gate" href="#accessories">
+        <span class="icon-badge icon-acc">💍</span>
+        <h3>إكسسوارات وكعوب</h3>
+        <p>تصفحي مجوهرات، حقائب، وكعوب لإكمال أجمل لوك.</p>
+        <span class="go">تصفّح الرف <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="cars">
+    <div class="section-head">
+      <span class="eyebrow">🏁 بوابة السرعة</span>
+      <h2>سباق مليان سرعة</h2>
+      <p>اضغطي ▲ ▼ لتغيير المسار وتفادي السيارات قبل ما تصطدمي فيها</p>
+    </div>
+    <div class="feature-card">
+      <div class="race-stage" id="raceStage">
+        <div class="lane-line" style="top:33%"></div>
+        <div class="lane-line" style="top:66%"></div>
+        <div class="player-car" id="playerCar" style="top:33%;right:20px;">🚗</div>
+      </div>
+      <div class="race-track-label">
+        <span id="raceStatus">المسافة: 0 م</span>
+        <span id="raceBest">أفضل نتيجة: 0 م</span>
+      </div>
+      <div class="game-controls" style="margin-top:16px;">
+        <button class="btn btn-ghost" id="laneUp">⬆️ مسار أعلى</button>
+        <button class="btn btn-primary" id="raceStart">🏎️ ابدأ السباق</button>
+        <button class="btn btn-ghost" id="laneDown">⬇️ مسار أسفل</button>
+      </div>
+      <p class="game-msg" id="raceMsg"></p>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="plane">
+    <div class="section-head">
+      <span class="eyebrow">✈️ بوابة الطيران</span>
+      <h2>طيارة تطير وتتفادى عقبات</h2>
+      <p>اضغطي مع الاستمرار (أو اسحبي بإصبعك) لرفع الطيارة، واتركي للنزول</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="planeScore">النقاط: 0</span>
+        <span id="planeBest">الأفضل: 0</span>
+      </div>
+      <canvas id="planeCanvas" width="680" height="382" role="img" aria-label="لعبة طيارة تتفادى العقبات"></canvas>
+      <p class="game-msg" id="planeMsg">اضغطي ابدأ ثم استمري بالضغط للطيران للأعلى</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="planeStart">✈️ ابدأ الطيران</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="paint">
+    <div class="section-head">
+      <span class="eyebrow">🎨 بوابة الإبداع</span>
+      <h2>لوحة الرسم</h2>
+      <p>اختاري لون الفرشاة وحجمها وارسمي لوحتك الخاصة</p>
+    </div>
+    <div class="feature-card">
+      <div class="paint-toolbar">
+        <button class="color-dot active" data-color="#4A3B45" style="background:#4A3B45" aria-label="أسود بنفسجي"></button>
+        <button class="color-dot" data-color="#FF5D8F" style="background:#FF5D8F" aria-label="وردي"></button>
+        <button class="color-dot" data-color="#FFD166" style="background:#FFD166" aria-label="أصفر"></button>
+        <button class="color-dot" data-color="#7FD4E8" style="background:#7FD4E8" aria-label="سماوي"></button>
+        <button class="color-dot" data-color="#8FD19E" style="background:#8FD19E" aria-label="أخضر"></button>
+        <button class="color-dot" data-color="#B79CED" style="background:#B79CED" aria-label="بنفسجي"></button>
+        <button class="color-dot" data-color="#FFFFFF" style="background:#FFFFFF" aria-label="ممحاة"></button>
+        <span class="brush-size">
+          <label for="brushSize">حجم الفرشاة</label>
+          <input type="range" id="brushSize" min="2" max="28" value="8">
+        </span>
+        <button class="btn btn-ghost" id="clearPaint">🧹 مسح الكل</button>
+      </div>
+      <canvas id="paintCanvas" width="960" height="480" role="img" aria-label="منطقة رسم تفاعلية"></canvas>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="jump">
+    <div class="section-head">
+      <span class="eyebrow">🤸 بوابة التوازن</span>
+      <h2>قفزات وتوازن</h2>
+      <p>اضغطي مسافة أو اضغطي على الشاشة في اللحظة الصحيحة للقفز فوق العقبات</p>
+    </div>
+    <div class="feature-card game-stage-wrap">
+      <div class="game-hud">
+        <span id="jumpScore">النقاط: 0</span>
+        <span id="jumpBest">الأفضل: 0</span>
+      </div>
+      <div class="jump-stage" id="jumpStage" style="width:100%;max-width:680px;">
+        <div class="jump-ground"></div>
+        <div class="jumper" id="jumper" style="right:30px;">🏃‍♀️</div>
+      </div>
+      <p class="game-msg" id="jumpMsg">اضغطي ابدأ ثم اضغطي زر القفز عشان تتفادين العقبات</p>
+      <div class="game-controls">
+        <button class="btn btn-primary" id="jumpStart">🤸 ابدأ التحدي</button>
+        <button class="btn btn-ghost" id="jumpBtn">⬆️ اقفزي</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="dressup">
+    <div class="section-head">
+      <span class="eyebrow">👗 بوابة التصميم</span>
+      <h2>بيتي عروستي المنسف</h2>
+      <p>غيّري الفستان، الشعر، وكل التفاصيل واصنعي أجمل لوك</p>
+    </div>
+    <div class="feature-card">
+      <div class="dressup-layout">
+        <div class="doll-stage">
+          <svg id="dollSvg" viewBox="0 0 200 380" xmlns="http://www.w3.org/2000/svg">
+            <!-- legs -->
+            <rect x="86" y="270" width="12" height="70" rx="6" fill="#F4C7A1"/>
+            <rect x="102" y="270" width="12" height="70" rx="6" fill="#F4C7A1"/>
+            <!-- shoes -->
+            <ellipse id="shoeL" cx="92" cy="345" rx="14" ry="8" fill="#FF5D8F"/>
+            <ellipse id="shoeR" cx="108" cy="345" rx="14" ry="8" fill="#FF5D8F"/>
+            <!-- dress -->
+            <path id="dressShape" d="M70 170 L130 170 L150 290 Q100 310 50 290 Z" fill="#FF8FAB"/>
+            <path d="M70 170 L130 170 L122 195 L78 195 Z" fill="#FF5D8F" opacity="0.5"/>
+            <!-- arms -->
+            <rect x="58" y="175" width="13" height="60" rx="6" fill="#F4C7A1"/>
+            <rect x="129" y="175" width="13" height="60" rx="6" fill="#F4C7A1"/>
+            <!-- neck + head -->
+            <rect x="92" y="120" width="16" height="20" fill="#F4C7A1"/>
+            <circle cx="100" cy="95" r="42" fill="#F4C7A1"/>
+            <!-- face -->
+            <circle cx="86" cy="92" r="4" fill="#4A3B45"/>
+            <circle cx="114" cy="92" r="4" fill="#4A3B45"/>
+            <path d="M88 108 Q100 116 112 108" stroke="#4A3B45" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <circle cx="78" cy="100" r="6" fill="#FF8FAB" opacity="0.5"/>
+            <circle cx="122" cy="100" r="6" fill="#FF8FAB" opacity="0.5"/>
+            <!-- hair back -->
+            <path id="hairBack" d="M58 95 Q55 150 65 175 L75 175 Q65 130 70 90 Z" fill="#4A3B45"/>
+            <path id="hairBack2" d="M142 95 Q145 150 135 175 L125 175 Q135 130 130 90 Z" fill="#4A3B45"/>
+            <!-- hair top -->
+            <path id="hairTop" d="M58 95 Q55 50 100 45 Q145 50 142 95 Q130 70 100 68 Q70 70 58 95 Z" fill="#4A3B45"/>
+            <!-- accessory slot (crown/headband) -->
+            <g id="headAccessory"></g>
+            <!-- necklace slot -->
+            <g id="neckAccessory"></g>
+          </svg>
+        </div>
+        <div class="doll-controls">
+          <div class="option-tabs" id="dressupTabs">
+            <button class="option-tab active" data-panel="dressColor">لون الفستان</button>
+            <button class="option-tab" data-panel="hairColor">لون الشعر</button>
+            <button class="option-tab" data-panel="headAcc">إكسسوار الرأس</button>
+            <button class="option-tab" data-panel="shoeColor">الكعب</button>
+          </div>
+
+          <div class="option-panel" id="panel-dressColor">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="dress" data-color="#FF8FAB" style="background:#FF8FAB">👗</button>
+              <button class="swatch" data-target="dress" data-color="#B79CED" style="background:#B79CED">👗</button>
+              <button class="swatch" data-target="dress" data-color="#7FD4E8" style="background:#7FD4E8">👗</button>
+              <button class="swatch" data-target="dress" data-color="#FFD166" style="background:#FFD166">👗</button>
+              <button class="swatch" data-target="dress" data-color="#8FD19E" style="background:#8FD19E">👗</button>
+              <button class="swatch" data-target="dress" data-color="#FF5D8F" style="background:#FF5D8F">👗</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-hairColor" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="hair" data-color="#4A3B45" style="background:#4A3B45">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#2B1B12" style="background:#2B1B12">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#8B5A2B" style="background:#8B5A2B">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#D9A441" style="background:#D9A441">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#C24A4A" style="background:#C24A4A">💇‍♀️</button>
+              <button class="swatch" data-target="hair" data-color="#E8E8E8" style="background:#E8E8E8">💇‍♀️</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-headAcc" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-acc="none">🚫</button>
+              <button class="swatch" data-acc="crown">👑</button>
+              <button class="swatch" data-acc="band">🎀</button>
+              <button class="swatch" data-acc="flower">🌸</button>
+            </div>
+          </div>
+
+          <div class="option-panel" id="panel-shoeColor" style="display:none;">
+            <div class="swatch-grid">
+              <button class="swatch active" data-target="shoe" data-color="#FF5D8F" style="background:#FF5D8F">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#4A3B45" style="background:#4A3B45">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#FFD166" style="background:#FFD166">👠</button>
+              <button class="swatch" data-target="shoe" data-color="#7FD4E8" style="background:#7FD4E8">👠</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-section wrap" id="accessories">
+    <div class="section-head">
+      <span class="eyebrow">💍 بوابة التألق</span>
+      <h2>إكسسوارات، مجوهرات، وكعوب</h2>
+      <p>تصفحي الرف واضغطي على أي قطعة تحبينها لتجربتها على عروستك</p>
+    </div>
+    <div class="shelf-grid" id="shelfGrid">
+      <div class="shelf-item" data-target="dollNecklace" data-piece="pearl"><span class="emoji">📿</span><span class="name">طوق لؤلؤي</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="dollNecklace" data-piece="gold"><span class="emoji">✨</span><span class="name">سلسلة ذهبية</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="head" data-piece="crown"><span class="emoji">👑</span><span class="name">تاج صغير</span><span class="cat">إكسسوار رأس</span></div>
+      <div class="shelf-item" data-target="head" data-piece="flower"><span class="emoji">🌸</span><span class="name">إكليل ورد</span><span class="cat">إكسسوار رأس</span></div>
+      <div class="shelf-item" data-target="bag" data-piece="pink"><span class="emoji">👛</span><span class="name">حقيبة وردية</span><span class="cat">حقائب</span></div>
+      <div class="shelf-item" data-target="bag" data-piece="star"><span class="emoji">⭐</span><span class="name">حقيبة نجوم</span><span class="cat">حقائب</span></div>
+      <div class="shelf-item" data-target="shoe" data-piece="pink"><span class="emoji">👠</span><span class="name">كعب وردي</span><span class="cat">أحذية</span></div>
+      <div class="shelf-item" data-target="shoe" data-piece="gold"><span class="emoji">🥿</span><span class="name">حذاء ذهبي</span><span class="cat">أحذية</span></div>
+      <div class="shelf-item" data-target="ring" data-piece="diamond"><span class="emoji">💍</span><span class="name">خاتم لامع</span><span class="cat">مجوهرات</span></div>
+      <div class="shelf-item" data-target="bracelet" data-piece="charm"><span class="emoji">💫</span><span class="name">سوار تعليقات</span><span class="cat">مجوهرات</span></div>
+    </div>
+    <p class="game-msg" id="shelfMsg" style="margin-top:18px;"></p>
+  </section>
+
+</main>
+
+<footer>
+  سحابة اللعب 🌤️ — منصة لعب وتعلّم صُممت بحب للأطفال
+</footer>
+
+<script>
+/* ===================== PAINT TOOL ===================== */
+(function(){
+  const canvas = document.getElementById('paintCanvas');
+  const ctx = canvas.getContext('2d');
+  let drawing=false, color='#4A3B45', size=8, last=null;
+
+  function resizeCanvas(){
+    const ratio = canvas.width/canvas.height;
+    const displayWidth = canvas.clientWidth;
+    canvas.style.height = (displayWidth/ratio)+'px';
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  function pos(e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width/rect.width;
+    const scaleY = canvas.height/rect.height;
+    const cx = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
+    const cy = (e.touches? e.touches[0].clientY : e.clientY) - rect.top;
+    return {x:cx*scaleX, y:cy*scaleY};
+  }
+  function start(e){ drawing=true; last=pos(e); e.preventDefault(); }
+  function move(e){
+    if(!drawing) return;
+    const p = pos(e);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = size;
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.beginPath();
+    ctx.moveTo(last.x,last.y);
+    ctx.lineTo(p.x,p.y);
+    ctx.stroke();
+    last=p;
+    e.preventDefault();
+  }
+  function end(){ drawing=false; }
+
+  canvas.addEventListener('mousedown',start);
+  canvas.addEventListener('mousemove',move);
+  window.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false});
+  canvas.addEventListener('touchmove',move,{passive:false});
+  canvas.addEventListener('touchend',end);
+
+  document.querySelectorAll('.color-dot').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.color-dot').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      color = btn.dataset.color;
+    });
+  });
+  document.getElementById('brushSize').addEventListener('input',(e)=>{ size = +e.target.value; });
+  document.getElementById('clearPaint').addEventListener('click',()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+  });
+})();
+
+/* ===================== CAR RACE GAME ===================== */
+(function(){
+  const stage = document.getElementById('raceStage');
+  const player = document.getElementById('playerCar');
+  const statusEl = document.getElementById('raceStatus');
+  const bestEl = document.getElementById('raceBest');
+  const msgEl = document.getElementById('raceMsg');
+  const startBtn = document.getElementById('raceStart');
+  const lanes = [16, 49, 82];
+  let lane = 1, running=false, distance=0, rivals=[], tick=null, best=0;
+
+  try{ best = +(localStorage.getItem('race_best')||0); }catch(e){ best=0; }
+  bestEl.textContent = 'أفضل نتيجة: '+best+' م';
+
+  function setLane(i){
+    lane = Math.max(0, Math.min(2, i));
+    player.style.top = lanes[lane]+'%';
+  }
+  document.getElementById('laneUp').addEventListener('click',()=> setLane(lane-1));
+  document.getElementById('laneDown').addEventListener('click',()=> setLane(lane+1));
+  window.addEventListener('keydown',(e)=>{
+    if(!running) return;
+    if(e.key==='ArrowUp') setLane(lane-1);
+    if(e.key==='ArrowDown') setLane(lane+1);
+  });
+
+  function spawnRival(){
+    const el = document.createElement('div');
+    el.className='rival-car';
+    el.textContent='🚙';
+    const rLane = Math.floor(Math.random()*3);
+    el.style.top = lanes[rLane]+'%';
+    el.style.left = '-40px';
+    stage.appendChild(el);
+    rivals.push({el, lane:rLane, x:-40});
+  }
+
+  function reset(){
+    rivals.forEach(r=>r.el.remove());
+    rivals=[]; distance=0; setLane(1);
+    statusEl.textContent='المسافة: 0 م';
+    msgEl.textContent='';
+  }
+
+  function loop(){
+    distance += 1;
+    statusEl.textContent='المسافة: '+distance+' م';
+    if(Math.random()<0.045) spawnRival();
+
+    const stageWidth = stage.clientWidth;
+    const speed = 6 + Math.min(distance/200, 6);
+    rivals.forEach(r=>{
+      r.x += speed;
+      r.el.style.left = r.x+'px';
+    });
+    rivals = rivals.filter(r=>{
+      if(r.x > stageWidth+40){ r.el.remove(); return false; }
+      return true;
+    });
+
+    const playerRight = stageWidth - 60;
+    rivals.forEach(r=>{
+      if(r.lane===lane && r.x > playerRight-40 && r.x < playerRight+20){
+        endGame();
+      }
+    });
+  }
+
+  function endGame(){
+    running=false;
+    clearInterval(tick);
+    msgEl.textContent = '🏁 خسرتي! وصلتي '+distance+' متر — جربي تتفادين أكثر بالمرة الجاية';
+    if(distance>best){
+      best=distance;
+      try{ localStorage.setItem('race_best', best); }catch(e){}
+      bestEl.textContent='أفضل نتيجة: '+best+' م';
+      msgEl.textContent='🎉 رقم قياسي جديد! '+distance+' متر';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='🏎️ يلا سباق!';
+    tick = setInterval(loop, 90);
+  });
+})();
+
+/* ===================== JUMP & BALANCE GAME ===================== */
+(function(){
+  const jumper = document.getElementById('jumper');
+  const stage = document.getElementById('jumpStage');
+  const scoreEl = document.getElementById('jumpScore');
+  const bestEl = document.getElementById('jumpBest');
+  const msgEl = document.getElementById('jumpMsg');
+  const startBtn = document.getElementById('jumpStart');
+  const jumpBtn = document.getElementById('jumpBtn');
+  let running=false, jumping=false, obstacles=[], score=0, best=0, tick=null, spawnTimer=0;
+
+  try{ best = +(localStorage.getItem('jump_best')||0); }catch(e){ best=0; }
+  bestEl.textContent='الأفضل: '+best;
+
+  function doJump(){
+    if(!running || jumping) return;
+    jumping=true;
+    jumper.style.bottom='130px';
+    setTimeout(()=>{ jumper.style.bottom='18px'; jumping=false; }, 480);
+  }
+  jumpBtn.addEventListener('click', doJump);
+  window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); doJump(); } });
+  stage.addEventListener('touchstart', doJump);
+
+  function spawnObstacle(){
+    const el = document.createElement('div');
+    el.className='obstacle';
+    el.style.right='-20px';
+    stage.appendChild(el);
+    obstacles.push({el, x:-20});
+  }
+
+  function reset(){
+    obstacles.forEach(o=>o.el.remove());
+    obstacles=[]; score=0; jumping=false;
+    jumper.style.bottom='18px';
+    scoreEl.textContent='النقاط: 0';
+    msgEl.textContent='';
+    spawnTimer=0;
+  }
+
+  function loop(){
+    const speed = 5 + Math.min(score/15, 6);
+    spawnTimer--;
+    if(spawnTimer<=0){
+      spawnObstacle();
+      spawnTimer = 40 + Math.random()*30;
+    }
+    const stageWidth = stage.clientWidth;
+    obstacles.forEach(o=>{
+      o.x += speed;
+      o.el.style.right = o.x+'px';
+    });
+    obstacles = obstacles.filter(o=>{
+      if(o.x > stageWidth+20){
+        o.el.remove();
+        score++;
+        scoreEl.textContent='النقاط: '+score;
+        return false;
+      }
+      return true;
+    });
+
+    const jumperBottom = parseInt(jumper.style.bottom);
+    obstacles.forEach(o=>{
+      if(o.x > 14 && o.x < 60 && jumperBottom < 60){
+        endGame();
+      }
+    });
+  }
+
+  function endGame(){
+    running=false;
+    clearInterval(tick);
+    msgEl.textContent='💥 لمستي عقبة! نتيجتك: '+score;
+    if(score>best){
+      best=score;
+      try{ localStorage.setItem('jump_best', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+      msgEl.textContent='🎉 رقم قياسي جديد! '+score+' نقطة';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='🤸 يلا قفزي!';
+    tick=setInterval(loop, 45);
+  });
+})();
+
+/* ===================== PLANE DODGE GAME ===================== */
+(function(){
+  const canvas = document.getElementById('planeCanvas');
+  const ctx = canvas.getContext('2d');
+  const scoreEl = document.getElementById('planeScore');
+  const bestEl = document.getElementById('planeBest');
+  const msgEl = document.getElementById('planeMsg');
+  const startBtn = document.getElementById('planeStart');
+
+  const W = canvas.width, H = canvas.height;
+  let plane = {x:90, y:H/2, vy:0, r:18};
+  let obstacles = [];
+  let clouds = [];
+  let running=false, holding=false, score=0, best=0, frame=0, raf=null;
+
+  try{ best = +(localStorage.getItem('plane_best')||0); }catch(e){ best=0; }
+  bestEl.textContent = 'الأفضل: '+best;
+
+  for(let i=0;i<6;i++){
+    clouds.push({x:Math.random()*W, y:30+Math.random()*(H-60), s:20+Math.random()*30, v:0.4+Math.random()*0.6});
+  }
+
+  function reset(){
+    plane = {x:90, y:H/2, vy:0, r:18};
+    obstacles=[]; score=0; frame=0;
+    scoreEl.textContent='النقاط: 0';
+    msgEl.textContent='';
+  }
+
+  function spawnObstacle(){
+    const gapH = 130;
+    const gapY = 50 + Math.random()*(H-100-gapH);
+    obstacles.push({x:W+30, gapY, gapH, w:34, passed:false});
+  }
+
+  function drawPlane(x,y){
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.font = '34px serif';
+    ctx.textAlign='center';
+    ctx.textBaseline='middle';
+    ctx.fillText('✈️', 0, 0);
+    ctx.restore();
+  }
+
+  function drawCloud(c){
+    ctx.save();
+    ctx.globalAlpha=0.8;
+    ctx.font = c.s+'px serif';
+    ctx.fillText('☁️', c.x, c.y);
+    ctx.restore();
+  }
+
+  function loop(){
+    frame++;
+    ctx.clearRect(0,0,W,H);
+
+    clouds.forEach(c=>{
+      c.x -= c.v;
+      if(c.x < -40) c.x = W+40;
+      drawCloud(c);
+    });
+
+    plane.vy += holding ? -0.55 : 0.5;
+    plane.vy = Math.max(-7, Math.min(7, plane.vy));
+    plane.y += plane.vy;
+    plane.y = Math.max(plane.r, Math.min(H-plane.r, plane.y));
+
+    if(frame % 95 === 0) spawnObstacle();
+
+    const speed = 3.2 + Math.min(score/8, 3.5);
+    obstacles.forEach(o=>{ o.x -= speed; });
+    obstacles = obstacles.filter(o=> o.x > -60);
+
+    ctx.lineWidth = 3;
+    obstacles.forEach(o=>{
+      ctx.fillStyle = '#E3F6FB';
+      ctx.strokeStyle = 'rgba(127,212,232,0.9)';
+      ctx.fillRect(o.x, 0, o.w, o.gapY);
+      ctx.strokeRect(o.x, 0, o.w, o.gapY);
+      const bottomY = o.gapY+o.gapH;
+      ctx.fillRect(o.x, bottomY, o.w, H-bottomY);
+      ctx.strokeRect(o.x, bottomY, o.w, H-bottomY);
+
+      const px = plane.x, py = plane.y, pr = plane.r*0.55;
+      if(px+pr > o.x && px-pr < o.x+o.w){
+        if(py-pr < o.gapY || py+pr > bottomY){
+          endGame();
+        }
+      }
+      if(!o.passed && o.x+o.w < plane.x){
+        o.passed = true;
+        score++;
+        scoreEl.textContent='النقاط: '+score;
+      }
+    });
+
+    drawPlane(plane.x, plane.y);
+
+    if(running) raf = requestAnimationFrame(loop);
+  }
+
+  function endGame(){
+    running=false;
+    cancelAnimationFrame(raf);
+    msgEl.textContent='💥 اصطدمتي! نقاطك: '+score;
+    if(score>best){
+      best=score;
+      try{ localStorage.setItem('plane_best', best); }catch(e){}
+      bestEl.textContent='الأفضل: '+best;
+      msgEl.textContent='🎉 رقم قياسي جديد! '+score+' نقطة';
+    }
+    startBtn.textContent='🔁 حاولي مرة ثانية';
+  }
+
+  function press(e){ holding=true; e.preventDefault(); }
+  function release(){ holding=false; }
+  canvas.addEventListener('mousedown',press);
+  window.addEventListener('mouseup',release);
+  canvas.addEventListener('touchstart',press,{passive:false});
+  canvas.addEventListener('touchend',release);
+  window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ e.preventDefault(); holding=true; } });
+  window.addEventListener('keyup',(e)=>{ if(e.code==='Space'){ holding=false; } });
+
+  startBtn.addEventListener('click',()=>{
+    if(running) return;
+    reset();
+    running=true;
+    startBtn.textContent='✈️ يلا طيري!';
+    raf = requestAnimationFrame(loop);
+  });
+
+  ctx.clearRect(0,0,W,H);
+  drawPlane(plane.x,plane.y);
+})();
+
+/* ===================== DRESS UP DOLL ===================== */
+(function(){
+  const tabs = document.querySelectorAll('.option-tab');
+  const panels = {
+    dressColor: document.getElementById('panel-dressColor'),
+    hairColor: document.getElementById('panel-hairColor'),
+    headAcc: document.getElementById('panel-headAcc'),
+    shoeColor: document.getElementById('panel-shoeColor'),
+  };
+  tabs.forEach(tab=>{
+    tab.addEventListener('click',()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      tab.classList.add('active');
+      Object.values(panels).forEach(p=>p.style.display='none');
+      panels[tab.dataset.panel].style.display='block';
+    });
+  });
+
+  document.querySelectorAll('.swatch[data-target]').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      const group = sw.parentElement;
+      group.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+      sw.classList.add('active');
+      const color = sw.dataset.color;
+      const target = sw.dataset.target;
+      if(target==='dress'){
+        document.getElementById('dressShape').setAttribute('fill', color);
+      } else if(target==='hair'){
+        ['hairBack','hairBack2','hairTop'].forEach(id=>{
+          document.getElementById(id).setAttribute('fill', color);
+        });
+      } else if(target==='shoe'){
+        document.getElementById('shoeL').setAttribute('fill', color);
+        document.getElementById('shoeR').setAttribute('fill', color);
+      }
+    });
+  });
+
+  const accMap = {
+    none: '',
+    crown: '<path d="M78 50 L84 38 L92 48 L100 34 L108 48 L116 38 L122 50 Z" fill="#FFD166" stroke="#E8B23A" stroke-width="1.5"/>',
+    band: '<path d="M58 70 Q100 55 142 70" stroke="#FF5D8F" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="142" cy="70" r="9" fill="#FF8FAB"/>',
+    flower: '<circle cx="65" cy="62" r="7" fill="#FF8FAB"/><circle cx="58" cy="68" r="6" fill="#FFD166"/><circle cx="72" cy="68" r="6" fill="#7FD4E8"/>'
+  };
+  document.querySelectorAll('.swatch[data-acc]').forEach(sw=>{
+    sw.addEventListener('click',()=>{
+      sw.parentElement.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+      sw.classList.add('active');
+      document.getElementById('headAccessory').innerHTML = accMap[sw.dataset.acc] || '';
+    });
+  });
+
+  const shelfMsg = document.getElementById('shelfMsg');
+  const neckMap = {
+    pearl: '<circle cx="100" cy="148" r="3" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="92" cy="150" r="3" fill="#fff" stroke="#ddd" stroke-width="1"/><circle cx="108" cy="150" r="3" fill="#fff" stroke="#ddd" stroke-width="1"/>',
+    gold: '<path d="M88 144 Q100 154 112 144" stroke="#FFD166" stroke-width="3" fill="none" stroke-linecap="round"/>'
+  };
+  document.querySelectorAll('.shelf-item').forEach(item=>{
+    item.addEventListener('click',()=>{
+      const target = item.dataset.target;
+      const piece = item.dataset.piece;
+      const name = item.querySelector('.name').textContent;
+      if(target==='dollNecklace'){
+        document.getElementById('neckAccessory').innerHTML = neckMap[piece] || '';
+      } else if(target==='head'){
+        document.getElementById('headAccessory').innerHTML = accMap[piece] || '';
+      } else if(target==='shoe'){
+        const color = piece==='gold' ? '#FFD166' : '#FF5D8F';
+        document.getElementById('shoeL').setAttribute('fill', color);
+        document.getElementById('shoeR').setAttribute('fill', color);
+      }
+      document.querySelectorAll('.shelf-item').forEach(i=>i.style.borderColor='');
+      item.style.borderColor='var(--coral-deep)';
+      shelfMsg.textContent = '✨ تمت إضافة: '+name+' — شوفيها على العروستك بالأعلى!';
+      document.getElementById('dressup').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+})();
+</script>
+
+
+</body>
+</html>
